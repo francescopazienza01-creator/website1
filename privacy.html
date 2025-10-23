@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Revno | Privacy & Terms</title>
+  <meta name="description" content="Review Revno’s privacy practices and terms of service in a single, concise legal hub." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0c10; --panel:#12141a; --card:#161922; --txt:#f1f5ff; --muted:#a6b0bd;
+      --pri:#6ee7ff; --pri-soft:rgba(110,231,255,.14); --radius:18px; --max:960px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--txt);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;}
+    a{color:var(--pri);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{padding:32px 28px 12px;max-width:var(--max);margin:0 auto;display:grid;gap:12px}
+    header .topline{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    header .home{display:inline-flex;align-items:center;gap:10px;font-weight:600;color:var(--pri);background:var(--pri-soft);padding:8px 14px;border-radius:999px;border:1px solid rgba(110,231,255,.18)}
+    header .title-block{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:26px;display:grid;gap:10px;box-shadow:0 20px 45px rgba(0,0,0,.28)}
+    header .title-block h1{margin:0;font-size:clamp(30px,4vw,42px);letter-spacing:.01em}
+    header .title-block p{margin:0;color:var(--muted);line-height:1.6;font-size:15px}
+    .legal-nav{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .legal-nav a{color:var(--txt);background:rgba(255,255,255,.08);padding:8px 14px;border-radius:12px;font-size:13px;border:1px solid rgba(255,255,255,.08);transition:background .25s ease,border-color .25s ease}
+    .legal-nav a:hover{background:rgba(110,231,255,.16);border-color:rgba(110,231,255,.4);text-decoration:none}
+
+    main{max-width:var(--max);margin:0 auto 92px;padding:0 28px;display:grid;gap:26px}
+    section{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:24px 26px;display:grid;gap:12px;position:relative}
+    h2{margin:0;font-size:clamp(20px,3vw,26px)}
+    h3{margin:0;font-size:17px}
+    p{margin:0;color:var(--muted);line-height:1.65;font-size:15px}
+    ul{margin:0;padding-left:20px;color:var(--muted);line-height:1.65;font-size:15px;display:grid;gap:6px}
+    .card-grid{display:grid;gap:16px}
+    .card-grid article{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:18px 20px;display:grid;gap:8px}
+    .card-grid strong{color:var(--txt)}
+    .fine-print{font-size:13px;color:rgba(166,176,189,.8)}
+    footer{max-width:var(--max);margin:0 auto 50px;padding:0 28px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;color:var(--muted);font-size:14px}
+    footer span{display:flex;gap:12px;align-items:center}
+    .page-transition{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,rgba(110,231,255,.12),transparent 55%),radial-gradient(circle at 80% 30%,rgba(124,58,237,.12),transparent 60%),var(--bg);opacity:0;pointer-events:none;transition:opacity .45s ease;z-index:120}
+    .page-transition.active{opacity:1;pointer-events:auto}
+    .reveal{opacity:0;transform:translate3d(0,var(--reveal-offset,18px),0);transition:opacity .7s ease,transform .7s ease}
+    .reveal-up{--reveal-offset:-18px}
+    .reveal-down{--reveal-offset:18px}
+    .revealed{opacity:1;transform:translate3d(0,0,0)}
+    @media(max-width:640px){
+      header .title-block{padding:22px}
+      section{padding:20px}
+      .legal-nav a{font-size:12px;padding:7px 12px}
+      footer{flex-direction:column;align-items:flex-start}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .reveal{transition:none !important;opacity:1 !important;transform:none !important}
+      .page-transition{transition:none !important;opacity:0 !important;pointer-events:none !important}
+    }
+  </style>
+</head>
+<body>
+  <div id="pageTransition" class="page-transition active" aria-hidden="true"></div>
+  <header>
+    <div class="topline">
+      <a class="home transition-link" href="index.html">← Back to Revno</a>
+    </div>
+    <div class="title-block">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(110,231,255,.7);font-weight:600">Legal</span>
+        <h1>Privacy & Terms of Service</h1>
+      </div>
+      <p>How Revno handles data, fulfills its obligations, and what we expect from partners. This summary is intentionally concise—let your Revno point of contact know if you need a fuller agreement.</p>
+      <nav class="legal-nav">
+        <a href="#privacy">Privacy Overview</a>
+        <a href="#data-use">Data Use</a>
+        <a href="#rights">Your Rights</a>
+        <a href="#terms">Terms of Service</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="privacy">
+      <h2>Privacy Overview</h2>
+      <p>We collect only the information needed to operate your revenue pod: contact details you share, performance metrics you want tracked, and platform activity that supports the engagement. Everything is stored in encrypted systems with access limited to your Revno operators.</p>
+      <div class="card-grid">
+        <article>
+          <strong>What we log</strong>
+          <p>Account contacts, pipeline metrics, platform usage signals, and support conversations relevant to the engagement.</p>
+        </article>
+        <article>
+          <strong>Why we log it</strong>
+          <p>To run outreach, deliver analytics, personalize coaching, and keep your sales systems synchronized.</p>
+        </article>
+        <article>
+          <strong>Who sees it</strong>
+          <p>Only the Revno team assigned to your account plus vetted automation vendors required to execute the agreed scope.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="data-use">
+      <h2>Data Use & Retention</h2>
+      <p>We use your data solely to deliver the services described in your Statement of Work. We never sell data and do not use it for unrelated marketing.</p>
+      <ul>
+        <li><strong>Processors.</strong> We rely on secure tools (CRM, automation, communication) under strict access controls.</li>
+        <li><strong>Retention.</strong> Data is retained while the engagement is active and removed or returned within 30 days of termination unless law requires more.</li>
+        <li><strong>Security.</strong> Credentials are stored in centrally managed vaults, MFA is enforced for operators, and systems are reviewed quarterly.</li>
+      </ul>
+      <p class="fine-print">If you need a Data Processing Agreement or custom retention schedule, request it through your account lead.</p>
+    </section>
+
+    <section id="rights">
+      <h2>Your Rights</h2>
+      <p>You control your information. Share requests with your Revno lead and we’ll coordinate the steps below—responses arrive within five business days.</p>
+      <ul>
+        <li>Access or export the data we hold about your organization.</li>
+        <li>Request corrections or restrictions on specific datasets.</li>
+        <li>Delete data at the end of an engagement (subject to legal retention duties).</li>
+      </ul>
+    </section>
+
+    <section id="terms">
+      <h2>Terms of Service</h2>
+      <p>These condensed terms complement the detailed SOW you sign. They define responsibilities so engagements stay predictable and compliant.</p>
+      <div class="card-grid">
+        <article>
+          <strong>Scope & Deliverables</strong>
+          <p>Revno provides staffing, playbooks, automations, and reporting as outlined in your SOW. Third-party tool licenses remain yours unless the SOW states otherwise.</p>
+        </article>
+        <article>
+          <strong>Client Duties</strong>
+          <ul>
+            <li>Grant timely access to platforms, prospect lists, and stakeholders.</li>
+            <li>Keep operations compliant with applicable laws and platform terms.</li>
+            <li>Pay invoices according to the agreed schedule.</li>
+          </ul>
+        </article>
+        <article>
+          <strong>Confidentiality & IP</strong>
+          <p>Both parties protect confidential information. Assets created for your account are licensed for your internal use while engaged and delivered upon completion.</p>
+        </article>
+        <article>
+          <strong>Liability & Termination</strong>
+          <p>Our liability is capped at fees paid in the prior 90 days. Either party may terminate with the notice period in the SOW; we assist with handover and settle outstanding invoices immediately.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact & Notices</h2>
+      <p>Questions or requests should go through your Revno engagement lead. If you need to send formal notices, use the mailing address listed in your engagement agreement.</p>
+      <p class="fine-print">Need a signed copy? We provide countersigned PDFs upon request.</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>© revno.co — All rights reserved.</span>
+    <span><a href="privacy.html">Privacy · Terms</a></span>
+  </footer>
+
+  <script>
+    (function(){
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const transitionOverlay = document.getElementById('pageTransition');
+      const transitionLinks = document.querySelectorAll('a.transition-link');
+
+      if(transitionOverlay){
+        if(prefersReducedMotion){
+          transitionOverlay.classList.remove('active');
+        } else {
+          window.addEventListener('load', ()=>{
+            requestAnimationFrame(()=> transitionOverlay.classList.remove('active'));
+          });
+          transitionLinks.forEach(link=>{
+            link.addEventListener('click', event=>{
+              const href = link.getAttribute('href');
+              if(!href || href.startsWith('#') || link.target === '_blank' || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+              event.preventDefault();
+              transitionOverlay.classList.add('active');
+              setTimeout(()=>{ window.location.href = href; }, 320);
+            });
+          });
+        }
+      }
+
+      const revealTargets = Array.from(document.querySelectorAll('header .home, header .title-block, .legal-nav a, section, .card-grid article'));
+      if(revealTargets.length){
+        if(!prefersReducedMotion && 'IntersectionObserver' in window){
+          let lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+          let scrollDirection = 'down';
+          const updateDirection = ()=>{
+            const currentY = window.pageYOffset || document.documentElement.scrollTop || 0;
+            if(currentY < lastScrollY - 2){
+              scrollDirection = 'up';
+            } else if(currentY > lastScrollY + 2){
+              scrollDirection = 'down';
+            }
+            lastScrollY = currentY;
+          };
+          window.addEventListener('scroll', updateDirection, {passive:true});
+
+          const observer = new IntersectionObserver(entries=>{
+            entries.forEach(entry=>{
+              const el = entry.target;
+              if(entry.isIntersecting){
+                const siblings = el.parentElement ? Array.from(el.parentElement.children) : [el];
+                const idx = Math.max(0, siblings.indexOf(el));
+                el.style.transitionDelay = (idx * 60) + 'ms';
+                let direction = (el.dataset.reveal || '').toLowerCase();
+                if(!direction){
+                  direction = scrollDirection;
+                }
+                if(direction === 'up' || el.classList.contains('reveal-up')){
+                  el.classList.add('reveal-up');
+                  el.classList.remove('reveal-down');
+                } else {
+                  el.classList.add('reveal-down');
+                  el.classList.remove('reveal-up');
+                }
+                el.classList.add('reveal', 'revealed');
+              } else {
+                el.classList.remove('revealed');
+              }
+            });
+          }, {threshold:0.18});
+
+          revealTargets.forEach(el=>{
+            if(!el.classList.contains('reveal')){
+              el.classList.add('reveal');
+            }
+            observer.observe(el);
+          });
+
+          updateDirection();
+        } else {
+          revealTargets.forEach(el=>{
+            if(!el.classList.contains('reveal')){
+              el.classList.add('reveal');
+            }
+            el.classList.add('revealed');
+          });
+        }
+      }
+
+      const smoothAnchors = document.querySelectorAll('a[href^=\"#\']');
+      smoothAnchors.forEach(anchor=>{
+        anchor.addEventListener('click', evt=>{
+          const href = anchor.getAttribute('href') || '';
+          if(href.length <= 1) return;
+          const target = document.querySelector(href);
+          if(!target) return;
+          evt.preventDefault();
+          const behavior = prefersReducedMotion ? 'auto' : 'smooth';
+          target.scrollIntoView({behavior, block:'start'});
+          if(history.pushState){
+            history.pushState(null, '', href);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

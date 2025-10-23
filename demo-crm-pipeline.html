@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Revno Pipeline Board</title>
+  <meta name="description" content="Inspect Revno pipeline health, stage movement, and deal velocity in one workspace." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#06070c; --panel:#11141c; --panel-soft:#171b25; --surface:#0b0e15;
+      --pri:#6ee7ff; --pri-2:#7c3aed; --accent:#3dd68c; --alert:#f97316;
+      --txt:#e6eef6; --muted:#9aa5b5;
+      --radius:16px; --border:1px solid rgba(255,255,255,.07);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--txt);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;min-height:100%}
+    a{color:inherit;text-decoration:none}
+    .page-transition{position:fixed;inset:0;background:radial-gradient(circle at 15% 20%,rgba(110,231,255,.12),transparent 55%),radial-gradient(circle at 80% 12%,rgba(124,58,237,.16),transparent 60%),var(--bg);opacity:0;pointer-events:none;transition:opacity .45s ease;z-index:120}
+    .page-transition.active{opacity:1;pointer-events:auto}
+    .app-shell{min-height:100vh;display:grid;grid-template-columns:260px minmax(0,1fr);background:linear-gradient(180deg,#07090f 0%,#05060a 100%)}
+    .sidebar{padding:32px 24px;display:flex;flex-direction:column;gap:28px;border-right:var(--border);background:linear-gradient(195deg,rgba(20,24,36,.9),rgba(12,15,23,.95));position:sticky;top:0;min-height:100vh}
+    .sidebar-header{display:flex;align-items:center;gap:12px}
+    .logo{width:48px;height:48px;display:block;transition:transform .25s ease;filter:drop-shadow(0 8px 18px rgba(110,231,255,.22))}
+    .sidebar-header:hover .logo{transform:translateY(-1px) scale(1.04)}
+    .sidebar-header strong{display:block;font-weight:800;letter-spacing:.3px}
+    .sidebar-header span{font-size:13px;color:var(--muted)}
+    .menu{display:flex;flex-direction:column;gap:8px}
+    .menu-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;font-size:14px;color:var(--muted);transition:background .25s ease,color .25s ease;border:1px solid transparent}
+    .menu-item .icon{width:12px;height:12px;border-radius:4px;background:linear-gradient(135deg,rgba(110,231,255,.6),rgba(124,58,237,.6))}
+    .menu-item .pill{margin-left:auto;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--pri);background:rgba(110,231,255,.12);padding:4px 8px;border-radius:999px}
+    .menu-item:hover{background:rgba(110,231,255,.08);color:var(--txt)}
+    .menu-item.active{background:rgba(110,231,255,.12);color:var(--txt);border-color:rgba(110,231,255,.25)}
+    .sidebar-footer{margin-top:auto;display:flex;flex-direction:column;gap:16px;position:sticky;bottom:24px;padding:16px;border-radius:18px;background:linear-gradient(180deg,rgba(12,15,23,.96),rgba(8,10,16,.9));border:1px solid rgba(110,231,255,.12);box-shadow:0 18px 46px rgba(4,6,10,.55)}
+    .sidebar-footer .calendly-btn{width:100%;display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;border:1px solid rgba(110,231,255,.32);background:linear-gradient(135deg,rgba(110,231,255,.18),rgba(124,58,237,.18));color:var(--txt);font-weight:600;letter-spacing:.01em;transition:transform .25s ease,box-shadow .25s ease}
+    .sidebar-footer .cta{width:100%;justify-content:center}
+    .sidebar-footer .calendly-btn:hover{transform:translateY(-1px);box-shadow:0 18px 36px rgba(110,231,255,.22)}
+    .sidebar-footer .calendly-btn:focus-visible{outline:2px solid rgba(110,231,255,.6);outline-offset:3px}
+    .team-card{background:rgba(12,15,23,.9);border:var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+    .team-card h3{margin:0;font-size:14px}
+    .team-card ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted)}
+    .team-card li{display:flex;align-items:center;gap:10px}
+    .status-dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+    .status-dot.offline{background:rgba(154,165,181,.6)}
+    .cta{display:flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:12px;background:rgba(110,231,255,.14);color:var(--pri);font-weight:600;border:1px solid rgba(110,231,255,.32);transition:transform .25s ease,box-shadow .25s ease}
+    .cta:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(110,231,255,.22)}
+
+    .main{padding:36px 40px;display:flex;flex-direction:column;gap:32px}
+    .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+    .topbar h1{margin:0;font-size:clamp(24px,3vw,34px)}
+    .topbar p{margin:6px 0 0;color:var(--muted);font-size:14px;max-width:480px}
+    .topbar-actions{display:flex;align-items:center;gap:16px}
+    .search{position:relative}
+    .search::before{content:"";position:absolute;left:12px;top:50%;transform:translateY(-50%);width:14px;height:14px;border-radius:50%;border:2px solid rgba(154,165,181,.4)}
+    .search::after{content:"";position:absolute;left:22px;top:57%;width:2px;height:6px;background:rgba(154,165,181,.4);transform:rotate(45deg)}
+    .search input{background:var(--panel);border:var(--border);border-radius:999px;padding:10px 16px 10px 36px;color:var(--txt);font-size:13px;min-width:220px}
+    .search input::placeholder{color:rgba(154,165,181,.6)}
+    .avatar-stack{display:flex;align-items:center}
+    .avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--pri),var(--pri-2));display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#05060a;border:2px solid rgba(15,18,27,.9)}
+    .avatar+.avatar{margin-left:-10px}
+
+    .stage-overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+    .stage-card{background:var(--panel);border:var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+    .stage-card span{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:rgba(154,165,181,.75)}
+    .stage-card strong{font-size:28px}
+    .delta{font-size:12px}
+    .delta.up{color:var(--accent)}
+    .delta.down{color:#f97373}
+
+    .board-layout{display:grid;grid-template-columns:2.2fr 1fr;gap:20px;align-items:start}
+    .kanban{display:flex;gap:16px;overflow-x:auto;padding-bottom:6px}
+    .column{min-width:240px;background:var(--panel);border:var(--border);border-radius:var(--radius);display:flex;flex-direction:column;gap:12px;padding:16px}
+    .column header{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+    .column header .count{background:rgba(110,231,255,.12);color:var(--pri);border-radius:999px;padding:4px 10px;font-size:11px}
+    .deal-card{background:var(--panel-soft);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+    .deal-card h3{margin:0;font-size:15px;color:var(--txt)}
+    .deal-card p{margin:0;font-size:13px;color:var(--muted)}
+    .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;background:rgba(61,214,140,.12);color:var(--accent);padding:4px 8px;border-radius:999px}
+    .badge.hot{background:rgba(124,58,237,.18);color:var(--pri-2)}
+    .badge.alert{background:rgba(249,115,22,.18);color:var(--alert)}
+    .deal-meta{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:rgba(154,165,181,.75)}
+
+    .velocity-panel{background:var(--panel);border:var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:18px}
+    .velocity-panel h2{margin:0;font-size:16px}
+    .velocity-panel table{width:100%;border-collapse:collapse;font-size:13px}
+    .velocity-panel th,.velocity-panel td{text-align:left;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+    .velocity-panel th{font-size:12px;color:rgba(154,165,181,.75);text-transform:uppercase;letter-spacing:.08em}
+    .velocity-panel tbody tr:last-child td{border-bottom:none}
+    .badge-inline{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:11px;background:rgba(110,231,255,.14);color:var(--pri)}
+
+    .notes{display:flex;flex-direction:column;gap:14px}
+    .note-card{background:var(--panel-soft);border:1px solid rgba(255,255,255,.05);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted)}
+    .note-card strong{color:var(--txt);font-size:14px}
+
+    @media(max-width:1240px){
+      .stage-overview{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .board-layout{grid-template-columns:1fr}
+    }
+    @media(max-width:1024px){
+      .app-shell{grid-template-columns:1fr}
+      .sidebar{position:relative;min-height:auto;border-right:none;border-bottom:var(--border);padding:24px 20px}
+      .main{padding:28px 20px 60px}
+    }
+    @media(max-width:640px){
+      .topbar{flex-direction:column;align-items:flex-start}
+      .stage-overview{grid-template-columns:1fr}
+      .kanban{padding-bottom:12px}
+    }
+  </style>
+</head>
+<body>
+  <div id="pageTransition" class="page-transition active" aria-hidden="true"></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img class="logo" src="images/revno-logo.svg" alt="Revno logo" width="60" height="60" loading="lazy" decoding="async" />
+        <div>
+          <strong>Revno</strong>
+          <span>SalesOps Suite</span>
+        </div>
+      </div>
+      <nav class="menu" aria-label="Primary navigation">
+        <a class="menu-item transition-link" href="demo-crm.html">
+          <span class="icon" aria-hidden="true"></span>
+          <span>Revenue Overview</span>
+          <span class="pill">live</span>
+        </a>
+        <a class="menu-item transition-link" href="demo-crm-sales.html">
+          <span class="icon" aria-hidden="true"></span>
+          <span>Sales Command</span>
+          <span class="pill">kpis</span>
+        </a>
+        <a class="menu-item active transition-link" href="demo-crm-pipeline.html">
+          <span class="icon" aria-hidden="true"></span>
+          <span>Pipeline Board</span>
+        </a>
+        <a class="menu-item transition-link" href="demo-crm-automation.html">
+          <span class="icon" aria-hidden="true"></span>
+          <span>Automation Studio</span>
+        </a>
+        <a class="menu-item transition-link" href="demo-crm-reporting.html">
+          <span class="icon" aria-hidden="true"></span>
+          <span>Reporting</span>
+        </a>
+        <a class="menu-item transition-link" href="demo-crm-team.html">
+          <span class="icon" aria-hidden="true"></span>
+          <span>Team & QA</span>
+        </a>
+        <a class="menu-item transition-link" href="demo-crm-settings.html">
+          <span class="icon" aria-hidden="true"></span>
+          <span>Settings</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button type="button" class="calendly-btn" data-calendly="https://calendly.com/fpazienza5/45min-hour-consultation-clone?primary_color=6ee7ff&background_color=0b0c10&text_color=e6eef6">Book Strategy Call</button>
+        <a class="cta transition-link" href="index.html">← Back to Revno Site</a>
+      </div>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <div>
+          <h1>Pipeline Intelligence</h1>
+          <p>Track stage movement, SLA compliance, and deal velocity to keep every opportunity on pace with revenue targets.</p>
+        </div>
+        <div class="topbar-actions">
+          <label class="search">
+            <input type="search" placeholder="Search deals, companies, owners…" />
+          </label>
+          <div class="avatar-stack">
+            <span class="avatar">TR</span>
+            <span class="avatar" style="background:linear-gradient(135deg,#ffce76,#fb7185)">JM</span>
+            <span class="avatar" style="background:linear-gradient(135deg,#4ade80,#38bdf8)">BT</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="stage-overview" aria-label="Stage metrics">
+        <article class="stage-card">
+          <span>Average Time in Stage</span>
+          <strong>3.1 days</strong>
+          <span class="delta up">Goal: &lt;4 days</span>
+        </article>
+        <article class="stage-card">
+          <span>Stage Slippage</span>
+          <strong>9%</strong>
+          <span class="delta up">Down 3 pts week-over-week</span>
+        </article>
+        <article class="stage-card">
+          <span>SLA Compliance</span>
+          <strong>94%</strong>
+          <span class="delta up">Response in &lt;15 minutes</span>
+        </article>
+        <article class="stage-card">
+          <span>Deal Velocity</span>
+          <strong>18.6 days</strong>
+          <span class="delta down">Up 1.2 days vs last sprint</span>
+        </article>
+      </section>
+
+      <div class="board-layout">
+        <section>
+          <div class="kanban" aria-label="Pipeline kanban board">
+            <div class="column">
+              <header><span>New Lead</span><span class="count">6</span></header>
+              <article class="deal-card">
+                <span class="badge hot">Hot</span>
+                <h3>Glow Aesthetics • SMS Funnel</h3>
+                <p>Live chat to booked call in 7 min. Needs pricing doc.</p>
+                <div class="deal-meta">
+                  <span>$4,800 MRR</span>
+                  <span>SLA: 32 min</span>
+                </div>
+              </article>
+              <article class="deal-card">
+                <span class="badge">Warm</span>
+                <h3>Atlas Labs • Enterprise Suite</h3>
+                <p>Requested ROI model. SDR follow-up scheduled.</p>
+                <div class="deal-meta">
+                  <span>$8,400 MRR</span>
+                  <span>Owner: Jess</span>
+                </div>
+              </article>
+            </div>
+            <div class="column">
+              <header><span>Qualified</span><span class="count">9</span></header>
+              <article class="deal-card">
+                <span class="badge">Hot</span>
+                <h3>Nova Clinics • AI Concierge</h3>
+                <p>Deposits enabled. Closer meeting Tuesday.</p>
+                <div class="deal-meta">
+                  <span>$6,200 MRR</span>
+                  <span>Owner: Taylor</span>
+                </div>
+              </article>
+              <article class="deal-card">
+                <span class="badge alert">Watchlist</span>
+                <h3>Cobalt SaaS • RevOps Build</h3>
+                <p>Awaiting stack deck revision. Reminder set.</p>
+                <div class="deal-meta">
+                  <span>$11,400 MRR</span>
+                  <span>Touch in 2 hrs</span>
+                </div>
+              </article>
+            </div>
+            <div class="column">
+              <header><span>Booked</span><span class="count">5</span></header>
+              <article class="deal-card">
+                <span class="badge">Hot</span>
+                <h3>Summit Coaching • Elite Pod</h3>
+                <p>Reminder sequence active. Deposit pending.</p>
+                <div class="deal-meta">
+                  <span>$3,900 MRR</span>
+                  <span>Call: Wed 3:00p</span>
+                </div>
+              </article>
+              <article class="deal-card">
+                <span class="badge">Warm</span>
+                <h3>Apollo Med • Intake Suite</h3>
+                <p>Rescheduled twice. Smart no-show workflow fired.</p>
+                <div class="deal-meta">
+                  <span>$9,600 MRR</span>
+                  <span>Risk: Medium</span>
+                </div>
+              </article>
+            </div>
+            <div class="column">
+              <header><span>Closed Won</span><span class="count">12</span></header>
+              <article class="deal-card">
+                <span class="badge">Won</span>
+                <h3>Beacon Legal • Appointment Engine</h3>
+                <p>Implementation kickoff scheduled tomorrow.</p>
+                <div class="deal-meta">
+                  <span>$7,800 MRR</span>
+                  <span>Retention: 98%</span>
+                </div>
+              </article>
+              <article class="deal-card">
+                <span class="badge">Won</span>
+                <h3>Volt Energy • Sales Desk</h3>
+                <p>Upgraded to full suite. Reporting pod added.</p>
+                <div class="deal-meta">
+                  <span>$12,500 MRR</span>
+                  <span>Onboarded 2 days ago</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+        <aside class="velocity-panel" aria-label="Velocity insights">
+          <h2>Velocity & Stage Flow</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th>Avg. time</th>
+                <th>Exit rate</th>
+                <th>Next step</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>New Lead</td>
+                <td>4.6 hrs</td>
+                <td>78%</td>
+                <td><span class="badge-inline">Qualify call</span></td>
+              </tr>
+              <tr>
+                <td>Qualified</td>
+                <td>2.8 days</td>
+                <td>64%</td>
+                <td><span class="badge-inline">Proposal</span></td>
+              </tr>
+              <tr>
+                <td>Booked</td>
+                <td>3.2 days</td>
+                <td>72%</td>
+                <td><span class="badge-inline">Show</span></td>
+              </tr>
+              <tr>
+                <td>Closed Won</td>
+                <td>—</td>
+                <td>—</td>
+                <td><span class="badge-inline">Implementation</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="notes">
+            <div class="note-card">
+              <strong>Alert: Watchlist deals</strong>
+              Apollo Med and Cobalt SaaS exceeded stage targets. Automation escalations already triggered to owners.
+            </div>
+            <div class="note-card">
+              <strong>Next Play: Inbound Spike</strong>
+              Webinar replay generated 18 new leads. SDR coverage extended with after-hours virtual desk.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function(){
+      const pageTransition = document.getElementById('pageTransition');
+      const canAnimate = pageTransition && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      if(canAnimate){
+        window.addEventListener('load', ()=>{
+          requestAnimationFrame(()=> pageTransition.classList.remove('active'));
+        });
+        document.querySelectorAll('a.transition-link').forEach(link=>{
+          link.addEventListener('click', e=>{
+            const href = link.getAttribute('href');
+            if(!href || href.startsWith('#') || link.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            e.preventDefault();
+            pageTransition.classList.add('active');
+            setTimeout(()=>{ window.location.href = href; }, 320);
+          });
+        });
+      } else if(pageTransition){
+        pageTransition.parentElement && pageTransition.parentElement.removeChild(pageTransition);
+      }
+    })();
+  </script>
+  <script>
+    // Visual no-op toggles for menu pills and deal badges
+    (function(){
+      const toggleAttr = (el)=>{
+        const on = el.classList.toggle('is-on');
+        el.setAttribute('aria-pressed', on ? 'true' : 'false');
+      };
+      document.querySelectorAll('.menu .pill').forEach(pill=>{
+        pill.setAttribute('role','button');
+        pill.setAttribute('tabindex','0');
+        pill.addEventListener('click', ()=> toggleAttr(pill));
+        pill.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleAttr(pill); } });
+      });
+      document.querySelectorAll('.deal-card .badge').forEach(badge=>{
+        badge.setAttribute('role','button');
+        badge.setAttribute('tabindex','0');
+        badge.addEventListener('click', ()=> toggleAttr(badge));
+        badge.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleAttr(badge); } });
+      });
+    })();
+  </script>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <script>
+    (function(){
+      const btn = document.querySelector('.calendly-btn');
+      if(!btn) return;
+      const calendlyUrl = btn.getAttribute('data-calendly');
+      btn.addEventListener('click', ()=>{
+        if(window.Calendly && typeof Calendly.showPopupWidget === 'function'){
+          Calendly.showPopupWidget(calendlyUrl);
+        } else {
+          window.open(calendlyUrl, '_blank', 'noopener');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

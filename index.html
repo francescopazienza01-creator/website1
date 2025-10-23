@@ -1,0 +1,1832 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Revno | Done-For-You Teams that Turn Leads into Clients</title>
+  <meta name="description" content="We build and manage remote sales teams that turn leads into clients: systems, scripts, dashboards, and accountability." />
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:description" content="We systemize outreach, increase show rates, and raise close rates with trained teams and proven playbooks." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com" />
+  <meta property="og:image" content="https://yourdomain.com/og.jpg" />
+  
+  <!-- Canonical + Theme Color -->
+  <link rel="canonical" href="https://yourdomain.com/" />
+  <meta name="theme-color" content="#0b0c10" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0c10; --card:#14161b; --txt:#e6eef6; --muted:#a6b0bd; --pri:#6ee7ff; --pri-2:#7c3aed;
+      --max:1100px; --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--txt);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin-inline:auto;padding:28px}
+    section[id]{scroll-margin-top:110px}
+    #faq{scroll-margin-top:110px}
+
+    /* Header */
+    header{position:sticky;top:0;background:linear-gradient(180deg,rgba(11,12,16,.92),rgba(11,12,16,.7) 60%,rgba(11,12,16,0));backdrop-filter:saturate(160%) blur(8px);z-index:50;border-bottom:1px solid rgba(255,255,255,.06);transition:padding .25s ease, box-shadow .25s ease}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px;transition:min-height .25s ease}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:60px;height:60px;display:block;border-radius:20px;transition:transform .25s ease,filter .25s ease;filter:drop-shadow(0 8px 24px rgba(110,231,255,.28))}
+    .brand:hover .logo{transform:translateY(-1px) scale(1.05);filter:drop-shadow(0 10px 26px rgba(110,231,255,.35))}
+    .tag{font-weight:800;letter-spacing:.4px;font-size:18px}
+    .cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--pri),var(--pri-2));padding:12px 18px;border-radius:14px;color:#0b0c10;font-weight:800;position:relative;overflow:hidden;transition:transform .25s ease, box-shadow .25s ease;border:0}
+    .cta:hover{opacity:.92;transform:translateY(-1px) scale(1.04);box-shadow:0 0 20px rgba(110,231,255,.4);cursor:pointer}
+    .cta:focus-visible{outline:2px solid rgba(110,231,255,.8);outline-offset:2px}
+    .cta-group{display:flex;align-items:center;gap:12px}
+    .legal-link{color:var(--muted);font-weight:600}
+    .legal-link:hover{color:var(--txt);text-decoration:underline}
+    .cta.alt{background:transparent;border:1px solid rgba(110,231,255,.35);color:var(--pri);box-shadow:none}
+    .cta.alt:hover{box-shadow:0 0 18px rgba(110,231,255,.35);color:var(--txt)}
+
+    /* Progress bar */
+    #progressbar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--pri),var(--pri-2));z-index:60;opacity:0;transition:width .12s ease,opacity .2s ease}
+    body.scrolled #progressbar{opacity:1}
+
+    /* Hero */
+    .hero{padding:64px 0 40px; position:relative; overflow:hidden}
+    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:22px;transition:transform .35s ease, box-shadow .35s ease}
+    .card:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    h1{font-size:clamp(28px,4vw,46px);line-height:1.06;margin:10px 0 12px}
+    p.kicker{letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700;font-size:12px;margin:0 0 8px}
+    p.lead{color:var(--muted);font-size:clamp(15px,2.2vw,18px);margin:0 0 14px}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+    .badge{border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 12px;color:var(--muted);font-size:14px}
+
+    /* Anchor chips under header */
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{border:1px solid rgba(255,255,255,.14);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+    .chip:hover{border-color:rgba(255,255,255,.32);color:var(--txt)}
+
+    /* Sections */
+    section{margin:36px 0}
+    h2{font-size:clamp(22px,3vw,32px);margin:0 0 12px}
+
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .kpis .card{padding:18px;text-align:center}
+    .kpis .num{font-size:28px;font-weight:800}
+    .kpis .cap{color:var(--muted);font-size:14px}
+
+    /* Month-one plan */
+    .month-one{position:relative;display:grid;gap:18px}
+    .month-one h2{margin-bottom:4px}
+    .month-one p.blurb{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+    .month-one-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .metric-card{padding:16px 18px;border:1px solid rgba(110,231,255,.16);border-radius:var(--radius);background:rgba(14,17,23,.8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:92px;transition:transform .25s ease}
+    .metric-card:hover{transform:translateY(-2px)}
+    .metric-num{font-size:30px;font-weight:800;color:var(--txt);line-height:1;text-align:center}
+    .metric-label{font-size:12.5px;font-weight:700;color:rgba(230,238,246,.92);text-transform:uppercase;letter-spacing:.08em;text-align:center;white-space:normal;max-width:100%}
+
+    /* System marquee */
+    .system-marquee,.why-marquee{position:relative;overflow:hidden;padding-block:12px;max-width:820px;margin-inline:auto}
+    .system-marquee::before,.system-marquee::after,
+    .why-marquee::before,.why-marquee::after{content:"";position:absolute;top:0;bottom:0;width:180px;pointer-events:none;z-index:2}
+    .system-marquee::before,.why-marquee::before{left:0;background:linear-gradient(90deg,rgba(11,12,16,1),rgba(11,12,16,0))}
+    .system-marquee::after,.why-marquee::after{right:0;background:linear-gradient(270deg,rgba(11,12,16,1),rgba(11,12,16,0))}
+    .system-track,.why-track{display:flex;align-items:stretch;gap:14px;width:max-content}
+    .system-track{animation:marquee-system 33s linear infinite}
+    .system-marquee:hover .system-track{animation-play-state:paused}
+    .why-track{animation:marquee-system-reverse 33s linear infinite}
+    .why-marquee:hover .why-track{animation-play-state:paused}
+    .features{display:flex;gap:14px;position:relative}
+    .features .card{min-width:260px;width:260px;transition:transform .4s ease,opacity .4s ease;transform:translateY(18px);opacity:0;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);background:var(--card)}
+    .features.visible .card{transform:translateY(0);opacity:1}
+    .features .card h3{margin:6px 0 4px;font-size:18px}
+    .features .card p{color:var(--muted);font-size:14px}
+
+    /* Services */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative}
+    .services .card h3{margin:6px 0 10px;font-size:18px}
+    .services ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.55}
+    .autos{position:relative;overflow:hidden;padding-block:6px}
+    .autos-track{display:flex;align-items:stretch;gap:14px;width:max-content;animation:marquee-slide 70s linear infinite}
+    .autos:hover .autos-track{animation-play-state:paused}
+    .autos .card{flex:0 0 320px;display:flex;flex-direction:column;gap:10px;min-height:100%}
+    .autos .card h4{margin:4px 0 6px;font-size:16px}
+    .pill{display:inline-block;border:1px solid rgba(255,255,255,.14);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+    .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+
+    /* Why section */
+    .why{display:flex;gap:14px;position:relative}
+    .why .card{min-width:260px;width:260px;transition:transform .4s ease,opacity .4s ease;transform:translateY(18px);opacity:0;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);background:var(--card)}
+    .why.visible .card{transform:translateY(0);opacity:1}
+    .why .card h3{margin:6px 0 4px;font-size:18px}
+    .why .card p{color:var(--muted);font-size:14px}
+
+    /* Testimonials */
+    .testis{position:relative;overflow:hidden;padding-block:6px}
+    .testis-track{display:flex;align-items:stretch;gap:14px;width:max-content;animation:marquee-slide 80s linear infinite}
+    .testis:hover .testis-track{animation-play-state:paused}
+    .testis .card{flex:0 0 320px;min-height:100%;display:flex;flex-direction:column;justify-content:space-between}
+    .quote{font-size:14px;color:var(--muted)}
+    .who{margin-top:8px;font-weight:700}
+
+    /* Banner CTA */
+    .banner{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+    .banner .cta{padding:14px 26px;font-size:15px}
+
+    /* Form */
+    form{display:grid;gap:12px}
+    label{font-size:14px;color:var(--muted)}
+    input,select,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1116;color:var(--txt)}
+    .disclaimer{color:var(--muted);font-size:12px}
+
+    /* FAQ */
+    details{background:rgba(20,22,27,.96);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px 20px;transition:background .25s ease,border-color .25s ease,transform .25s ease}
+    details[open]{background:rgba(20,22,27,.8);border-color:rgba(110,231,255,.28);transform:translateY(-1px)}
+    details+details{margin-top:12px}
+    summary{cursor:pointer;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:space-between;gap:16px;color:#f1f5ff;letter-spacing:.02em}
+    summary::-webkit-details-marker{display:none}
+    #faq summary::after{content:"+";font-weight:700;font-size:18px;color:var(--pri);transition:transform .25s ease}
+    #faq details[open] summary::after{content:"−";transform:rotate(180deg)}
+    #faq details p{color:var(--muted);font-size:14px;line-height:1.65;margin:14px 0 0}
+
+    /* Assistant widget */
+    .assistant{position:fixed;right:22px;bottom:120px;width:320px;max-width:calc(100vw - 32px);z-index:140;font-size:14px;color:var(--txt)}
+    .assistant-panel{position:relative;background:rgba(15,18,25,.95);border:1px solid rgba(110,231,255,.22);border-radius:18px;padding:16px 16px 70px;box-shadow:0 18px 50px rgba(0,0,0,.4);backdrop-filter:blur(16px);display:grid;gap:12px;opacity:0;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease}
+    .assistant.open .assistant-panel{opacity:1;transform:translateY(0)}
+    .assistant-panel[hidden]{display:none}
+    .assistant-toggle{position:absolute;right:0;bottom:-58px;background:linear-gradient(135deg,var(--pri),var(--pri-2));border:none;color:#0b0c10;font-weight:700;padding:12px 18px;border-radius:999px;box-shadow:0 12px 30px rgba(110,231,255,.35);cursor:pointer;display:inline-flex;align-items:center;gap:8px;pointer-events:auto}
+    .assistant-toggle:focus-visible{outline:2px solid rgba(255,255,255,.6);outline-offset:4px}
+    .assistant-header{display:flex;flex-direction:column;gap:6px}
+    .assistant-header strong{font-size:15px}
+    .assistant-log{max-height:260px;overflow-y:auto;display:grid;gap:10px;padding-right:6px}
+    .assistant-msg{padding:12px 14px;border-radius:14px;line-height:1.45;background:rgba(20,22,27,.92);border:1px solid rgba(255,255,255,.06);justify-self:start;max-width:100%}
+    .assistant-msg.ai{border-color:rgba(110,231,255,.28);background:rgba(15,18,25,.95)}
+    .assistant-msg.user{background:rgba(110,231,255,.12);border-color:rgba(110,231,255,.28);justify-self:end}
+    .assistant-msg.ai.typing{display:inline-flex;align-items:center;gap:4px;opacity:.8;letter-spacing:4px}
+    .typing-dots{display:inline-flex;gap:4px}
+    .typing-dots span{width:6px;height:6px;border-radius:50%;background:rgba(110,231,255,.85);opacity:.4;animation:dotBlink 1s infinite ease-in-out}
+    .typing-dots span:nth-child(2){animation-delay:.15s}
+    .typing-dots span:nth-child(3){animation-delay:.3s}
+    @keyframes dotBlink{
+      0%,80%,100%{transform:translateY(0);opacity:.35}
+      40%{transform:translateY(-4px);opacity:1}
+    }
+    .assistant-form{position:absolute;left:0;right:0;bottom:10px;padding:0 16px}
+    .assistant-form form{display:flex;gap:8px;align-items:center}
+    .assistant-form input{flex:1;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1116;color:var(--txt)}
+    .assistant-form button{background:rgba(110,231,255,.9);color:#0b0c10;border:none;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+    .assistant-suggestions{display:flex;flex-wrap:wrap;gap:6px}
+    .assistant-suggestions button{border:1px solid rgba(110,231,255,.28);color:var(--pri);background:transparent;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
+    .assistant-suggestions button:hover{border-color:rgba(110,231,255,.5)}
+
+    /* Footer */
+    footer{margin:40px 0 20px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+
+    /* Welcome overlay */
+    .welcome-overlay{position:fixed;inset:0;display:grid;place-items:center;background:rgba(11,12,16,.92);backdrop-filter:blur(14px);z-index:200;opacity:0;pointer-events:none;transition:opacity .5s ease}
+    .welcome-overlay.active{opacity:1;pointer-events:auto;animation:welcomeFadeIn 1.2s ease forwards}
+    .welcome-overlay.closing{opacity:0;pointer-events:none}
+    .welcome-overlay.closing .welcome-card{transform:translateY(16px);opacity:.9}
+    body.intro-fade main, body.intro-fade footer, body.intro-fade header{animation:contentFade .9s ease forwards}
+    .welcome-card{width:min(88vw,880px);max-height:88vh;background:rgba(12,16,24,.95);border:1px solid rgba(110,231,255,.22);border-radius:28px;padding:40px;display:flex;flex-direction:column;gap:24px;align-items:center;position:relative;overflow:hidden;box-shadow:0 32px 110px rgba(0,0,0,.55);transition:transform .45s ease, opacity .45s ease}
+    .welcome-card::before{content:"";position:absolute;inset:-120px -200px;background:conic-gradient(from 120deg,rgba(110,231,255,.18),transparent 38%);opacity:.6;animation:welcomeGlow 14s linear infinite}
+    .welcome-graphic{position:relative;width:100%;height:clamp(240px,40vh,360px);border-radius:22px;overflow:hidden;background:linear-gradient(160deg,rgba(11,12,18,.75),rgba(11,12,16,0)),url('images/paz2.png') center/cover no-repeat;box-shadow:0 26px 70px rgba(10,14,26,.5)}
+    .welcome-graphic-overlay{position:absolute;inset:0;background:linear-gradient(190deg,rgba(11,12,16,0) 12%,rgba(11,12,16,.82) 88%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px 24px;color:var(--txt);gap:10px}
+    .welcome-graphic-overlay h3{margin:0;font-size:clamp(17px,2.6vw,20px);letter-spacing:.08em;text-transform:uppercase;color:var(--pri)}
+    .welcome-graphic-overlay p{margin:0;color:rgba(230,238,246,.84);font-size:14px;line-height:1.6;max-width:420px}
+    .welcome-graphic-chips{display:flex;flex-wrap:wrap;gap:8px}
+    .welcome-graphic-chips span{padding:6px 12px;border-radius:999px;border:1px solid rgba(110,231,255,.24);background:rgba(12,18,26,.65);font-size:11px;text-transform:uppercase;letter-spacing:.11em;color:var(--pri)}
+    .welcome-title{margin:0;font-size:clamp(26px,4.3vw,35px);font-weight:800;letter-spacing:.028em;text-align:center}
+    .welcome-sub{margin:0;color:rgba(230,238,246,.84);font-size:15px;line-height:1.65;text-align:center;max-width:540px}
+    .welcome-cta{display:inline-flex;align-items:center;justify-content:center;padding:12px 24px;border-radius:15px;border:none;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--pri),var(--pri-2));color:#0b0c10;transition:transform .25s ease,box-shadow .25s ease}
+    .welcome-tap{margin:4px 0 0;color:var(--muted);font-size:13px;text-align:center;opacity:.9}
+    .welcome-cta{display:inline-flex;align-items:center;justify-content:center;padding:12px 26px;border-radius:15px;border:none;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--pri),var(--pri-2));color:#0b0c10;transition:transform .25s ease,box-shadow .25s ease}
+    .welcome-cta:hover{transform:translateY(-1px);box-shadow:0 14px 35px rgba(110,231,255,.35)}
+    .calendly-container{border:1px solid rgba(110,231,255,.2);border-radius:18px;overflow:hidden;background:#04060b;padding:12px}
+
+    /* Marquee containers */
+    .system-marquee,.why-marquee{position:relative;overflow:hidden;padding-block:12px;max-width:820px;margin-inline:auto}
+    .system-marquee::before,.system-marquee::after,
+    .why-marquee::before,.why-marquee::after{content:"";position:absolute;top:0;bottom:0;width:180px;pointer-events:none;z-index:2}
+    .system-marquee::before,.why-marquee::before{left:0;background:linear-gradient(90deg,rgba(11,12,16,1),rgba(11,12,16,0))}
+    .system-marquee::after,.why-marquee::after{right:0;background:linear-gradient(270deg,rgba(11,12,16,1),rgba(11,12,16,0))}
+    .system-track,.why-track{display:flex;align-items:stretch;gap:14px;width:max-content}
+    .system-track{animation:marquee-system 33s linear infinite}
+    .system-marquee:hover .system-track{animation-play-state:paused}
+    .why-track{animation:marquee-system-reverse 33s linear infinite}
+    .why-marquee:hover .why-track{animation-play-state:paused}
+    .features{display:flex;gap:14px;position:relative}
+    .features .card{min-width:260px;width:260px;transition:transform .4s ease,opacity .4s ease;transform:translateY(18px);opacity:0;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);background:var(--card)}
+    .features.visible .card{transform:translateY(0);opacity:1}
+    .features .card h3{margin:6px 0 4px;font-size:18px}
+    .features .card p{color:var(--muted);font-size:14px}
+
+    /* Back-to-top button */
+    #toTop{position:fixed;left:22px;bottom:22px;width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:#0f1116;color:var(--txt);display:grid;place-items:center;font-size:18px;box-shadow:0 10px 30px rgba(0,0,0,.25);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:45}
+    #toTop.show{opacity:1;transform:none;pointer-events:auto}
+    #toTop:hover{box-shadow:0 0 20px rgba(110,231,255,.35);border-color:rgba(255,255,255,.28)}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .nav{flex-direction:column;align-items:flex-start}
+      .cta-group{flex-wrap:wrap}
+      .grid{grid-template-columns:1fr}
+      .features,.kpis,.services,.why{grid-template-columns:1fr}
+      .system-marquee,.why-marquee{max-width:100%}
+      .system-track,.why-track{animation:none!important;flex-wrap:wrap;width:100%}
+      .system-track .clone,.why-track .clone{display:none}
+      .system-track .card,.why-track .card,.features .card,.why .card{min-width:100%;width:100%;transform:none!important;opacity:1!important}
+      #toTop{right:16px;left:auto;bottom:160px}
+      .testis .card{flex:0 0 280px}
+      .autos .card{flex:0 0 280px}
+      .month-one-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .assistant{width:280px;right:16px;bottom:110px}
+    }
+    @media (max-width:640px){
+      .cta-group{width:100%;gap:10px}
+      .cta-group > a{flex:1;justify-content:center}
+      .month-one-metrics{grid-template-columns:1fr}
+      .testis .card{flex:0 0 240px}
+      .autos .card{flex:0 0 240px}
+      .assistant{left:16px;right:16px;width:auto;bottom:90px}
+      .assistant-panel{max-height:60vh}
+    }
+
+    /* --- Animations & micro-interactions --- */
+    @keyframes float {0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+    @keyframes gradientShift {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @keyframes marquee-slide {0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    @keyframes shine {0%{transform:translateX(-120%)}50%{transform:translateX(120%)}100%{transform:translateX(120%)}}
+    @keyframes marquee-system {0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    @keyframes marquee-system-reverse {0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+    @keyframes welcomeFadeIn {0%{opacity:0;transform:scale(1.02)}40%{opacity:.65;transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+    @keyframes contentFade {0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:translateY(0)}}
+    @keyframes welcomeGlow {0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+
+    .logo{animation:float 10s ease-in-out infinite}
+    .cta::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent); transform:translateX(-120%); animation:shine 3.5s ease-in-out infinite}
+
+    .orb{position:absolute; width:260px; height:260px; border-radius:50%; filter:blur(60px); opacity:.22; pointer-events:none; animation:float 8s ease-in-out infinite}
+    .orb-a{background:radial-gradient(closest-side,var(--pri),transparent 70%); top:-70px; left:-70px}
+    .orb-b{background:radial-gradient(closest-side,var(--pri-2),transparent 70%); bottom:-90px; right:-50px; animation-duration:10s}
+
+    /* Reveal on scroll */
+    .reveal{opacity:0; transform:translate3d(0,var(--reveal-offset,14px),0); transition:opacity .7s ease, transform .7s ease}
+    .reveal-up{--reveal-offset:-14px}
+    .reveal-down{--reveal-offset:14px}
+    .revealed{opacity:1; transform:translate3d(0,0,0)}
+
+    /* Page transitions */
+    .page-transition{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,rgba(110,231,255,.12),transparent 55%),radial-gradient(circle at 80% 30%,rgba(124,58,237,.12),transparent 60%),var(--bg);opacity:0;pointer-events:none;transition:opacity .45s ease;z-index:120}
+    .page-transition.active{opacity:1;pointer-events:auto}
+
+    /* Header shrink */
+    body.scrolled header{box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    body.scrolled .nav{min-height:56px}
+    body.scrolled .logo{transform:scale(.92)}
+
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important}
+      .cta::after{display:none}
+      .testis{overflow-x:auto}
+      .autos{overflow-x:auto}
+      .features::before,.why::before{opacity:1 !important}
+      .features .card,.why .card{transform:none !important;opacity:1 !important}
+    }
+
+
+    /* Scroll-to-top */
+    #toTop{position:fixed;left:22px;bottom:22px;width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:#0f1116;color:var(--txt);display:grid;place-items:center;font-size:18px;box-shadow:0 10px 30px rgba(0,0,0,.25);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:45}
+    #toTop.show{opacity:1;transform:none;pointer-events:auto}
+    #toTop:hover{box-shadow:0 0 20px rgba(110,231,255,.35);border-color:rgba(255,255,255,.28)}
+  </style>
+
+  <!-- JSON-LD: Organization + WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Revno",
+        "url": "https://yourdomain.com/",
+        "logo": "https://yourdomain.com/og.jpg",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "name": "Revno",
+        "url": "https://yourdomain.com/",
+        "publisher": { "@type": "Organization", "name": "Revno" },
+        "inLanguage": "en",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://yourdomain.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+  <body>
+    <div class="welcome-overlay active" id="welcomeOverlay" aria-modal="true" role="dialog" aria-label="Revno welcome message">
+      <div class="welcome-card">
+        <div class="welcome-graphic">
+          <div class="welcome-graphic-overlay">
+            <h3>Precision Revenue Ops</h3>
+            <p>See how Revno maps every lead, triggers every workflow, and keeps your revenue desk accountable in real time.</p>
+            <div class="welcome-graphic-chips">
+              <span>Systems</span>
+              <span>Automations</span>
+              <span>Team</span>
+            </div>
+          </div>
+        </div>
+        <h2 class="welcome-title">Where Innovation Meets Sales</h2>
+        <p class="welcome-sub">We fuse custom CRM architecture, intelligent automations, and human operators so every qualified lead becomes booked revenue.</p>
+        <p class="welcome-tap">Tap anywhere to continue…</p>
+      </div>
+    </div>
+    <!-- Thin scroll progress bar -->
+    <div id="progressbar" aria-hidden="true"></div>
+    <div id="pageTransition" class="page-transition active" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <img class="logo" src="images/revno-logo.svg" alt="Revno logo" width="60" height="60" loading="lazy" decoding="async" />
+        <span class="tag" aria-hidden="true">Revno</span>
+      </div>
+      <div class="chips" aria-hidden="true">
+        <a class="chip" href="#services">System</a>
+        <a class="chip" href="#services">Automations</a>
+        <a class="chip" href="#contact">Contact</a>
+        <a class="chip" href="#faq">FAQ</a>
+      </div>
+      <div class="cta-group">
+        <a class="cta transition-link" href="demo-crm.html">Check Our Demo CRM</a>
+        <a class="cta" href="#contact">Book Your Call</a>
+        <a class="legal-link transition-link" href="privacy.html" title="Privacy & Terms">privacy.terms</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero grid">
+      <div class="orb orb-a"></div>
+      <div class="orb orb-b"></div>
+      <div class="card">
+        <p class="kicker">OPTIMIZE • AUTOMATE • SCALE</p>
+        <h1>Managed Revenue Operations Systems</h1>
+        <p class="lead">We install the systems, team, and training to turn your existing lead flow into booked calls and closed revenue — fast.</p>
+        <div class="badges">
+          <div class="badge">Systems • Team • Training</div>
+          <div class="badge">Booked-call & revenue goals</div>
+          <div class="badge">Dashboards & accountability</div>
+        </div>
+        <a class="cta" href="#contact">Book Your Consultation</a>
+      </div>
+      <div class="card month-one">
+        <h2>What You Get in Month 1</h2>
+        <p class="blurb">Launch the Revno desk in under 30 days—systems live, reps trained, KPIs tracked.</p>
+        <div class="month-one-metrics">
+          <div class="metric-card"><span class="metric-num">+30–80%</span><span class="metric-label">Booked Calls</span></div>
+          <div class="metric-card"><span class="metric-num">+10–25%</span><span class="metric-label">Show Rate</span></div>
+          <div class="metric-card"><span class="metric-num">+3–10%</span><span class="metric-label">Close Rate</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>The System</h2>
+      <div class="system-marquee">
+        <div class="features system-track">
+          <div class="card">
+            <h3>1) Audit</h3>
+            <p>We audit funnel, scripts, KPIs, and CRM to find the fastest conversion wins.</p>
+          </div>
+          <div class="card">
+            <h3>2) Systemize</h3>
+            <p>We implement outreach cadences, booking flows, tracking dashboards, and manager cadences.</p>
+          </div>
+          <div class="card">
+            <h3>3) Train &amp; Scale</h3>
+            <p>We recruit/train setters &amp; closers, run roleplays, and enforce KPIs to scale revenue.</p>
+          </div>
+          <div class="card clone" aria-hidden="true" tabindex="-1">
+            <h3>1) Audit</h3>
+            <p>We audit funnel, scripts, KPIs, and CRM to find the fastest conversion wins.</p>
+          </div>
+          <div class="card clone" aria-hidden="true" tabindex="-1">
+            <h3>2) Systemize</h3>
+            <p>We implement outreach cadences, booking flows, tracking dashboards, and manager cadences.</p>
+          </div>
+          <div class="card clone" aria-hidden="true" tabindex="-1">
+            <h3>3) Train &amp; Scale</h3>
+            <p>We recruit/train setters &amp; closers, run roleplays, and enforce KPIs to scale revenue.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Revno -->
+    <section>
+      <h2>Why Revno</h2>
+      <div class="why-marquee">
+        <div class="why why-track">
+          <div class="card">
+            <h3>Speed</h3>
+            <p>Under-60s speed-to-lead, round-robin routing, and instant DM replies to capture intent.</p>
+          </div>
+          <div class="card">
+            <h3>Precision</h3>
+            <p>Script updates from call audits, KPI scorecards, and attribution that shows what content prints money.</p>
+          </div>
+          <div class="card">
+            <h3>Accountability</h3>
+            <p>Weekly executive report with actions, forecasts, and rep-level performance—no black boxes.</p>
+          </div>
+          <div class="card clone" aria-hidden="true" tabindex="-1">
+            <h3>Speed</h3>
+            <p>Under-60s speed-to-lead, round-robin routing, and instant DM replies to capture intent.</p>
+          </div>
+          <div class="card clone" aria-hidden="true" tabindex="-1">
+            <h3>Precision</h3>
+            <p>Script updates from call audits, KPI scorecards, and attribution that shows what content prints money.</p>
+          </div>
+          <div class="card clone" aria-hidden="true" tabindex="-1">
+            <h3>Accountability</h3>
+            <p>Weekly executive report with actions, forecasts, and rep-level performance—no black boxes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <h2>Services</h2>
+      <div class="services">
+        <div class="card">
+          <h3>Revenue Systems Architecture</h3>
+          <ul>
+            <li>Custom CRM build-outs (GoHighLevel, Salesforce, HubSpot) mapped to your funnel logic</li>
+            <li>Deal stages, automations, tagging, and productized pipelines built to scale</li>
+            <li>Lead-router architecture with geo/time/window logic and instant alerts</li>
+            <li>Data hygiene: dedupe rules, opt-out logic, and compliance tagging baked in</li>
+            <li>API, Zapier, and Make bridges to marketing, billing, and fulfillment platforms</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Automation & Enablement</h3>
+          <ul>
+            <li>High-intent flows: DM-to-calendar, page-to-call, inbound phone to rep assignment</li>
+            <li>Lifecycle nurturing: reactivation sequences, deposit recovery, churn prevention</li>
+            <li>Playbook engine: dynamic scripts, briefing packs, objection handling micro-sites</li>
+            <li>Notification matrix: Slack, SMS, and email escalations when KPIs drift</li>
+            <li>After-hours coverage with AI triage, qualification, and handoff tasks</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Analytics & Control Rooms</h3>
+          <ul>
+            <li>Executive dashboards charting booked calls, conversion, LTV, and pipeline velocity</li>
+            <li>Rep scorecards with talk-time, follow-up cadence, and win-rate insights</li>
+            <li>Attribution panels tying channels, campaigns, and creatives to revenue</li>
+            <li>Capacity dashboards: forecasting, hiring signals, and burn-down pacing</li>
+            <li>Weekly control room reviews with issues list, fixes, and next sprint priorities</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <h2 style="margin-bottom:6px">Automations We Install (Weeks 1–4)</h2>
+        <div class="autos" style="margin-top:10px">
+          <div class="autos-track">
+            <div class="card">
+              <h4>Speed-to-Lead Router</h4>
+              <p class="lead">Auto-assign new leads to the next available setter within seconds.</p>
+              <div class="pills"><span class="pill">Round-robin</span><span class="pill">Reply-time SLA</span><span class="pill">Escalations</span></div>
+            </div>
+            <div class="card">
+              <h4>DM → Qualified Booking</h4>
+              <p class="lead">Prompted questions qualify for authority, need, budget & timeline before the calendar link.</p>
+              <div class="pills"><span class="pill">IG / WA / SMS</span><span class="pill">GHL Forms</span><span class="pill">Tags</span></div>
+            </div>
+            <div class="card">
+              <h4>No-Show Reducer</h4>
+              <p class="lead">Stacked reminders + deposit/commitment messages cut no-shows by 20–40%.</p>
+              <div class="pills"><span class="pill">Reminders</span><span class="pill">Deposits</span><span class="pill">Reschedule link</span></div>
+            </div>
+            <div class="card">
+              <h4>Dead-Lead Reviver</h4>
+              <p class="lead">90-day nurture with seasonal offers and objection-based angles.</p>
+              <div class="pills"><span class="pill">Smart timing</span><span class="pill">Templates</span><span class="pill">Opt-out safe</span></div>
+            </div>
+            <div class="card">
+              <h4>Closer Assist</h4>
+              <p class="lead">Pre-call briefs with lead notes, objections, and prior DMs auto-attached to the event.</p>
+              <div class="pills"><span class="pill">Calendar notes</span><span class="pill">CRM link</span><span class="pill">Recording</span></div>
+            </div>
+            <div class="card">
+              <h4>Won/Lost Feedback Loop</h4>
+              <p class="lead">Closed-won/-lost reasons update scripts & training automatically.</p>
+              <div class="pills"><span class="pill">Tags → Reports</span><span class="pill">Script updates</span></div>
+            </div>
+            <!-- Duplicate set for seamless marquee -->
+            <div class="card">
+              <h4>Speed-to-Lead Router</h4>
+              <p class="lead">Auto-assign new leads to the next available setter within seconds.</p>
+              <div class="pills"><span class="pill">Round-robin</span><span class="pill">Reply-time SLA</span><span class="pill">Escalations</span></div>
+            </div>
+            <div class="card">
+              <h4>DM → Qualified Booking</h4>
+              <p class="lead">Prompted questions qualify for authority, need, budget & timeline before the calendar link.</p>
+              <div class="pills"><span class="pill">IG / WA / SMS</span><span class="pill">GHL Forms</span><span class="pill">Tags</span></div>
+            </div>
+            <div class="card">
+              <h4>No-Show Reducer</h4>
+              <p class="lead">Stacked reminders + deposit/commitment messages cut no-shows by 20–40%.</p>
+              <div class="pills"><span class="pill">Reminders</span><span class="pill">Deposits</span><span class="pill">Reschedule link</span></div>
+            </div>
+            <div class="card">
+              <h4>Dead-Lead Reviver</h4>
+              <p class="lead">90-day nurture with seasonal offers and objection-based angles.</p>
+              <div class="pills"><span class="pill">Smart timing</span><span class="pill">Templates</span><span class="pill">Opt-out safe</span></div>
+            </div>
+            <div class="card">
+              <h4>Closer Assist</h4>
+              <p class="lead">Pre-call briefs with lead notes, objections, and prior DMs auto-attached to the event.</p>
+              <div class="pills"><span class="pill">Calendar notes</span><span class="pill">CRM link</span><span class="pill">Recording</span></div>
+            </div>
+            <div class="card">
+              <h4>Won/Lost Feedback Loop</h4>
+              <p class="lead">Closed-won/-lost reasons update scripts & training automatically.</p>
+              <div class="pills"><span class="pill">Tags → Reports</span><span class="pill">Script updates</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <h2 style="margin-bottom:6px">Tech Stack & Integrations</h2>
+        <p class="lead">Native with GoHighLevel • Calendly • Google Calendar • Zoom • Instagram • WhatsApp • Gmail/Outlook • Slack/Discord • Stripe</p>
+        <div class="pills" style="margin-top:6px"><span class="pill">Webhook-ready</span><span class="pill">Zapier/Make</span><span class="pill">Custom APIs</span><span class="pill">Privacy-first</span></div>
+      </div>
+
+      <div class="reveal" style="margin-top:16px; display:flex; justify-content:flex-start">
+        <a class="cta" href="#contact" style="display:inline-flex">Replicate This →</a>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section>
+      <h2>What Clients Say</h2>
+      <div class="testis">
+        <div class="testis-track">
+          <div class="card">
+            <div class="quote">“Booked 62% more calls by week 3. Show rate up 18 points. This paid for itself in days.”</div>
+            <div class="who">Alex R. — Fitness Coaching</div>
+          </div>
+          <div class="card">
+            <div class="quote">“DM → booking qualified leads overnight. Our closers stop guessing and just close.”</div>
+            <div class="who">Priya M. — Med Spa</div>
+          </div>
+          <div class="card">
+            <div class="quote">“The weekly exec report locked our pipeline. KPIs are visible and reps hit targets.”</div>
+            <div class="who">Marcus L. — B2B Services</div>
+          </div>
+          <div class="card">
+            <div class="quote">“Revno’s playbooks made our setter team hum. We doubled qualified demos without adding ad spend.”</div>
+            <div class="who">Sofia P. — SaaS Founder</div>
+          </div>
+          <div class="card">
+            <div class="quote">“No-show rate cratered. The automated reminders plus live follow-up added six figures last quarter.”</div>
+            <div class="who">Daniel K. — Dental Clinics</div>
+          </div>
+          <div class="card">
+            <div class="quote">“They took over nurture and appointment setting so my team can focus on closing. Pipeline is finally predictable.”</div>
+            <div class="who">Harper T. — Real Estate Team</div>
+          </div>
+          <!-- Duplicate set for seamless marquee -->
+          <div class="card">
+            <div class="quote">“Booked 62% more calls by week 3. Show rate up 18 points. This paid for itself in days.”</div>
+            <div class="who">Alex R. — Fitness Coaching</div>
+          </div>
+          <div class="card">
+            <div class="quote">“DM → booking qualified leads overnight. Our closers stop guessing and just close.”</div>
+            <div class="who">Priya M. — Med Spa</div>
+          </div>
+          <div class="card">
+            <div class="quote">“The weekly exec report locked our pipeline. KPIs are visible and reps hit targets.”</div>
+            <div class="who">Marcus L. — B2B Services</div>
+          </div>
+          <div class="card">
+            <div class="quote">“Revno’s playbooks made our setter team hum. We doubled qualified demos without adding ad spend.”</div>
+            <div class="who">Sofia P. — SaaS Founder</div>
+          </div>
+          <div class="card">
+            <div class="quote">“No-show rate cratered. The automated reminders plus live follow-up added six figures last quarter.”</div>
+            <div class="who">Daniel K. — Dental Clinics</div>
+          </div>
+          <div class="card">
+            <div class="quote">“They took over nurture and appointment setting so my team can focus on closing. Pipeline is finally predictable.”</div>
+            <div class="who">Harper T. — Real Estate Team</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="grid">
+      <div class="card">
+        <h2>Book a Strategy Call</h2>
+        <p class="lead">Grab a slot so we can audit your pipeline, tech stack, and sales performance live.</p>
+        <div class="calendly-container">
+          <div class="calendly-inline-widget" data-url="https://calendly.com/fpazienza5/45min-hour-consultation-clone" style="min-width:320px;height:700px;"></div>
+        </div>
+      </div>
+      <div class="card" id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>How fast can we launch?</summary>
+          <p>Kickoff happens within 48 hours. We stand up core automations, scripts, and dashboards in the first 10 business days, then layer advanced workflows in weeks 3–4.</p>
+        </details>
+        <details>
+          <summary>What tools does Revno plug into?</summary>
+          <p>We connect to GoHighLevel, HubSpot, Salesforce, Slack/Discord, Google Workspace, Zoom, Calendly, Stripe, and more. Custom CRMs are wired through webhooks or API bridges.</p>
+        </details>
+        <details>
+          <summary>Is this just a chatbot?</summary>
+          <p>No. You get trained Revno desk operators augmented by AI copilots. Every lead gets human-level conversation quality with AI speed for routing, reminders, and data entry.</p>
+        </details>
+        <details>
+          <summary>Can my team jump in mid-conversation?</summary>
+          <p>Yes. Your setters and closers can take over instantly from Slack or inside the CRM. All transcripts, notes, and tasks stay synced so nothing falls through the cracks.</p>
+        </details>
+        <details>
+          <summary>How do you handle no-shows and payments?</summary>
+          <p>We deploy deposits, smart reminders, and recovery sequences. Failed payments or reschedules trigger alerts for your team with prebuilt next steps.</p>
+        </details>
+        <details>
+          <summary>What ongoing support do we get?</summary>
+          <p>Expect weekly exec recaps, daily desk monitoring, coaching clips, and monthly strategy sessions to refresh scripts, automations, and reporting.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section style="margin-top:48px">
+      <div class="banner card reveal">
+        <h2 style="margin:0">Want this built for you?</h2>
+        <p class="lead" style="margin:0">We’ll install the automations, train reps, and hit your booking targets.</p>
+        <a class="cta" href="#contact">Request My Consultation</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="wrap">
+    <span>© <span id="year"></span> Revno</span>
+    <span><a class="transition-link" href="privacy.html">privacy.terms</a></span>
+  </footer>
+
+  <!-- Scroll-to-top button -->
+  <button id="toTop" aria-label="Back to top" title="Back to top">↑</button>
+  <div class="assistant" id="assistant" aria-live="polite">
+    <div class="assistant-panel" id="assistantPanel" hidden>
+      <div class="assistant-header">
+        <strong>Revno Copilot</strong>
+        <p style="margin:0;color:var(--muted);font-size:13px">Ask anything about our done-for-you sales teams, automations, or onboarding.</p>
+        <div class="assistant-suggestions">
+          <button type="button" data-question="What services do you offer?">Services</button>
+          <button type="button" data-question="How fast can we launch?">Launch speed</button>
+          <button type="button" data-question="What results can we expect?">Expected results</button>
+          <button type="button" data-question="Which tools do you integrate with?">Integrations</button>
+        </div>
+      </div>
+      <div class="assistant-log" id="assistantLog" role="log" aria-live="polite"></div>
+      <div class="assistant-form">
+        <form id="assistantForm" autocomplete="off">
+          <input id="assistantInput" name="question" type="text" placeholder="Ask your question…" aria-label="Ask your question" required />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+    <button class="assistant-toggle" type="button" id="assistantToggle" aria-expanded="false" aria-controls="assistantPanel">
+      Ask Revno
+    </button>
+  </div>
+
+  <script>
+    // tiny niceties
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+      const id=a.getAttribute('href'); if(id.length>1){ e.preventDefault(); document.querySelector(id).scrollIntoView({behavior:'smooth'}); }
+    }));
+
+    // Reveal-on-scroll using IntersectionObserver (staggered)
+    let lastScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    let scrollDirection = 'down';
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const el = entry.target;
+        if(entry.isIntersecting){
+        const siblings = el.parentElement ? Array.from(el.parentElement.children) : [el];
+        const idx = Math.max(0, siblings.indexOf(el));
+        el.style.transitionDelay = (idx * 60) + 'ms';
+        let direction = (el.dataset.reveal || '').toLowerCase();
+        if(!direction){
+          direction = scrollDirection;
+          }
+          if(direction === 'up' || el.classList.contains('reveal-up')){
+            el.classList.add('reveal-up');
+            el.classList.remove('reveal-down');
+          } else if(direction === 'down' || el.classList.contains('reveal-down')){
+            el.classList.add('reveal-down');
+            el.classList.remove('reveal-up');
+          }
+          el.classList.add('revealed');
+          if(el.classList.contains('features') || el.classList.contains('why')){
+            el.classList.add('visible');
+            const cards = el.querySelectorAll('.card');
+            cards.forEach((card, cardIdx)=>{
+              card.style.transitionDelay = `${cardIdx * 140}ms`;
+            });
+          }
+        } else {
+          el.classList.remove('revealed');
+          if(el.classList.contains('features') || el.classList.contains('why')){
+            el.classList.remove('visible');
+          }
+        }
+      });
+    }, {threshold: 0.1});
+
+    const revealTargets = document.querySelectorAll('section, .card, h1, h2, .cta, [data-reveal], .reveal-up, .reveal-down, .features, .why');
+    revealTargets.forEach(el=>{
+      const direction = (el.dataset.reveal || '').toLowerCase();
+      el.classList.add('reveal');
+      if(direction === 'up' || el.classList.contains('reveal-up')){
+        el.classList.add('reveal-up');
+        el.classList.remove('reveal-down');
+      } else if(direction === 'down' || el.classList.contains('reveal-down')){
+        el.classList.add('reveal-down');
+        el.classList.remove('reveal-up');
+      }
+      io.observe(el);
+    });
+
+    const pageTransition = document.getElementById('pageTransition');
+    const canAnimateTransition = pageTransition && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if(canAnimateTransition){
+      window.addEventListener('load', ()=>{
+        requestAnimationFrame(()=> pageTransition.classList.remove('active'));
+      });
+      document.querySelectorAll('a.transition-link').forEach(link=>{
+        link.addEventListener('click', e=>{
+          const href = link.getAttribute('href');
+          if(!href || href.startsWith('#') || link.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          e.preventDefault();
+          pageTransition.classList.add('active');
+          setTimeout(()=>{ window.location.href = href; }, 320);
+        });
+      });
+    } else if(pageTransition){
+      pageTransition.parentElement && pageTransition.parentElement.removeChild(pageTransition);
+    }
+
+    // Scroll progress & header shrink & back-to-top
+    const progressBar = document.getElementById('progressbar');
+    const toTopBtn = document.getElementById('toTop');
+    function onScroll(){
+      const doc = document.documentElement;
+      const st = doc.scrollTop || document.body.scrollTop;
+      if(st < lastScrollY){
+        scrollDirection = 'up';
+      } else if(st > lastScrollY){
+        scrollDirection = 'down';
+      }
+      lastScrollY = st;
+      const h = (doc.scrollHeight - doc.clientHeight) || 1;
+      const pct = Math.min(100, Math.max(0, (st / h) * 100));
+      if(progressBar) progressBar.style.width = pct + '%';
+      if(st > 10) document.body.classList.add('scrolled'); else document.body.classList.remove('scrolled');
+      if(toTopBtn){ if(st > 400) toTopBtn.classList.add('show'); else toTopBtn.classList.remove('show'); }
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('load', onScroll);
+    if(toTopBtn){ toTopBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'})); }
+
+    // Assistant bot (rule-based FAQ helper)
+    const assistant = document.getElementById('assistant');
+    if(assistant){
+      const panel = document.getElementById('assistantPanel');
+      const toggle = document.getElementById('assistantToggle');
+      const log = document.getElementById('assistantLog');
+      const form = document.getElementById('assistantForm');
+      const input = document.getElementById('assistantInput');
+      const suggestionButtons = assistant.querySelectorAll('[data-question]');
+      let seeded = false;
+      const transcripts = [];
+
+      const STOP_WORDS = new Set(['and','the','for','with','that','from','your','you','are','our','this','have','has','will','into','about','just','over','more','than','what','when','where','which','while','after','before','within','their','them','they','each','been','make','made','can','able','also','but','per','via','how','much','many','who','does','get','into','onto','onto']);
+
+      function normalizeQuestion(text){
+        return (text || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g,' ')
+          .replace(/\s+/g,' ')
+          .trim();
+      }
+
+      function levenshtein(a,b){
+        if(a === b) return 0;
+        if(!a.length) return b.length;
+        if(!b.length) return a.length;
+        const dp = Array.from({length:b.length + 1}, (_, i)=> i);
+        for(let i = 1; i <= a.length; i++){
+          let prev = i - 1;
+          dp[0] = i;
+          for(let j = 1; j <= b.length; j++){
+            const temp = dp[j];
+            if(a[i-1] === b[j-1]){
+              dp[j] = prev;
+            } else {
+              dp[j] = Math.min(prev, dp[j], dp[j-1]) + 1;
+            }
+            prev = temp;
+          }
+        }
+        return dp[b.length];
+      }
+
+      function fuzzyMatch(token, candidate){
+        if(token === candidate) return true;
+        const lenDiff = Math.abs(token.length - candidate.length);
+        if(lenDiff > 2) return false;
+        const maxDist = token.length > 6 || candidate.length > 6 ? 2 : 1;
+        if(token.length <= 3 || candidate.length <= 3){
+          return false;
+        }
+        return levenshtein(token, candidate) <= maxDist;
+      }
+
+      function hasFuzzyToken(token, tokenSet, tokenList){
+        if(tokenSet.has(token)) return true;
+        for(let i = 0; i < tokenList.length; i++){
+          if(fuzzyMatch(token, tokenList[i])) return true;
+        }
+        return false;
+      }
+
+      function tokenize(text){
+        return (text.toLowerCase().match(/[a-z0-9]+/g) || []).filter(token=> token.length > 2 && !STOP_WORDS.has(token));
+      }
+
+      function buildKnowledge(){
+        const docs = [];
+        const seen = new Set();
+        const skipNodes = new Set([assistant]);
+        document.querySelectorAll('main section').forEach((section, idx)=>{
+          if(skipNodes.has(section) || section.contains(assistant)) return;
+          if(section.querySelector('form')) return;
+          const text = section.innerText.replace(/\s+/g,' ').trim();
+          if(text.length < 80) return;
+          const headingEl = section.querySelector('h1,h2,h3,h4');
+          const heading = headingEl ? headingEl.textContent.trim() : '';
+          const signature = text.slice(0,180);
+          if(seen.has(signature)) return;
+          const tokens = new Set(tokenize(text));
+          if(tokens.size < 4) return;
+          const sentences = text.split(/(?<=[.!?])\s+/).map(s=>s.trim()).filter(Boolean);
+          docs.push({id:`section-${idx}`, title:heading, text, tokens, tokenArray:Array.from(tokens), sentences});
+          seen.add(signature);
+        });
+
+        document.querySelectorAll('.features .card, .services .card, .autos .card, .why .card, .kpis .card, .month-one .card, .map-step').forEach((node, idx)=>{
+          if(node.closest('section') && node.closest('section').querySelector('form')) return;
+          const text = node.innerText.replace(/\s+/g,' ').trim();
+          if(text.length < 60) return;
+          const signature = text.slice(0,160);
+          if(seen.has(signature)) return;
+          const headingEl = node.querySelector('h3,h4');
+          const heading = headingEl ? headingEl.textContent.trim() : '';
+          const tokens = new Set(tokenize(text));
+          if(tokens.size < 4) return;
+          const sentences = text.split(/(?<=[.!?])\s+/).map(s=>s.trim()).filter(Boolean);
+          docs.push({id:`card-${idx}`, title:heading, text, tokens, tokenArray:Array.from(tokens), sentences});
+          seen.add(signature);
+        });
+        return docs;
+      }
+
+      const knowledgeDocs = buildKnowledge();
+      const linkDocs = buildLinkDocs();
+
+      const manualQA = [
+        {
+          questions:['what is revno','tell me about revno','describe revno','what does revno do'],
+          answer:'Revno is a full-stack sales operations company. We design, automate, and manage the systems that turn leads into booked calls and closed clients, bringing structure, accountability, and automation to your revenue engine.'
+        },
+        {
+          questions:['why are you the best','why are you guys the best','why are you best','what makes you the best','are you the best','why are you so good'],
+          answer:'We are the best because we pair trained operators with proven automations and accountable management. That means speed‑to‑lead routing, show‑rate reminder stacks, and closer coaching—backed by live KPIs—so every qualified lead is touched, tracked, and converted.'
+        },
+        {
+          questions:['why choose you','why choose revno','why should i choose you','why should i choose revno','why pick revno','why are you better','why are you better than others'],
+          answer:'Teams choose Revno because we combine people, playbooks, and automations into one managed system. You get speed‑to‑lead routing, show‑rate workflows, closer coaching, and live KPIs—so more leads turn into booked calls and revenue, consistently.'
+        },
+        {
+          questions:['where is revno based','are you remote','what locations do you serve'],
+          answer:'Revno operates remotely and supports clients across North America, Europe, and other global regions with systems built for distributed teams.'
+        },
+        {
+          questions:['what does the name revno mean','why the name revno','revno meaning'],
+          answer:'"Revno" blends "Revenue" and "Innovation," reflecting our focus on modernizing revenue growth through operational precision, automation, and innovation.'
+        },
+        {
+          questions:['what industries do you work with','who do you specialize in','which niches do you serve'],
+          answer:'We partner mostly with service-based companies—coaching, consulting, digital marketing, medspas, real estate, construction, education—but we adapt to any model that books calls or manages a sales team.'
+        },
+        {
+          questions:['what makes revno unique','why revno','how are you different'],
+          answer:'Revno unifies automation tech, operational management, and human performance systems under one managed solution—most partners only handle one or two of those pieces.'
+        },
+        {
+          questions:['what is revno mission','mission statement','why do you exist'],
+          answer:'Our mission is to make scalable revenue operations accessible to small and midsize businesses so they can grow predictably without relying on inconsistent human processes.'
+        },
+        {
+          questions:['how big is the revno team','team size','who is on the team'],
+          answer:'Revno is a specialized team of automation architects, sales managers, data analysts, and system builders. We stay lean so every client gets dedicated attention.'
+        },
+        {
+          questions:['who are your typical clients','ideal client','who do you work with'],
+          answer:'We serve founders with proven offers and steady lead flow who lack structure to convert consistently—often agencies, coaching programs, or local service providers scaling beyond manual sales.'
+        },
+        {
+          questions:['what do you deliver','what do i get from revno','explain the offer'],
+          answer:'Revno delivers a full revenue infrastructure: CRM setup, automations, funnel tracking, team management systems, reporting dashboards, and daily sales oversight to move you from inconsistent to predictable revenue.'
+        },
+        {
+          questions:['is this setup or ongoing','do you offer ongoing management','one-time or retainer'],
+          answer:'We start with a structured implementation, then stay on via a performance-based revenue share that covers ongoing optimization, maintenance, and sales management.'
+        },
+        {
+          questions:['what is included in setup','setup details','implementation scope'],
+          answer:'Setup covers CRM and automation build-out, pipeline configuration, tagging, dashboards, lead routing, and foundational flows like booking reminders, follow-ups, and deposit sequences.'
+        },
+        {
+          questions:['what automations do you handle','automation scope','automation details'],
+          answer:'We build workflows that eliminate repetitive manual work—routing new leads, sending reminders, updating statuses, triggering reports, and keeping every handoff synchronized.'
+        },
+        {
+          questions:['what is included in sales management','management deliverables','daily management'],
+          answer:'Sales management includes daily rep monitoring, performance tracking, roleplays, script updates, KPI reporting, and accountability reviews.'
+        },
+        {
+          questions:['how do setup automation management work together','how does it fit together','explain the stack'],
+          answer:'Setup lays the foundation, automations run repeatable actions, and management keeps humans performing while optimizing the system over time.'
+        },
+        {
+          questions:['what is the onboarding process','how do you onboard','onboarding steps'],
+          answer:'Onboarding starts with a strategy call to audit your pipeline, tech stack, and sales structure. We map an implementation plan, handle the technical build, and transition into management within 2–4 weeks.'
+        },
+        {
+          questions:['how long until results','when do we see results','timeline for outcomes'],
+          answer:'Most clients see measurable lifts in call bookings and show rates within 2–4 weeks of implementation.'
+        },
+        {
+          questions:['how do you communicate','communication cadence','how do we stay in touch'],
+          answer:'We communicate through Slack, email, or client portals, with weekly reports and monthly review calls as standard.'
+        },
+        {
+          questions:['what do you need from me','client requirements','what access do you need'],
+          answer:'We need access to your CRM, calendars, and communication channels during setup. After go-live, you mainly provide approvals and periodic updates.'
+        },
+        {
+          questions:['do i need to hire staff','do you help with hiring','staffing question'],
+          answer:'You don’t have to hire—Revno can work with your existing reps or help recruit, onboard, and train new ones.'
+        },
+        {
+          questions:['what are your working hours','when do you operate','do you run 24 7'],
+          answer:'Automations run 24/7. Human oversight and reporting happen during standard business hours across multiple time zones.'
+        },
+        {
+          questions:['how often do you review performance','performance cadence','review frequency'],
+          answer:'We review performance daily internally and send weekly executive summaries with the key insights and next steps.'
+        },
+        {
+          questions:['can i change automations later','update automations','post launch changes'],
+          answer:'Yes. Our systems are modular, so we can update, swap, or expand automations without disrupting operations.'
+        },
+        {
+          questions:['how is pricing determined','how much do you charge','pricing model'],
+          answer:'We scope pricing during a consultation by outlining the implementation build you need and aligning on the revenue-share tier for ongoing management.'
+        },
+        {
+          questions:['is there a price list','fixed pricing','standard pricing'],
+          answer:'We do not publish a price list—each engagement combines a tailored build fee plus a performance-based share that reflects the systems and sales coverage you need.'
+        },
+        {
+          questions:['do you offer payment plans','payment options','financing'],
+          answer:'Yes—flexible payment structures are available depending on engagement length and project scope.'
+        },
+        {
+          questions:['do you charge setup fees','is there a setup fee','upfront cost'],
+          answer:'We charge a setup fee to architect and install your systems so you fully own the CRM, automations, and dashboards we deliver from day one.'
+        },
+        {
+          questions:['do you charge a retainer','is there a retainer','monthly retainer','do you charge monthly','monthly fee','ongoing fee','do you bill monthly','monthly retainer fee'],
+          answer:'No monthly retainer. You invest in the build once, then we stay aligned through a performance-based revenue share that covers ongoing maintenance and sales management.'
+        },
+        {
+          questions:['do you take revenue share','do you do commission','performance based pay'],
+          answer:'After the setup, we stay on via a custom revenue-share structure that aligns with ongoing system maintenance and sales management. No flat retainer—just partnership upside.'
+        },
+        {
+          questions:['what roi can i expect','expected results','roi question'],
+          answer:'Clients typically see 30–80% more booked calls, 10–25% better show rates, and 3–10% higher close rates—often within the first month.'
+        },
+        {
+          questions:['is there a refund policy','refunds','money back'],
+          answer:'Payments are final because the work is custom, but every engagement comes with a clear performance plan and transparent deliverables so you know the value being delivered.'
+        },
+        {
+          questions:['what platforms do you integrate with','supported platforms','what tools do you connect'],
+          answer:'We integrate with GoHighLevel, Calendly, Google Calendar, Zoom, WhatsApp, Instagram, Slack, Gmail, Outlook, Stripe, and custom APIs through Zapier or Make.'
+        },
+        {
+          questions:['can you integrate with salesforce','do you support hubspot','enterprise crm'],
+          answer:'Yes—our engineers can configure workflows for Salesforce, HubSpot, or nearly any CRM you prefer.'
+        },
+        {
+          questions:['what is gohighlevel','why use gohighlevel','gohighlevel question'],
+          answer:'GoHighLevel is a CRM and automation platform that centralizes lead management, pipelines, and communications. We use it because it scales well and anchors many of our managed systems.'
+        },
+        {
+          questions:['what security protocols do you follow','security question','data security'],
+          answer:'We encrypt data in transit and at rest, use role-based permissions, and limit access to authorized personnel only.'
+        },
+        {
+          questions:['how does automation improve conversion','why automation helps','automation benefits'],
+          answer:'Automation triggers instant responses, consistent follow-ups, and tight tracking, removing human delay so fewer leads fall through the cracks.'
+        },
+        {
+          questions:['how do you monitor automations','post setup monitoring','automation oversight'],
+          answer:'We monitor automations continuously, receive instant error alerts, and run weekly audits to keep the system reliable.'
+        },
+        {
+          questions:['how do you measure success','success metrics','what kpis do you track'],
+          answer:'Success is measured through booked calls, show rates, close rates, revenue per rep, plus system uptime, response time, and pipeline velocity.'
+        },
+        {
+          questions:['do clients get dashboards','dashboard access','reporting access'],
+          answer:'Yes—you receive custom real-time dashboards that visualize the performance data we track.'
+        },
+        {
+          questions:['what if performance declines','underperformance','results dropped'],
+          answer:'We run diagnostics to locate the weak link—scripts, automations, or human performance—and then execute targeted fixes.'
+        },
+        {
+          questions:['how do you improve close rates','closing support','closing question'],
+          answer:'We route the right prospects to the right reps, equip them with stronger scripts and briefs, and layer follow-ups so they close more consistently.'
+        },
+        {
+          questions:['what results do clients achieve','common results','client outcomes'],
+          answer:'Clients gain predictability, fewer no-shows, more efficient reps, and steadier month-to-month revenue.'
+        },
+        {
+          questions:['how involved am i after setup','do i have to manage this','post setup involvement'],
+          answer:'Your involvement stays light—we manage backend operations and sales oversight while you focus on delivery and growth.'
+        },
+        {
+          questions:['how often do i get updates','update cadence','reporting frequency'],
+          answer:'Expect weekly reports by default, and we adjust frequency if you need more or fewer touchpoints.'
+        },
+        {
+          questions:['what support is available','support options','who do i contact'],
+          answer:'You have direct access to your account lead via Slack or email plus technical support for system adjustments.'
+        },
+        {
+          questions:['can i pause services','pause engagement','put retainer on hold'],
+          answer:'You can pause ongoing management with notice. All setup assets remain yours permanently.'
+        },
+        {
+          questions:['what if i scale my team','can you handle more volume','multiple reps question'],
+          answer:'We expand automations, dashboards, and management systems as you grow, so the infrastructure scales with you.'
+        },
+        {
+          questions:['do you guarantee leads','guaranteed bookings','can you guarantee results'],
+          answer:'We do not guarantee specific numbers because outcomes depend on your offer and market, but we guarantee transparent, efficient systems so you have the best conversion potential.'
+        },
+        {
+          questions:['can you show proof','case studies','past results'],
+          answer:'Yes—we share anonymized case studies and performance data from comparable businesses during your consultation.'
+        },
+        {
+          questions:['how do you handle dissatisfaction','what if i am unhappy','complaints'],
+          answer:'We escalate issues through structured problem-solving and system reviews to realign expectations and outcomes quickly.'
+        },
+        {
+          questions:['is revno for startups','do you work with established companies','company size question'],
+          answer:'We support both: startups needing structure and established companies wanting to scale operations efficiently.'
+        },
+        {
+          questions:['what business size benefits most','ideal revenue stage','who gets most value'],
+          answer:'Companies generating steady leads but lacking automation or sales management see the biggest lift—typically $20k to $500k+ in monthly revenue.'
+        },
+        {
+          questions:['can you handle multiple offers','multiple brands','multi pipeline'],
+          answer:'Yes—we run multi-pipeline systems with tagging, segmentation, and separate dashboards for each offer or brand.'
+        },
+        {
+          questions:['how do you handle time zones','international scheduling','different regions'],
+          answer:'Automations respect each prospect’s timezone and our communication logic adjusts so reminders and outreach hit at the right local time.'
+        },
+        {
+          questions:['what does revno believe in','company philosophy','core belief'],
+          answer:'We believe sustainable growth comes from systems, not guesswork—every sales process should be measurable, repeatable, and improvable.'
+        },
+        {
+          questions:['what are your long term goals','future vision','long term mission'],
+          answer:'Long term, we aim to be the global infrastructure standard for sales management so any business can scale through automation and data.'
+        },
+        {
+          questions:['difference between scaling and stagnating','why companies stagnate','scaling vs stagnating'],
+          answer:'Scalers build structure, accountability, and reliable systems. Businesses that stagnate depend on individuals instead of documented processes.'
+        },
+        {
+          questions:['what do you stand for','client relationship philosophy','values'],
+          answer:'We stand for transparency, performance, and partnership—treating client systems like our own internal operations.'
+        },
+        {
+          questions:['how do you innovate','innovation approach','stay current'],
+          answer:'We continually update automation frameworks, data models, and training to reflect the latest tech and behavior trends in sales management.'
+        },
+        {
+          questions:['how are you today','hows your day','what are you up to','tell me something interesting','any news','tell me about yourself','can we just chat','lets chat','what do you do for fun','talk to me','small talk','chat with me','can we talk','tell me a fun fact','anything exciting'],
+          answer:'Doing great on this side—keeping Revno’s playbooks sharp and watching the metrics roll in. If you want to chat about automations, client wins, or just swap a fun fact (Did you know: companies with structured follow-up see up to 50% higher close rates?), I’m here for it. What’s on your mind?'
+        }
+      ];
+
+      const knowledgeBase = [
+        {
+          keywords:['service','services','offer','do you do','done-for-you','what do you do','what do you guys do','what does revno do','what is revno','what is your service','what does your company do','tell me about revno','who are you','what are you about'],
+          answers:[
+            'We stand up and operate remote sales teams for high-ticket offers. That covers setters and closers, playbooks, KPI dashboards, and automations that keep leads moving from DM to booked call to revenue.',
+            'We build and run revenue pods—setters, closers, scripting, dashboards, and automations that move a lead from first touch to signed client.',
+            'Think of us as your done-for-you outbound and closing arm: people, messaging, and systems that turn warm leads into booked calls and deals.'
+          ]
+        },
+        {
+          keywords:['automation','automations','workflow','implementation','systems'],
+          answers:[
+            'Weeks 1–4 we deploy the core automations: speed-to-lead routing, DM qualification, show-rate reminder stacks, closer briefs, failed-payment recovery, and nurture revivals. Everything stays synced inside your CRM.',
+            'Launch month means wiring in the automations—lead routing, follow-up cadences, closer briefings, and recovery workflows so nothing slips through cracks.',
+            'We install the Revno automation stack: instant lead routing, DM triage, no-show recovery, and closer playbooks tied straight into your CRM.'
+          ]
+        },
+        {
+          keywords:['launch','how fast','timeline','go live','kickoff','start'],
+          answers:[
+            'Kickoff happens within 48 hours. Core automations, scripts, and dashboards go live in the first 10 business days, then we layer advanced workflows and coaching in weeks 3–4.',
+            'We start within two days—core systems roll out across the first 10 business days, and weeks 3–4 focus on optimization and coaching.',
+            'Expect a fast ramp: launch call inside 48 hours, foundations live in 10 business days, and the final weeks spent on optimization and rep enablement.'
+          ]
+        },
+        {
+          keywords:['price','pricing','cost','costs','budget','how much','retainer','pricing tiers','investment','fees','charge monthly','monthly fee','monthly cost','ongoing price','retainer fee','monthly retainer','do you charge a retainer','do you charge monthly'],
+          answers:[
+            'You invest once in the implementation so the CRM, automations, and dashboards belong to you. After that we work on a revenue-share that scales with the sales infrastructure we run—no monthly retainer.',
+            'Ongoing support is covered by a performance-based share rather than a flat fee, keeping incentives aligned with the revenue we help generate.',
+            'Let’s map the build scope and revenue-share tier on a consultation call—drop your details and we’ll tailor the investment to your pipeline and goals.'
+          ]
+        },
+        {
+          keywords:['result','roi','outcome','case','win','success'],
+          answers:[
+            'Clients typically see show rates climb 15–30%, booked calls up 40–60%, and faster follow-up within the first month. We pair human operators with automations so every qualified lead is touched and tracked.',
+            'Most partners see more booked calls (up 40–60%), stronger show rates (15–30% bump), and faster lead pursuit once the team + tech are in sync.',
+            'Expect tighter follow-up, more sits, and better close rates—our teams regularly unlock 15–30% higher show rates and 40–60% more booked calls in month one.'
+          ]
+        },
+        {
+          keywords:['complaint','complaints','issue','issues','problem','problems','unhappy','customer complaint','negative review','bad review','do clients complain','has anyone complained','do people cancel'],
+          answers:[
+            'We build weekly QA loops into every pod—call reviews, pipeline audits, and exec recaps—so issues surface fast. When something drifts, we correct it inside 24 hours. That cadence keeps churn extremely low.',
+            'Clients stick because we make problems visible before they become complaints. Daily dashboards, shared scorecards, and RevOps oversight give founders the same view we have.',
+            'Most partners stay with Revno for multiple quarters. If something ever feels off, we co-pilot the fix immediately and document the play so it doesn’t repeat.'
+          ]
+        },
+        {
+          keywords:['are you good','are you guys good','any good','are you legit','are you reliable','are you effective','are you the best','do you deliver','can you deliver','do you get results','are you proven','do you work','do you perform'],
+          answers:[
+            'We build pods that consistently ship numbers: 40–60% more booked calls, 15–30% higher show rates, and daily operator oversight so nothing slips. It’s why clients stick for multi-quarter engagements.',
+            'Revno is results-first. Dedicated setters/closers, RevOps, and QA dashboards keep the pipeline honest—if something drifts, we spot it inside 24 hours and correct course.',
+            'Legit proof? We operating-partner with coaching, SaaS, and service brands doing $3M–$40M ARR. They retain us because we lift conversion KPIs and own the day-to-day grind.'
+          ]
+        },
+        {
+          keywords:['integration','tools','stack','gohighlevel','calendly','zapier','slack','crm'],
+          answers:[
+            'We plug into GoHighLevel, Calendly, Google Calendar, Zoom, Instagram, WhatsApp, Slack/Discord, Stripe, and custom APIs. If you live in another CRM, we map the hand-offs during onboarding.',
+            'Revno runs across GoHighLevel, Calendly, Zoom, Stripe, Slack/Discord, IG/WhatsApp DMs, and custom APIs. Different CRM? We blueprint the integrations during setup.',
+            'Our stack covers the usual suspects—GHL, Calendly, Google/Zoom, Slack/Discord, Stripe, IG/WhatsApp—and we wire custom bridges if your CRM is off the beaten path.'
+          ]
+        },
+        {
+          keywords:['support','ongoing','training','coaching','after launch','management'],
+          answers:[
+            'You get daily desk oversight, weekly executive recaps with next actions, coaching clips for setters/closers, and monthly strategy to refresh scripts, automations, and reporting.',
+            'Post-launch we handle daily ops, deliver weekly exec summaries, keep reps sharp with coaching clips, and refresh scripts/automations every month.',
+            'Ongoing support = daily pipeline supervision, weekly reports with next steps, rep coaching, and monthly optimization of messaging, automations, and dashboards.'
+          ]
+        },
+        {
+          keywords:['industry','niche','who do you work with','fit','vertical','business type'],
+          answers:[
+            'Revno works best with high-ticket coaching, professional services, SaaS, agencies, med spas, real estate, and other consultative offers that rely on booked calls to close.',
+            'Ideal partners sell premium, consultative offers—think coaching, agencies, SaaS, med spas, real estate teams, and expert services that win on booked calls.',
+            'We slot in for premium service and SaaS orgs: coaches, agencies, expert services, med spas, real estate pros—anyone closing over consults or demos.'
+          ]
+        },
+        {
+          keywords:['communication','contact','talk to','speak','call','schedule','book'],
+          answers:[
+            'Ready to dig in? Drop your details in the <a href="#contact">strategy call form</a> and we’ll confirm a time to walk through your funnel, tech stack, and numbers.',
+            'Let’s sync live—pop into the <a href="#contact">strategy call form</a> and we’ll line up a deep dive on your pipeline.',
+            'Grab a slot in the <a href="#contact">strategy call form</a> and we’ll walk through funnel metrics, tech, and next steps together.'
+          ]
+        },
+        {
+          keywords:['hello','hi','hey','hi there','hello there','hey there','hi how are you','how are you','good morning','good afternoon','good evening','hi team'],
+          answers:[
+            'Hey! Doing great on this side—ready whenever you want to dig into your sales ops, automations, or anything Revno related.',
+            'Hi there 👋 All good here. What should we unpack next—systems, people, or performance?',
+            'Hey hey! I’m geared up for whatever sales or Revno question you want to run by me.'
+          ]
+        },
+        {
+          keywords:['cool','thanks','thank you','appreciate','awesome','great','nice','good to hear','sounds good','got it','makes sense','love it','perfect','sweet','cheers'],
+          answers:[
+            'Appreciate it! If you want to explore another workflow, need a link, or have fresh questions, just let me know.',
+            'Glad that helps. Want me to pull up another play, a report, or anything else while you’re here?',
+            'Love it. If something else pops up—more context, another automation, anything—just say the word.'
+          ]
+        }
+      ];
+      const defaultAnswers = [
+        'I might not have that on file yet. Share a bit more or <a href="#contact">book a strategy call</a> and we’ll cover it live.',
+        'Not seeing that in my notes yet—drop a little more detail or <a href="#contact">book a strategy call</a> and we’ll map it together.',
+        'That one isn’t logged yet. If you can clarify, or <a href="#contact">grab a strategy call</a>, we’ll tackle it with you.'
+      ];
+      const docClosers = [
+        'Need deeper support? <a href="#contact">Book a strategy call</a> and we’ll walk you through it live.',
+        'Want to jam on this live? <a href="#contact">Book a strategy call</a> and we’ll map it with you.',
+        'If you’d like us to audit it together, <a href="#contact">book a strategy call</a> and we’ll step through it.'
+      ];
+      const linkOpeners = [
+        'You can find it here:',
+        'Here’s the spot:',
+        'Hop over here:'
+      ];
+
+      function pickFrom(list){
+        if(!Array.isArray(list) || !list.length) return '';
+        const idx = Math.floor(Math.random() * list.length);
+        return list[Math.max(0, Math.min(list.length - 1, idx))];
+      }
+
+      function pickAnswerFrom(entry){
+        const answers = entry && Array.isArray(entry.answers) ? entry.answers : (entry && entry.answer ? [entry.answer] : []);
+        return pickFrom(answers) || '';
+      }
+
+      function getDefaultAnswer(){
+        return pickFrom(defaultAnswers) || defaultAnswers[0] || '';
+      }
+
+      const preparedManualQA = manualQA.map(entry=>{
+        const tokenSet = new Set();
+        entry.questions.forEach(question=>{
+          tokenize(question).forEach(token=> tokenSet.add(token));
+        });
+        const tokenList = Array.from(tokenSet);
+        const normalized = entry.questions.map(normalizeQuestion).filter(Boolean);
+        return {...entry, tokenSet, tokenList, normalized };
+      });
+
+      const preparedKnowledgeBase = knowledgeBase.map(entry=>{
+        const tokenSets = entry.keywords
+          .map(keyword=>{
+            const tokens = tokenize(keyword);
+            return tokens.length ? new Set(tokens) : null;
+          })
+          .filter(Boolean);
+        const uniqueTokens = new Set();
+        tokenSets.forEach(set=> set.forEach(token=> uniqueTokens.add(token)));
+        const uniqueList = Array.from(uniqueTokens);
+        return {...entry, tokenSets, uniqueTokens, uniqueList};
+      });
+
+      function appendMessage(message, sender, allowHTML, options){
+        const opts = options || {};
+        const bubble = document.createElement('div');
+        bubble.className = `assistant-msg ${sender}`;
+        if(opts.className){
+          bubble.classList.add(opts.className);
+        }
+        if(opts.id){
+          bubble.id = opts.id;
+        }
+        if(allowHTML){
+          bubble.innerHTML = message;
+        } else {
+          bubble.textContent = message;
+        }
+        log.appendChild(bubble);
+        log.scrollTop = log.scrollHeight;
+        if(sender === 'user' || sender === 'ai'){
+          transcripts.push({
+            sender,
+            content: allowHTML ? bubble.innerHTML : bubble.textContent,
+            timestamp: Date.now()
+          });
+          if(transcripts.length > 40){
+            transcripts.splice(0, transcripts.length - 40);
+          }
+        }
+        return bubble;
+      }
+
+      function findAnswer(question){
+        const lowered = question.toLowerCase();
+        const tokens = tokenize(question);
+        const candidates = [];
+
+        const manualMatch = matchManualQA(tokens);
+        if(manualMatch) candidates.push(manualMatch);
+
+        const memoryMatch = matchConversationMemory(tokens, lowered);
+        if(memoryMatch) candidates.push(memoryMatch);
+
+        const knowledgeMatch = matchKnowledgeBase(lowered, tokens);
+        if(knowledgeMatch) candidates.push(knowledgeMatch);
+
+        const docMatch = searchKnowledge(question, tokens);
+        if(docMatch) candidates.push(docMatch);
+
+        const linkMatch = searchLinks(question, tokens);
+        if(linkMatch) candidates.push(linkMatch);
+
+        if(candidates.length){
+          candidates.sort((a,b)=> b.score - a.score);
+          return candidates[0].answer;
+        }
+        return getDefaultAnswer();
+      }
+
+      function matchManualQA(questionTokens){
+        if(!preparedManualQA.length || !questionTokens.length) return null;
+        const normalizedQuestion = normalizeQuestion(questionTokens.join(' '));
+        const tokenSet = new Set(questionTokens);
+        let best = null;
+        preparedManualQA.forEach(entry=>{
+          let matches = 0;
+          entry.tokenList.forEach(token=>{
+            if(hasFuzzyToken(token, tokenSet, questionTokens)) matches += 1;
+          });
+          if(matches === 0) return;
+          const patternCoverage = matches / Math.max(1, entry.tokenList.length);
+          const queryCoverage = matches / Math.max(1, tokenSet.size);
+          let normalizedScore = 0;
+          if(entry.normalized && entry.normalized.length){
+            entry.normalized.forEach(pattern=>{
+              if(!pattern) return;
+              const len = Math.max(pattern.length, normalizedQuestion.length) || 1;
+              const dist = levenshtein(pattern, normalizedQuestion);
+              const similarity = Math.max(0, 1 - (dist / len));
+              if(similarity > normalizedScore) normalizedScore = similarity;
+            });
+          }
+          let score = (patternCoverage * 0.45) + (queryCoverage * 0.25) + (normalizedScore * 0.3);
+          if(questionTokens.length <= 3 && matches >= 1) score += 0.1;
+          if(!best || score > best.score){
+            best = {answer: entry.answer, score};
+          }
+        });
+        if(!best) return null;
+        return {answer: best.answer, score: Math.min(1, best.score + 0.6)};
+      }
+
+      function matchConversationMemory(questionTokens, lowered){
+        if(!transcripts.length) return null;
+        const normalizedQuestion = normalizeQuestion(questionTokens.join(' '));
+        const askSummary = normalizedQuestion.includes('summary') || normalizedQuestion.includes('summarize') || normalizedQuestion.includes('recap');
+        const askWhatTalked = normalizedQuestion.includes('what did we talk') || normalizedQuestion.includes('what did we chat');
+        const askRemember = normalizedQuestion.includes('remember what we') || normalizedQuestion.includes('remember our conversation');
+        const askLastQuestion = normalizedQuestion.includes('last question') || normalizedQuestion.includes('what did i just ask');
+
+        if(askSummary || askWhatTalked || askRemember){
+          const recap = buildConversationSummary();
+          if(recap){
+            return {answer: recap, score: 0.95};
+          }
+        }
+
+        if(askLastQuestion){
+          const lastUser = findLastUserMessage();
+          if(lastUser){
+            return {answer: `The last thing you asked was: “${escapeHtml(lastUser.content)}”.`, score:0.92};
+          }
+        }
+
+        const follow = analyzeFollowUp(questionTokens, lowered);
+        if(follow) return follow;
+
+        return null;
+      }
+
+      function findLastUserMessage(){
+        for(let i = transcripts.length - 1; i >= 0; i--){
+          if(transcripts[i].sender === 'user'){
+            return transcripts[i];
+          }
+        }
+        return null;
+      }
+
+      function buildConversationSummary(){
+        const recent = transcripts.slice(-12);
+        const userPoints = [];
+        const aiPoints = [];
+        recent.forEach(entry=>{
+          const clean = cleanSummaryText(entry.content);
+          if(!clean) return;
+          if(entry.sender === 'user' && userPoints.length < 3){
+            userPoints.push(clean);
+          } else if(entry.sender === 'ai' && aiPoints.length < 3){
+            aiPoints.push(clean);
+          }
+        });
+        if(!userPoints.length && !aiPoints.length) return null;
+        let summary = '<strong>Conversation Recap</strong><br>';
+        if(userPoints.length){
+          summary += 'You raised: ' + userPoints.join('; ') + '.<br>';
+        }
+        if(aiPoints.length){
+          summary += 'I covered: ' + aiPoints.join('; ') + '.';
+        }
+        summary += '<br><br>Want to go deeper on any of that?';
+        return summary;
+      }
+
+      function cleanSummaryText(text){
+        const div = document.createElement('div');
+        div.innerHTML = text;
+        return div.textContent.replace(/\s+/g,' ').trim();
+      }
+
+      function escapeHtml(text){
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      function analyzeFollowUp(questionTokens, lowered){
+        const lastUser = findLastUserMessage();
+        if(!lastUser) return null;
+        const normalizedLast = normalizeQuestion(lastUser.content);
+        if(!normalizedLast) return null;
+
+        if(lowered.includes('tell me more') || lowered.includes('more detail') || lowered.includes('expand') || lowered.includes('elaborate')){
+          return {answer:'Happy to expand—should we zoom in on pricing, implementation, automations, or client results?', score:0.45};
+        }
+
+        if(lowered.includes('same thing') || lowered.includes('repeat')){
+          return {answer:'Sure thing. Want the quick recap, the detailed play-by-play, or a checklist summary?', score:0.45};
+        }
+
+        if(lowered.includes('why') && normalizedLast.includes('why')){
+          return {answer:'Still digging into the “why”? We can connect it to ROI, operational leverage, or client proof—your pick.', score:0.4};
+        }
+
+        return null;
+      }
+
+      function matchKnowledgeBase(questionText, questionTokens){
+        const tokenSet = new Set(questionTokens);
+        let bestEntry = null;
+        preparedKnowledgeBase.forEach(entry=>{
+          let phraseBoost = 0;
+          entry.keywords.forEach(keyword=>{
+            if(keyword.trim().length > 1 && questionText.includes(keyword)){
+              phraseBoost = Math.max(phraseBoost, Math.min(0.35, 0.2 + (keyword.split(/\s+/).length * 0.05)));
+            }
+          });
+          let overlaps = 0;
+          entry.uniqueList.forEach(token=>{
+            if(tokenSet.has(token)){
+              overlaps += 1;
+              return;
+            }
+            for(let i = 0; i < questionTokens.length; i++){
+              if(fuzzyMatch(questionTokens[i], token)){
+                overlaps += 1;
+                break;
+              }
+            }
+          });
+          if(overlaps === 0 && phraseBoost === 0) return;
+          const ratio = overlaps / Math.max(1, tokenSet.size);
+          const coverage = overlaps / Math.max(1, entry.uniqueTokens.size);
+          let score = (ratio * 0.6) + (coverage * 0.3) + phraseBoost;
+          if(tokenSet.size <= 2 && overlaps > 0) score += 0.1;
+          if(!bestEntry || score > bestEntry.score){
+            bestEntry = {entry, score};
+          }
+        });
+        if(!bestEntry || bestEntry.score < 0.14) return null;
+        const answer = pickAnswerFrom(bestEntry.entry);
+        if(!answer) return null;
+        return {answer, score: Math.min(1, bestEntry.score + 0.7)};
+      }
+
+      function searchKnowledge(question, presetTokens){
+        const queryTokens = Array.isArray(presetTokens) && presetTokens.length ? presetTokens : tokenize(question);
+        if(!queryTokens.length) return null;
+        let bestDoc = null;
+        let bestScore = 0;
+        let matchedTokens = [];
+        knowledgeDocs.forEach(doc=>{
+          let matchCount = 0;
+          const docMatches = [];
+          const tokenArray = doc.tokenArray || Array.from(doc.tokens);
+          queryTokens.forEach(token=>{
+            if(doc.tokens.has(token)){
+              matchCount += 1;
+              docMatches.push(token);
+            } else {
+              for(let i = 0; i < tokenArray.length; i++){
+                if(fuzzyMatch(token, tokenArray[i])){
+                  matchCount += 1;
+                  docMatches.push(token);
+                  break;
+                }
+              }
+            }
+          });
+          if(matchCount === 0) return;
+          const uniqueness = matchCount / queryTokens.length;
+          const density = matchCount / Math.sqrt(doc.tokens.size || 1);
+          const score = (uniqueness * 0.6) + (density * 0.4);
+          if(score > bestScore){
+            bestScore = score;
+            bestDoc = doc;
+            matchedTokens = docMatches;
+          }
+        });
+        if(!bestDoc || bestScore < 0.08) return null;
+
+        const sentences = bestDoc.sentences || [];
+        const matchedSet = new Set(matchedTokens);
+        const ranked = sentences
+          .map(sentence=>{
+            const lower = sentence.toLowerCase();
+            let score = 0;
+            matchedSet.forEach(token=>{ if(lower.includes(token)) score += 1; });
+            return {sentence, score};
+          })
+          .filter(item=>item.score>0)
+          .sort((a,b)=> b.score - a.score || a.sentence.length - b.sentence.length);
+
+        const chosenSentences = (ranked.length ? ranked.slice(0,2) : sentences.slice(0,2)).map(item=>item.sentence).join(' ');
+        if(!chosenSentences) return null;
+
+        let reply = '';
+        if(bestDoc.title){
+          reply += `<strong>${bestDoc.title}</strong><br>`;
+        }
+        reply += chosenSentences;
+        const closer = pickFrom(docClosers);
+        if(closer){
+          reply += ` <br><br>${closer}`;
+        }
+        return {answer: reply, score: Math.min(0.92, bestScore + (matchedTokens.length * 0.05) + 0.05)};
+      }
+
+      function buildLinkDocs(){
+        const docs = [];
+        const seen = new Set();
+        document.querySelectorAll('a[href]').forEach((anchor, idx)=>{
+          if(anchor.closest('.assistant')) return;
+          const href = anchor.getAttribute('href');
+          if(!href || href.startsWith('javascript:')) return;
+          const text = anchor.textContent.replace(/\s+/g,' ').trim();
+          if(!text || text.length < 3) return;
+          const key = `${href}|${text}`;
+          if(seen.has(key)) return;
+          const context = `${text} ${href}`;
+          const tokens = new Set(tokenize(context));
+          if(tokens.size === 0) return;
+          docs.push({id:`link-${idx}`, text, href, tokens, tokenArray:Array.from(tokens)});
+          seen.add(key);
+        });
+        return docs;
+      }
+
+      function searchLinks(question, presetTokens){
+        if(!linkDocs.length) return null;
+        const queryTokens = Array.isArray(presetTokens) && presetTokens.length ? presetTokens : tokenize(question);
+        if(!queryTokens.length) return null;
+        let best = null;
+        let bestScore = 0;
+        linkDocs.forEach(doc=>{
+          let matches = 0;
+          const tokenArray = doc.tokenArray || Array.from(doc.tokens);
+          queryTokens.forEach(token=>{
+            if(doc.tokens.has(token)){
+              matches += 1;
+            } else {
+              for(let i = 0; i < tokenArray.length; i++){
+                if(fuzzyMatch(token, tokenArray[i])){
+                  matches += 1;
+                  break;
+                }
+              }
+            }
+          });
+          if(matches === 0) return;
+          const ratio = matches / queryTokens.length;
+          const density = matches / doc.tokens.size;
+          const score = ratio * 0.6 + density * 0.4;
+          if(score > bestScore){
+            bestScore = score;
+            best = doc;
+          }
+        });
+        if(!best || bestScore < 0.15) return null;
+        const opener = pickFrom(linkOpeners) || 'You can find it here:';
+        let answer = `${opener} <a href="${best.href}">${best.text}</a>.`;
+        if(best.href && best.href.startsWith('#')){
+          answer += ' It is highlighted on this page—scroll to the section to review the full details.';
+        }
+        return {answer, score: Math.min(0.88, bestScore + 0.15)};
+      }
+
+      function respond(question){
+        let answer = findAnswer(question);
+        if(typeof answer !== 'string' || !answer.trim()){
+          answer = getDefaultAnswer();
+        }
+        let typingBubble = null;
+        let typingTimer = null;
+        const plainLength = answer.replace(/<[^>]+>/g,'').length;
+        const delay = Math.min(1400, Math.max(320, 220 + plainLength * 8));
+
+        typingBubble = appendMessage('<span class="typing-dots"><span></span><span></span><span></span></span>', 'ai', true, {className:'typing'});
+
+        const startTyping = ()=>{
+          if(typingBubble && typingBubble.parentNode){
+            typingBubble.parentNode.removeChild(typingBubble);
+          }
+          const container = appendMessage('', 'ai', true, {className:'typing'});
+          container.innerHTML = '';
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(`<div>${answer}</div>`, 'text/html');
+          const nodes = Array.from(doc.body.firstChild.childNodes);
+          const renderNode = (node)=>{
+            if(node.nodeType === Node.TEXT_NODE){
+              const text = node.textContent || '';
+              if(!text.trim().length){
+                container.appendChild(document.createTextNode(text));
+                return;
+              }
+              const span = document.createElement('span');
+              container.appendChild(span);
+              let idx = 0;
+              const typeText = ()=>{
+                if(idx >= text.length){ return; }
+                span.textContent += text[idx];
+                idx += 1;
+                const baseDelay = 20;
+                const variance = Math.random() * 25;
+                setTimeout(typeText, baseDelay + variance);
+              };
+              typeText();
+            } else if(node.nodeType === Node.ELEMENT_NODE){
+              const clone = node.cloneNode(false);
+              container.appendChild(clone);
+              const children = Array.from(node.childNodes);
+              children.forEach(child=>{
+                const childNode = child.cloneNode(true);
+                clone.appendChild(childNode);
+              });
+            }
+          };
+          nodes.forEach(renderNode);
+          container.classList.remove('typing');
+        };
+
+        typingTimer = setTimeout(startTyping, delay);
+      }
+
+      function openAssistant(){
+        assistant.classList.add('open');
+        panel.hidden = false;
+        toggle.setAttribute('aria-expanded','true');
+        if(!seeded){
+          appendMessage('Hey—I’m the Revno copilot. Ask me about our services, automations, launch timeline, or integrations.', 'ai', false);
+          seeded = true;
+        }
+        setTimeout(()=>input.focus(), 150);
+      }
+
+      function closeAssistant(){
+        assistant.classList.remove('open');
+        panel.hidden = true;
+        toggle.setAttribute('aria-expanded','false');
+      }
+
+      toggle.addEventListener('click', ()=>{
+        if(assistant.classList.contains('open')){
+          closeAssistant();
+        } else {
+          openAssistant();
+        }
+      });
+
+      form.addEventListener('submit', e=>{
+        e.preventDefault();
+        const question = input.value.trim();
+        if(!question) return;
+        appendMessage(question,'user',false);
+        input.value = '';
+        respond(question);
+      });
+
+      suggestionButtons.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const question = btn.getAttribute('data-question') || '';
+          if(!assistant.classList.contains('open')) openAssistant();
+          if(question){
+            appendMessage(question,'user',false);
+            respond(question);
+          }
+        });
+      });
+
+      input.addEventListener('keydown', e=>{
+        if(e.key === 'Escape'){
+          closeAssistant();
+          toggle.focus();
+        }
+      });
+    }
+  </script>
+
+  <script>
+    (function(){
+      const overlay = document.getElementById('welcomeOverlay');
+      if(!overlay) return;
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const body = document.body;
+
+      const hideOverlay = ()=>{
+        if(overlay.classList.contains('closing')) return;
+        overlay.classList.remove('active');
+        overlay.classList.add('closing');
+        body.classList.add('intro-fade');
+
+        const cleanup = ()=>{
+          overlay.removeEventListener('transitionend', cleanup);
+          if(overlay.parentNode) overlay.parentNode.removeChild(overlay);
+          body.classList.remove('intro-fade');
+        };
+
+        if(prefersReducedMotion){
+          cleanup();
+        } else {
+          overlay.addEventListener('transitionend', cleanup, {once:true});
+          setTimeout(cleanup, 500);
+        }
+      };
+
+      overlay.addEventListener('click', hideOverlay);
+    })();
+  </script>
+
+  <!-- Analytics placeholder (e.g., Plausible/GA4) -->
+  <!-- <script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script> -->
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</body>
+</html>

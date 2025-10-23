@@ -1,0 +1,44 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="revno-bg" x1="26" y1="22" x2="174" y2="178" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#69EDFF"/>
+      <stop offset="0.45" stop-color="#5BD0FF"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <radialGradient id="revno-halo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(52 48) scale(120)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="revno-orbit" x1="48" y1="48" x2="152" y2="156" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#6EE7FF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="revno-r-fill" x1="70" y1="70" x2="152" y2="148" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#111827" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="revno-r-glow" x1="86" y1="86" x2="160" y2="166" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7C3AED" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#38BDF8" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="revno-spark" x1="60" y1="54" x2="132" y2="126" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="16" y="16" width="168" height="168" rx="44" fill="url(#revno-bg)"/>
+  <rect x="16" y="16" width="168" height="168" rx="44" fill="url(#revno-halo)"/>
+
+  <path d="M42 89C42 61 61 42 89 42H111C139 42 158 61 158 89C158 111 144 128 123 133L158 174H126L102 144H88V174H62V89Z" fill="#0B0F1A" opacity="0.35"/>
+
+  <path d="M52 86C52 62.356 70.356 44 94 44H114C137.644 44 156 62.356 156 86C156 107.026 142.627 122.629 122.147 126.604L154 168H120L98 142H84V168H52V86Z" fill="url(#revno-r-fill)"/>
+  <path d="M84 60V110H108C123 110 132 103 132 90C132 77 123 70 108 70H84V60Z" fill="url(#revno-r-glow)"/>
+
+  <path d="M126 126L162 168H134L110 140L126 126Z" fill="#7C3AED" fill-opacity="0.65"/>
+  <path d="M70 140H90L72 168C62.8 180.533 51.2 189.2 38 194L70 140Z" fill="#6EE7FF" fill-opacity="0.55"/>
+
+  <circle cx="154" cy="58" r="14" fill="url(#revno-spark)" opacity="0.65"/>
+  <path d="M58 62C74 46 98 40 120 48" stroke="url(#revno-orbit)" stroke-width="6" stroke-linecap="round" opacity="0.65"/>
+  <path d="M60 150C82 168 118 168 138 152" stroke="url(#revno-orbit)" stroke-width="5" stroke-linecap="round" opacity="0.45"/>
+</svg>
