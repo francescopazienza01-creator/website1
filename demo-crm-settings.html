@@ -25,7 +25,11 @@
     .sidebar-header{display:flex;align-items:center;gap:12px}
     .logo{width:48px;height:48px;display:block;transition:transform .25s ease;filter:drop-shadow(0 8px 18px rgba(110,231,255,.22))}
     .sidebar-header:hover .logo{transform:translateY(-1px) scale(1.04)}
-    .sidebar-header strong{display:block;font-weight:800;letter-spacing:.3px}
+    .sidebar-header strong{display:block;font-weight:800;letter-spacing:.3px;
+      /* Match logo gradient: #69EDFF → #5BD0FF → #7C3AED */
+      background:linear-gradient(135deg,#69EDFF 0%,#5BD0FF 45%,#7C3AED 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+    }
     .sidebar-header span{font-size:13px;color:var(--muted)}
     .menu{display:flex;flex-direction:column;gap:8px}
     .menu-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;font-size:14px;color:var(--muted);transition:background .25s ease,color .25s ease;border:1px solid transparent}
@@ -46,6 +50,9 @@
     .status-dot.offline{background:rgba(154,165,181,.6)}
     .cta{display:flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:12px;background:rgba(110,231,255,.14);color:var(--pri);font-weight:600;border:1px solid rgba(110,231,255,.32);transition:transform .25s ease,box-shadow .25s ease}
     .cta:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(110,231,255,.22)}
+    /* Subtle box hover interactions */
+    .stat-card,.stage-card,.deal-card,.panel,.kpi-card,.metric-card,.summary-card,.chart-card,.table-card,.velocity-panel,.workflow-panel,.test-panel,.deliverability,.node,.report-list,.forecast{transition:transform .2s ease, box-shadow .2s ease}
+    .stat-card:hover,.stage-card:hover,.deal-card:hover,.panel:hover,.kpi-card:hover,.metric-card:hover,.summary-card:hover,.chart-card:hover,.table-card:hover,.velocity-panel:hover,.workflow-panel:hover,.test-panel:hover,.deliverability:hover,.node:hover,.report-list:hover,.forecast:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(110,231,255,.14)}
 
     .main{padding:36px 40px;display:flex;flex-direction:column;gap:32px}
     .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
@@ -67,10 +74,11 @@
     .panel p{margin:0;font-size:13px;color:var(--muted)}
 
     .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:12px;background:var(--panel-soft);border:1px solid rgba(255,255,255,.05);font-size:13px;color:var(--muted)}
-    .toggle{width:42px;height:22px;border-radius:999px;background:rgba(110,231,255,.22);position:relative;border:1px solid rgba(110,231,255,.4)}
+    .toggle{width:42px;height:22px;border-radius:999px;background:rgba(110,231,255,.22);position:relative;border:1px solid rgba(110,231,255,.4);cursor:pointer}
     .toggle::after{content:"";position:absolute;top:2px;left:22px;width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,var(--pri),var(--pri-2));box-shadow:0 0 10px rgba(110,231,255,.35)}
     .toggle.off{background:rgba(154,165,181,.25);border-color:rgba(154,165,181,.4)}
     .toggle.off::after{left:2px;background:rgba(154,165,181,.8);box-shadow:none}
+    .toggle:focus-visible{outline:2px solid rgba(110,231,255,.6);outline-offset:3px}
 
     .integrations{display:flex;flex-direction:column;gap:16px}
     .integration{display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:12px;background:var(--panel-soft);border:1px solid rgba(255,255,255,.05);font-size:13px;color:var(--muted)}
@@ -311,6 +319,45 @@
         badge.setAttribute('tabindex','0');
         badge.addEventListener('click', ()=> toggleAttr(badge));
         badge.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleAttr(badge); } });
+      });
+    })();
+  </script>
+  <script>
+    // Settings switches: accessible, visual-only toggles (no backend effect)
+    (function(){
+      const rows = document.querySelectorAll('.settings-grid .toggle-row');
+      let uid = 0;
+      function setState(el, on){
+        if(on){
+          el.classList.remove('off');
+          el.setAttribute('aria-checked','true');
+        } else {
+          el.classList.add('off');
+          el.setAttribute('aria-checked','false');
+        }
+      }
+      rows.forEach(row=>{
+        const label = row.querySelector('span:not(.toggle)');
+        const sw = row.querySelector('.toggle');
+        if(!sw) return;
+        // Make it an accessible switch
+        sw.removeAttribute('aria-hidden');
+        sw.setAttribute('role','switch');
+        sw.setAttribute('tabindex','0');
+        // Link to visual label
+        if(label){
+          if(!label.id){ label.id = 'settings-toggle-label-' + (++uid); }
+          sw.setAttribute('aria-labelledby', label.id);
+        } else {
+          sw.setAttribute('aria-label','Toggle');
+        }
+        // Initialize ARIA state from CSS class
+        setState(sw, !sw.classList.contains('off'));
+        const flip = ()=> setState(sw, !(sw.getAttribute('aria-checked') === 'true'));
+        sw.addEventListener('click', flip);
+        sw.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); flip(); }
+        });
       });
     })();
   </script>

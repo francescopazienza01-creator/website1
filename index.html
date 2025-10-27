@@ -23,6 +23,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Calendly popup styles -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 
   <style>
     :root{
@@ -37,7 +39,7 @@
     #faq{scroll-margin-top:110px}
 
     /* Header */
-    header{position:sticky;top:0;background:linear-gradient(180deg,rgba(11,12,16,.92),rgba(11,12,16,.7) 60%,rgba(11,12,16,0));backdrop-filter:saturate(160%) blur(8px);z-index:50;border-bottom:1px solid rgba(255,255,255,.06);transition:padding .25s ease, box-shadow .25s ease}
+    header{position:sticky;top:0;background:linear-gradient(180deg,rgba(11,12,16,.92),rgba(11,12,16,.7) 60%,rgba(11,12,16,0));backdrop-filter:saturate(160%) blur(6px);-webkit-backdrop-filter:saturate(160%) blur(6px);z-index:50;border-bottom:1px solid rgba(255,255,255,.06);transition:padding .25s ease, box-shadow .25s ease;will-change:transform,backdrop-filter}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px;transition:min-height .25s ease}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:60px;height:60px;display:block;border-radius:20px;transition:transform .25s ease,filter .25s ease;filter:drop-shadow(0 8px 24px rgba(110,231,255,.28))}
@@ -53,11 +55,11 @@
     .cta.alt:hover{box-shadow:0 0 18px rgba(110,231,255,.35);color:var(--txt)}
 
     /* Progress bar */
-    #progressbar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--pri),var(--pri-2));z-index:60;opacity:0;transition:width .12s ease,opacity .2s ease}
+    #progressbar{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:left center;transform:scaleX(0);background:linear-gradient(90deg,var(--pri),var(--pri-2));z-index:60;opacity:0;transition:transform .12s ease,opacity .2s ease;will-change:transform}
     body.scrolled #progressbar{opacity:1}
 
     /* Hero */
-    .hero{padding:64px 0 40px; position:relative; overflow:hidden}
+    .hero{padding:22px 0 40px; position:relative; overflow:hidden}
     .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px}
     .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:22px;transition:transform .35s ease, box-shadow .35s ease}
     .card:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,0,0,.25)}
@@ -103,7 +105,7 @@
     .why-track{animation:marquee-system-reverse 33s linear infinite}
     .why-marquee:hover .why-track{animation-play-state:paused}
     .features{display:flex;gap:14px;position:relative}
-    .features .card{min-width:260px;width:260px;transition:transform .4s ease,opacity .4s ease;transform:translateY(18px);opacity:0;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);background:var(--card)}
+    .features .card{min-width:260px;width:260px;transition:transform .4s ease,opacity .4s ease;transform:translateY(18px);opacity:0;padding:22px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);background:var(--card);will-change:transform,opacity}
     .features.visible .card{transform:translateY(0);opacity:1}
     .features .card h3{margin:6px 0 4px;font-size:18px}
     .features .card p{color:var(--muted);font-size:14px}
@@ -184,7 +186,79 @@
     .assistant-suggestions{display:flex;flex-wrap:wrap;gap:6px}
     .assistant-suggestions button{border:1px solid rgba(110,231,255,.28);color:var(--pri);background:transparent;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
     .assistant-suggestions button:hover{border-color:rgba(110,231,255,.5)}
+    /* Assistant CTA button (e.g., Calendly) */
+    .assistant-cta-wrap{margin-top:8px}
+    .assistant-cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--pri),var(--pri-2));color:#0b0c10 !important;border:none;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;text-decoration:none;box-shadow:0 10px 24px rgba(110,231,255,.25)}
+    .assistant-cta:hover{opacity:.92;transform:translateY(-1px);box-shadow:0 12px 28px rgba(110,231,255,.32)}
+    .assistant-cta:focus-visible{outline:2px solid rgba(255,255,255,.6);outline-offset:3px}
+    /* Assistant dynamic follow-ups */
+    .assistant-followups{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+    .assistant-followup{border:1px solid rgba(110,231,255,.28);color:var(--pri);background:transparent;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer;text-decoration:none}
+    .assistant-followup:hover{border-color:rgba(110,231,255,.5)}
 
+    /* Typed banner */
+    .typed-banner{margin:2px 0 2px;color:var(--muted);font-size:clamp(14px,2vw,20px);text-align:center}
+    .typed-word{color:var(--txt);font-weight:800}
+    .typed-word::after{content:"|";display:inline-block;margin-left:2px;color:var(--pri);animation:blink .9s steps(1) infinite}
+    @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+    .typed-brand{
+      text-align:center;font-weight:800;letter-spacing:.4px;font-size:clamp(22px,3vw,36px);margin:2px 0 8px;
+      display:inline-block; width:100%;
+      /* Match logo gradient: #69EDFF → #5BD0FF → #7C3AED */
+      background:linear-gradient(135deg,#69EDFF 0%,#5BD0FF 45%,#7C3AED 100%);
+      -webkit-background-clip:text;background-clip:text;
+      color:transparent;-webkit-text-fill-color:transparent;
+      /* Stronger glow */
+      text-shadow:
+        0 0 10px rgba(105,237,255,.65),
+        0 0 22px rgba(105,237,255,.45),
+        0 0 40px rgba(124,58,237,.38),
+        0 0 70px rgba(124,58,237,.28);
+      filter: drop-shadow(0 4px 16px rgba(124,58,237,.18));
+      animation: brandBreath 6s ease-in-out infinite;
+      will-change: transform, filter, text-shadow;
+    }
+
+    /* Slow breathing glow for the brand text */
+    @keyframes brandBreath{
+      0%,100%{
+        text-shadow:
+          0 0 10px rgba(105,237,255,.55),
+          0 0 22px rgba(105,237,255,.38),
+          0 0 42px rgba(124,58,237,.32),
+          0 0 72px rgba(124,58,237,.24);
+        filter: drop-shadow(0 3px 12px rgba(124,58,237,.18));
+        transform: scale(1);
+      }
+      50%{
+        text-shadow:
+          0 0 16px rgba(105,237,255,.90),
+          0 0 34px rgba(105,237,255,.65),
+          0 0 70px rgba(124,58,237,.54),
+          0 0 110px rgba(124,58,237,.42);
+        filter: drop-shadow(0 8px 24px rgba(124,58,237,.30));
+        transform: scale(1.03);
+      }
+    }
+
+    /* Respect reduced motion preferences */
+    @media (prefers-reduced-motion: reduce){
+      .typed-brand{animation:none}
+    }
+
+    /* Demo CRM Welcome (overlay) */
+    .demo-welcome{position:fixed;inset:0;display:grid;place-items:center;background:rgba(11,12,16,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:210;opacity:0;pointer-events:none;transition:opacity .45s ease}
+    .demo-welcome.active{opacity:1;pointer-events:auto}
+    .demo-welcome-card{width:min(88vw,760px);background:rgba(12,16,24,.96);border:1px solid rgba(110,231,255,.22);border-radius:26px;padding:30px 28px;display:grid;gap:12px;box-shadow:0 28px 90px rgba(0,0,0,.55);transform:translateY(10px);transition:transform .45s ease}
+    .demo-welcome.active .demo-welcome-card{transform:translateY(0)}
+    .demo-welcome-card h3{margin:0;font-size:clamp(20px,3.2vw,26px);letter-spacing:.02em;color:var(--txt)}
+    .demo-welcome-card p{margin:0;color:rgba(230,238,246,.86);font-size:15px;line-height:1.65}
+    .demo-welcome-tap{color:var(--muted);font-size:13px}
+
+    @media (prefers-reduced-motion: reduce){
+      .demo-welcome{transition:none !important}
+      .demo-welcome-card{transition:none !important;transform:none !important}
+    }
     /* Footer */
     footer{margin:40px 0 20px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
 
@@ -196,12 +270,87 @@
     body.intro-fade main, body.intro-fade footer, body.intro-fade header{animation:contentFade .9s ease forwards}
     .welcome-card{width:min(88vw,880px);max-height:88vh;background:rgba(12,16,24,.95);border:1px solid rgba(110,231,255,.22);border-radius:28px;padding:40px;display:flex;flex-direction:column;gap:24px;align-items:center;position:relative;overflow:hidden;box-shadow:0 32px 110px rgba(0,0,0,.55);transition:transform .45s ease, opacity .45s ease}
     .welcome-card::before{content:"";position:absolute;inset:-120px -200px;background:conic-gradient(from 120deg,rgba(110,231,255,.18),transparent 38%);opacity:.6;animation:welcomeGlow 14s linear infinite}
-    .welcome-graphic{position:relative;width:100%;height:clamp(240px,40vh,360px);border-radius:22px;overflow:hidden;background:linear-gradient(160deg,rgba(11,12,18,.75),rgba(11,12,16,0)),url('images/paz2.png') center/cover no-repeat;box-shadow:0 26px 70px rgba(10,14,26,.5)}
+    .welcome-graphic{position:relative;width:100%;height:clamp(240px,40vh,360px);border-radius:22px;overflow:hidden;box-shadow:0 26px 70px rgba(10,14,26,.5);
+      /* Revamped brand image using layered gradients (no external photo) */
+      background:
+        /* subtle grid */
+        repeating-linear-gradient(90deg, rgba(110,231,255,.06) 0 1px, transparent 1px 44px),
+        repeating-linear-gradient(0deg, rgba(124,58,237,.05) 0 1px, transparent 1px 44px),
+        /* soft brand glows */
+        radial-gradient(120% 90% at 0% 0%, rgba(110,231,255,.18), transparent 60%),
+        radial-gradient(120% 90% at 100% 0%, rgba(124,58,237,.22), transparent 60%),
+        linear-gradient(135deg, rgba(105,237,255,.10), rgba(124,58,237,.08));
+    }
+    /* Logo-outline constellation (traceable) */
+    .logo-constellation{position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none}
+    .logo-constellation svg{width:100%; height:100%; display:block}
+    .logo-constellation .glow{stroke:url(#lc-grad); stroke-width:10; opacity:.10; filter:blur(6px)}
+    .logo-constellation .line{stroke:url(#lc-grad); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1000; stroke-dashoffset:1000; animation:logoTrace 14s ease-out forwards}
+    .logo-constellation .node{fill:#69EDFF; opacity:.9; filter:drop-shadow(0 0 6px rgba(110,231,255,.35))}
+    .logo-constellation .node.purple{fill:#7C3AED; filter:drop-shadow(0 0 6px rgba(124,58,237,.35))}
+    .logo-constellation .star{fill:#fff; opacity:.65; filter:drop-shadow(0 0 10px rgba(110,231,255,.28))}
+    .logo-constellation .ping{fill:none; stroke:url(#lc-grad); stroke-width:1.2; opacity:.6; transform-origin:center; animation:logoPing 2.6s ease-out infinite}
+    @keyframes logoTrace{to{stroke-dashoffset:0}}
+    @keyframes logoPing{0%{transform:scale(.7);opacity:.8}70%{transform:scale(2);opacity:.15}100%{transform:scale(2.2);opacity:0}}
+    /* Right-side cover to fill space (static, no motion) */
+    .welcome-cover{position:absolute; top:0; right:0; bottom:0; left:52%; z-index:0; pointer-events:none;
+      background:
+        /* light vertical grid */
+        repeating-linear-gradient(90deg, rgba(110,231,255,.06) 0 1px, transparent 1px 36px),
+        /* brand glows */
+        radial-gradient(90% 80% at 20% 30%, rgba(110,231,255,.12), transparent 60%),
+        radial-gradient(100% 80% at 80% 40%, rgba(124,58,237,.16), transparent 65%),
+        /* gentle darkening towards the edge */
+        linear-gradient(180deg, rgba(11,12,16,0), rgba(11,12,16,.25));
+      border-left:1px solid rgba(110,231,255,.14);
+      box-shadow:inset 0 0 80px rgba(0,0,0,.25);
+    }
+    .welcome-graphic::before,.welcome-graphic::after{content:"";position:absolute;inset:auto;z-index:0;pointer-events:none}
+    .welcome-graphic::before{left:-12%;top:-18%;width:380px;height:380px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, rgba(110,231,255,.55), rgba(110,231,255,0) 60%);
+      filter:blur(24px);mix-blend-mode:screen;opacity:.6;animation:orbA 14s ease-in-out infinite alternate;
+    }
+    .welcome-graphic::after{right:-16%;top:-12%;width:420px;height:420px;border-radius:50%;
+      background:radial-gradient(circle at 70% 40%, rgba(124,58,237,.55), rgba(124,58,237,0) 60%);
+      filter:blur(26px);mix-blend-mode:screen;opacity:.55;animation:orbB 16s ease-in-out infinite alternate;
+    }
+    .welcome-brandmark{position:absolute;left:18px;top:18px;width:78px;height:78px;border-radius:20px;overflow:hidden;z-index:1;transform:rotate(-4deg);
+      box-shadow:0 12px 36px rgba(110,231,255,.22), 0 18px 60px rgba(124,58,237,.20);
+      animation:brandmarkFloat 10s ease-in-out infinite;
+    }
+    .welcome-brandmark img{display:block;width:100%;height:100%}
     .welcome-graphic-overlay{position:absolute;inset:0;background:linear-gradient(190deg,rgba(11,12,16,0) 12%,rgba(11,12,16,.82) 88%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px 24px;color:var(--txt);gap:10px}
     .welcome-graphic-overlay h3{margin:0;font-size:clamp(17px,2.6vw,20px);letter-spacing:.08em;text-transform:uppercase;color:var(--pri)}
     .welcome-graphic-overlay p{margin:0;color:rgba(230,238,246,.84);font-size:14px;line-height:1.6;max-width:420px}
     .welcome-graphic-chips{display:flex;flex-wrap:wrap;gap:8px}
     .welcome-graphic-chips span{padding:6px 12px;border-radius:999px;border:1px solid rgba(110,231,255,.24);background:rgba(12,18,26,.65);font-size:11px;text-transform:uppercase;letter-spacing:.11em;color:var(--pri)}
+    @keyframes orbA{0%{transform:translate(0,0) scale(1)}50%{transform:translate(12px,16px) scale(1.06)}100%{transform:translate(24px,-6px) scale(1.1)}}
+    @keyframes orbB{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-10px,12px) scale(1.05)}100%{transform:translate(-22px,-8px) scale(1.1)}}
+    @keyframes brandmarkFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-4px) rotate(-2deg)}}
+
+    /* Welcome trace: calm, single-pass draw */
+    .welcome-trace{position:absolute; right:-4%; top:-10%; width:700px; height:400px; opacity:.75; pointer-events:none; display:none !important}
+    .welcome-trace svg{width:100%; height:100%; display:block}
+    .welcome-trace .glow{stroke:url(#wt-grad); stroke-width:16; opacity:.08; filter:blur(8px)}
+    .welcome-trace .wire{stroke:url(#wt-grad); stroke-width:2; opacity:.25}
+    .welcome-trace .line{stroke:url(#wt-grad); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1400; stroke-dashoffset:1400; animation:traceDraw 18s ease-out forwards}
+    .welcome-trace .star{fill:url(#wt-grad); opacity:.6; filter:drop-shadow(0 0 10px rgba(110,231,255,.25))}
+    .welcome-trace .spark{fill:rgba(255,255,255,.95); opacity:.35; filter:drop-shadow(0 0 8px rgba(110,231,255,.25))}
+    @keyframes traceDraw{to{stroke-dashoffset:0}}
+
+    /* Constellation: show and cover more of the right half (desktop) */
+    .welcome-constellation{position:absolute; right:-12%; top:-14%; width:820px; height:460px; pointer-events:none; display:none !important; opacity:.95}
+    /* Base constellation uses its local gradient */
+    .welcome-constellation:not(.wc-large):not(.wc-top) .glow,
+    .welcome-constellation:not(.wc-large):not(.wc-top) .line,
+    .welcome-constellation:not(.wc-large):not(.wc-top) .ping{stroke:url(#wc-grad)}
+    /* Tame intensity */
+    .welcome-constellation .glow{stroke-width:10; opacity:.10; filter:blur(8px)}
+    .welcome-constellation .line{stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+    .welcome-constellation .node.blue{fill:#69EDFF; filter:drop-shadow(0 0 6px rgba(110,231,255,.25))}
+    .welcome-constellation .node.purple{fill:#7C3AED; filter:drop-shadow(0 0 6px rgba(124,58,237,.25))}
+    .welcome-constellation .star{fill:rgba(255,255,255,.85); opacity:.6; filter:drop-shadow(0 0 10px rgba(110,231,255,.25))}
+    .welcome-constellation .ping{fill:none; opacity:.35}
     .welcome-title{margin:0;font-size:clamp(26px,4.3vw,35px);font-weight:800;letter-spacing:.028em;text-align:center}
     .welcome-sub{margin:0;color:rgba(230,238,246,.84);font-size:15px;line-height:1.65;text-align:center;max-width:540px}
     .welcome-cta{display:inline-flex;align-items:center;justify-content:center;padding:12px 24px;border-radius:15px;border:none;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--pri),var(--pri-2));color:#0b0c10;transition:transform .25s ease,box-shadow .25s ease}
@@ -216,7 +365,7 @@
     .why-marquee::before,.why-marquee::after{content:"";position:absolute;top:0;bottom:0;width:180px;pointer-events:none;z-index:2}
     .system-marquee::before,.why-marquee::before{left:0;background:linear-gradient(90deg,rgba(11,12,16,1),rgba(11,12,16,0))}
     .system-marquee::after,.why-marquee::after{right:0;background:linear-gradient(270deg,rgba(11,12,16,1),rgba(11,12,16,0))}
-    .system-track,.why-track{display:flex;align-items:stretch;gap:14px;width:max-content}
+    .system-track,.why-track{display:flex;align-items:stretch;gap:14px;width:max-content;will-change:transform}
     .system-track{animation:marquee-system 33s linear infinite}
     .system-marquee:hover .system-track{animation-play-state:paused}
     .why-track{animation:marquee-system-reverse 33s linear infinite}
@@ -247,6 +396,12 @@
       .autos .card{flex:0 0 280px}
       .month-one-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
       .assistant{width:280px;right:16px;bottom:110px}
+      header{backdrop-filter:none;-webkit-backdrop-filter:none}
+      /* Keep mobile clean */
+      .welcome-constellation{right:4%; top:34%; width:300px; height:200px}
+      .welcome-constellation.wc-large,.welcome-constellation.wc-top{display:none}
+      .welcome-trace{right:-2%; top:-2%; width:360px; height:220px}
+      .welcome-cover{left:62%; opacity:.9}
     }
     @media (max-width:640px){
       .cta-group{width:100%;gap:10px}
@@ -268,6 +423,12 @@
     @keyframes welcomeFadeIn {0%{opacity:0;transform:scale(1.02)}40%{opacity:.65;transform:scale(1)}100%{opacity:1;transform:scale(1)}}
     @keyframes contentFade {0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:translateY(0)}}
     @keyframes welcomeGlow {0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    @media (prefers-reduced-motion: reduce){
+      .welcome-graphic::before,.welcome-graphic::after,.welcome-brandmark{animation:none !important}
+      .welcome-constellation .line,.welcome-constellation .ping,.welcome-constellation .star{animation:none !important}
+      .welcome-trace .line,.welcome-trace .star,.welcome-trace .spark{animation:none !important}
+      .logo-constellation .line,.logo-constellation .ping,.logo-constellation .star{animation:none !important}
+    }
 
     .logo{animation:float 10s ease-in-out infinite}
     .cta::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent); transform:translateX(-120%); animation:shine 3.5s ease-in-out infinite}
@@ -337,9 +498,164 @@
 </head>
 
   <body>
+    <!-- Demo CRM welcome overlay (shown when clicking Demo CRM) -->
+    <div class="demo-welcome" id="demoWelcome" aria-modal="true" role="dialog" aria-label="Welcome to the Demo CRM" hidden>
+      <div class="demo-welcome-card">
+        <h3>Welcome to the Demo CRM</h3>
+        <p>Explore how Revno coordinates pipeline, automations, and team execution in a real-world workspace. It’s read‑only and prefilled with sample data so you can click around safely.</p>
+        <p class="demo-welcome-tap">Click anywhere to continue…</p>
+      </div>
+    </div>
     <div class="welcome-overlay active" id="welcomeOverlay" aria-modal="true" role="dialog" aria-label="Revno welcome message">
       <div class="welcome-card">
         <div class="welcome-graphic">
+          <div class="welcome-brandmark" aria-hidden="true">
+            <img src="images/revno-logo.svg" alt="" loading="lazy" decoding="async" />
+            <!-- Traceable constellation that outlines the Revno logo (rounded square + R shape); now aligned exactly -->
+            <div class="logo-constellation" aria-hidden="true">
+              <svg viewBox="0 0 200 200" focusable="false">
+                <defs>
+                  <linearGradient id="lc-grad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#69EDFF"/>
+                    <stop offset="1" stop-color="#7C3AED"/>
+                  </linearGradient>
+                </defs>
+              <!-- Outer rounded-rectangle outline matching logo's border (rx=44 at 16..184) -->
+              <path class="glow" d="M60 16 H140 Q184 16 184 60 V140 Q184 184 140 184 H60 Q16 184 16 140 V60 Q16 16 60 16 Z" fill="none" pathLength="1000"/>
+              <path class="line" d="M60 16 H140 Q184 16 184 60 V140 Q184 184 140 184 H60 Q16 184 16 140 V60 Q16 16 60 16 Z" fill="none" pathLength="1000"/>
+
+              <!-- Exact internal R outline paths from the logo (stroked instead of filled) -->
+              <path class="line" d="M52 86C52 62.356 70.356 44 94 44H114C137.644 44 156 62.356 156 86C156 107.026 142.627 122.629 122.147 126.604L154 168H120L98 142H84V168H52V86Z" fill="none" pathLength="1000"/>
+              <path class="line" d="M84 60V110H108C123 110 132 103 132 90C132 77 123 70 108 70H84V60Z" fill="none" pathLength="1000"/>
+
+              <!-- Nodes at corners and key joints -->
+              <circle class="node" cx="60" cy="16" r="2.6"/>
+              <circle class="node purple" cx="156" cy="16" r="2.6"/>
+              <circle class="node" cx="184" cy="44" r="2.4"/>
+              <circle class="node purple" cx="184" cy="156" r="2.4"/>
+              <circle class="node" cx="156" cy="184" r="2.6"/>
+              <circle class="node purple" cx="44" cy="184" r="2.6"/>
+              <circle class="node" cx="16" cy="156" r="2.4"/>
+              <circle class="node purple" cx="16" cy="44" r="2.4"/>
+              <circle class="node" cx="84" cy="60" r="2.2"/>
+              <circle class="node purple" cx="108" cy="72" r="2.2"/>
+              <circle class="node" cx="108" cy="104" r="2.2"/>
+              <circle class="node purple" cx="118" cy="126" r="2.2"/>
+
+              <!-- Gentle spark/ping accents -->
+              <circle class="star" cx="156" cy="42" r="1.6"/>
+              <circle class="star" cx="152" cy="174" r="1.4"/>
+              <circle class="star" cx="44" cy="26" r="1.4"/>
+              <circle class="ping" cx="84" cy="60" r="8"/>
+            </svg>
+          </div>
+          </div>
+          <svg class="welcome-trace" viewBox="0 0 700 400" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="wt-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#69EDFF" />
+                <stop offset="1" stop-color="#7C3AED" />
+              </linearGradient>
+            </defs>
+            <!-- Sales funnel to growth arrow (single trace) -->
+            <path class="glow" stroke="url(#wt-grad)" d="
+              M 95 230 L 255 230 L 205 300 L 185 330
+              C 250 305, 325 270, 395 235
+              C 460 202, 520 170, 575 140
+              L 560 130 L 610 130 L 595 180
+              M 120 300 L 260 300
+              M 150 300 L 150 250
+              M 190 300 L 190 230
+              M 230 300 L 230 205
+            " fill="none"/>
+            <path class="wire" stroke="url(#wt-grad)" d="
+              M 95 230 L 255 230 L 205 300 L 185 330
+              C 250 305, 325 270, 395 235
+              C 460 202, 520 170, 575 140
+              L 560 130 L 610 130 L 595 180
+              M 120 300 L 260 300
+              M 150 300 L 150 250
+              M 190 300 L 190 230
+              M 230 300 L 230 205
+            " fill="none"/>
+            <path class="line" stroke="url(#wt-grad)" d="
+              M 95 230 L 255 230 L 205 300 L 185 330
+              C 250 305, 325 270, 395 235
+              C 460 202, 520 170, 575 140
+              L 560 130 L 610 130 L 595 180
+              M 120 300 L 260 300
+              M 150 300 L 150 250
+              M 190 300 L 190 230
+              M 230 300 L 230 205
+            " fill="none"/>
+            <!-- Accents at funnel exit and arrow tip -->
+            <circle class="spark" cx="205" cy="300" r="2" style="animation-delay:.3s"/>
+            <circle class="spark" cx="255" cy="230" r="1.6" style="animation-delay:1.1s"/>
+            <circle class="star" cx="610" cy="130" r="2.2" style="animation-delay:.6s"/>
+          </svg>
+          <svg class="welcome-constellation" viewBox="0 0 260 180" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="wc-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#69EDFF" />
+                <stop offset="1" stop-color="#7C3AED" />
+              </linearGradient>
+            </defs>
+            <path class="glow" d="M10 140 C 46 110, 80 126, 106 92 S 164 68, 198 88 S 240 120, 248 100" fill="none"/>
+            <path class="line" d="M10 140 C 46 110, 80 126, 106 92 S 164 68, 198 88 S 240 120, 248 100" fill="none"/>
+            <circle class="ping" cx="106" cy="92" r="10" />
+            <circle class="node blue" cx="106" cy="92" r="3" />
+            <circle class="node purple" cx="198" cy="88" r="3" />
+            <circle class="node blue" cx="46" cy="110" r="3" />
+            <circle class="node purple" cx="240" cy="120" r="3" />
+          </svg>
+          <!-- Larger constellation to cover more right-side space -->
+          <svg class="welcome-constellation wc-large" viewBox="0 0 520 320" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="wc-grad2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#69EDFF" />
+                <stop offset="1" stop-color="#7C3AED" />
+              </linearGradient>
+            </defs>
+            <g opacity="0.95">
+              <path class="glow" stroke="url(#wc-grad2)" d="M40 260 C 120 210, 180 240, 230 170 S 330 120, 380 160 S 460 220, 500 180" fill="none"/>
+              <path class="line" stroke="url(#wc-grad2)" d="M40 260 C 120 210, 180 240, 230 170 S 330 120, 380 160 S 460 220, 500 180" fill="none"/>
+              <path class="line" stroke="url(#wc-grad2)" stroke-dasharray="5 9" d="M70 200 C 150 170, 210 210, 270 150 S 360 110, 420 130" fill="none" style="animation-duration:10s"/>
+            </g>
+            <!-- Nodes & stars -->
+            <circle class="ping" cx="230" cy="170" r="12" />
+            <circle class="node blue" cx="230" cy="170" r="4" />
+            <circle class="node purple" cx="380" cy="160" r="4" />
+            <circle class="node blue" cx="120" cy="210" r="4" />
+            <circle class="node purple" cx="460" cy="220" r="4" />
+            <circle class="star" cx="150" cy="260" r="1.6" style="animation-delay:.2s"/>
+            <circle class="star" cx="300" cy="210" r="1.4" style="animation-delay:1.1s"/>
+            <circle class="star" cx="430" cy="190" r="1.8" style="animation-delay:.6s"/>
+            <circle class="star" cx="490" cy="230" r="1.5" style="animation-delay:1.7s"/>
+            <circle class="star" cx="360" cy="250" r="1.3" style="animation-delay:2.2s"/>
+          </svg>
+          <!-- Top arc network to extend towards the popup's top -->
+          <svg class="welcome-constellation wc-top" viewBox="0 0 680 260" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="wc-grad3" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#69EDFF" />
+                <stop offset="1" stop-color="#7C3AED" />
+              </linearGradient>
+            </defs>
+            <g opacity="0.95">
+              <path class="glow" stroke="url(#wc-grad3)" d="M40 60 C 160 10, 260 40, 330 30 S 500 20, 620 50" fill="none"/>
+              <path class="line" stroke="url(#wc-grad3)" d="M40 60 C 160 10, 260 40, 330 30 S 500 20, 620 50" fill="none"/>
+              <path class="line" stroke="url(#wc-grad3)" stroke-dasharray="6 12" d="M100 100 C 220 50, 320 80, 420 60 S 560 70, 640 90" fill="none" style="animation-duration:9s"/>
+              <path class="line" stroke="url(#wc-grad3)" stroke-dasharray="4 8" d="M60 140 C 200 90, 300 110, 420 95 S 560 110, 660 130" fill="none" style="animation-duration:11s"/>
+            </g>
+            <!-- Nodes & twinkles along the top arcs -->
+            <circle class="node blue" cx="160" cy="50" r="3" />
+            <circle class="node purple" cx="330" cy="30" r="3" />
+            <circle class="node blue" cx="500" cy="22" r="3" />
+            <circle class="star" cx="220" cy="80" r="1.6" style="animation-delay:.4s"/>
+            <circle class="star" cx="410" cy="70" r="1.4" style="animation-delay:1.3s"/>
+            <circle class="star" cx="590" cy="85" r="1.8" style="animation-delay:.8s"/>
+            <circle class="star" cx="300" cy="118" r="1.5" style="animation-delay:1.9s"/>
+          </svg>
           <div class="welcome-graphic-overlay">
             <h3>Precision Revenue Ops</h3>
             <p>See how Revno maps every lead, triggers every workflow, and keeps your revenue desk accountable in real time.</p>
@@ -363,7 +679,6 @@
     <div class="wrap nav">
       <div class="brand">
         <img class="logo" src="images/revno-logo.svg" alt="Revno logo" width="60" height="60" loading="lazy" decoding="async" />
-        <span class="tag" aria-hidden="true">Revno</span>
       </div>
       <div class="chips" aria-hidden="true">
         <a class="chip" href="#services">System</a>
@@ -372,14 +687,18 @@
         <a class="chip" href="#faq">FAQ</a>
       </div>
       <div class="cta-group">
-        <a class="cta transition-link" href="demo-crm.html">Check Our Demo CRM</a>
+        <a class="cta" id="demoLink" href="demo-crm.html">Check Our Demo CRM</a>
         <a class="cta" href="#contact">Book Your Call</a>
-        <a class="legal-link transition-link" href="privacy.html" title="Privacy & Terms">privacy.terms</a>
       </div>
     </div>
   </header>
 
   <main class="wrap">
+    <div class="typed-brand">Revno</div>
+    <!-- Typing sentence banner -->
+    <p class="typed-banner" aria-live="polite">
+      <span class="typed-static">We turn leads into </span><span id="typedWord" class="typed-word">clients</span>
+    </p>
     <section class="hero grid">
       <div class="orb orb-a"></div>
       <div class="orb orb-b"></div>
@@ -507,7 +826,7 @@
       </div>
 
       <div class="card" style="margin-top:14px">
-        <h2 style="margin-bottom:6px">Automations We Install (Weeks 1–4)</h2>
+        <h2 style="margin-bottom:6px">Automations We Install</h2>
         <div class="autos" style="margin-top:10px">
           <div class="autos-track">
             <div class="card">
@@ -802,26 +1121,113 @@
       pageTransition.parentElement && pageTransition.parentElement.removeChild(pageTransition);
     }
 
-    // Scroll progress & header shrink & back-to-top
+    // Typed banner: animate last word
+    (function(){
+      const el = document.getElementById('typedWord');
+      if(!el) return;
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const words = ['clients','calls','revenue'];
+      let idx = 0;
+      let current = words[0];
+      el.textContent = current;
+      if(prefersReducedMotion) return;
+      const typeDelay = 85; // ms per char
+      const eraseDelay = 60; // ms per char
+      const holdDelay = 1100; // ms at full word
+      function cycle(){
+        const next = words[(idx + 1) % words.length];
+        let i = current.length;
+        function erase(){
+          if(i > 0){
+            el.textContent = current.slice(0, i - 1);
+            i--;
+            setTimeout(erase, eraseDelay + Math.random()*60);
+          } else {
+            let j = 0;
+            current = next;
+            function type(){
+              if(j < current.length){
+                el.textContent = current.slice(0, j + 1);
+                j++;
+                setTimeout(type, typeDelay + Math.random()*70);
+              } else {
+                idx = (idx + 1) % words.length;
+                setTimeout(cycle, holdDelay);
+              }
+            }
+            setTimeout(type, 120);
+          }
+        }
+        erase();
+      }
+      setTimeout(cycle, 1200);
+    })();
+
+    // Demo CRM welcome overlay handler
+    (function(){
+      const link = document.getElementById('demoLink');
+      const overlay = document.getElementById('demoWelcome');
+      if(!link || !overlay) return;
+      const href = link.getAttribute('href') || 'demo-crm.html';
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function showOverlay(){
+        overlay.hidden = false;
+        // ensure fade-in after layout
+        requestAnimationFrame(()=> overlay.classList.add('active'));
+      }
+
+      function go(){
+        // Optional: use page transition if available
+        if(pageTransition && !prefersReducedMotion){
+          pageTransition.classList.add('active');
+          setTimeout(()=>{ window.location.href = href; }, 300);
+        } else {
+          window.location.href = href;
+        }
+      }
+
+      link.addEventListener('click', (e)=>{
+        if(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return; // allow new tab/window
+        e.preventDefault();
+        showOverlay();
+      });
+
+      overlay.addEventListener('click', go);
+    })();
+
+    // Scroll progress & header shrink & back-to-top (rAF-throttled)
     const progressBar = document.getElementById('progressbar');
     const toTopBtn = document.getElementById('toTop');
-    function onScroll(){
+    let ticking = false;
+    let docHeight = 0;
+    const computeDocHeight = ()=>{
+      const d = document.documentElement;
+      docHeight = Math.max(1, (d.scrollHeight - d.clientHeight));
+    };
+    computeDocHeight();
+    window.addEventListener('resize', computeDocHeight, {passive:true});
+    function updateOnScroll(){
       const doc = document.documentElement;
-      const st = doc.scrollTop || document.body.scrollTop;
-      if(st < lastScrollY){
-        scrollDirection = 'up';
-      } else if(st > lastScrollY){
-        scrollDirection = 'down';
-      }
+      const st = doc.scrollTop || document.body.scrollTop || 0;
+      scrollDirection = (st < lastScrollY) ? 'up' : (st > lastScrollY ? 'down' : scrollDirection);
       lastScrollY = st;
-      const h = (doc.scrollHeight - doc.clientHeight) || 1;
-      const pct = Math.min(100, Math.max(0, (st / h) * 100));
-      if(progressBar) progressBar.style.width = pct + '%';
+      if(progressBar){
+        const pct = Math.min(1, Math.max(0, st / (docHeight || 1)));
+        progressBar.style.transform = `scaleX(${pct})`;
+      }
       if(st > 10) document.body.classList.add('scrolled'); else document.body.classList.remove('scrolled');
       if(toTopBtn){ if(st > 400) toTopBtn.classList.add('show'); else toTopBtn.classList.remove('show'); }
+      ticking = false;
+    }
+    function onScroll(){
+      if(!ticking){
+        window.requestAnimationFrame(updateOnScroll);
+        ticking = true;
+      }
     }
     window.addEventListener('scroll', onScroll, {passive:true});
-    window.addEventListener('load', onScroll);
+    window.addEventListener('load', updateOnScroll);
     if(toTopBtn){ toTopBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'})); }
 
     // Assistant bot (rule-based FAQ helper)
@@ -836,7 +1242,7 @@
       let seeded = false;
       const transcripts = [];
 
-      const STOP_WORDS = new Set(['and','the','for','with','that','from','your','you','are','our','this','have','has','will','into','about','just','over','more','than','what','when','where','which','while','after','before','within','their','them','they','each','been','make','made','can','able','also','but','per','via','how','much','many','who','does','get','into','onto','onto']);
+      const STOP_WORDS = new Set(['and','the','for','with','that','from','your','you','are','our','this','have','has','will','into','about','just','over','more','than','what','when','where','which','while','after','before','within','their','them','they','each','been','make','made','can','able','also','but','per','via','how','much','many','who','does','get','into','onto','onto','guys','pls','please']);
 
       function normalizeQuestion(text){
         return (text || '')
@@ -844,6 +1250,67 @@
           .replace(/[^a-z0-9\s]/g,' ')
           .replace(/\s+/g,' ')
           .trim();
+      }
+
+      // Domain lexicon to broaden understanding without a model
+      const LEXICON = {
+        pricing:['price','pricing','cost','costs','fee','fees','retainer','subscription','monthly','charge','charges','payment','payments','investment','budget','setup','build','buildout','revshare','revenue','share','commission','commissions','retainer fee','monthly retainer','ongoing','plan','plans'],
+        automation:['automation','automations','workflow','workflows','sequence','sequences','reminder','reminders','followup','follow-up','router','routing','speed','speed-to-lead','nurture','drip','cadence','cadences','playbook','playbooks','trigger','triggers','webhook','webhooks'],
+        technology:['gohighlevel','ghl','hubspot','salesforce','zapier','make','pabbly','calendly','calendar','google','gmail','zoom','slack','discord','stripe','api','apis','endpoint','endpoints','integration','integrations','stack','platforms','crm','crms'],
+        management:['sales','management','manager','managers','rep','reps','setter','setters','closer','closers','kpi','kpis','coaching','training','qa','quality','roleplay','script','scripts','scorecard','scorecards'],
+        timeline:['launch','onboard','onboarding','kickoff','timeline','start','startup','set up','setup','go-live','golive','implement','implementation','weeks','days'],
+        results:['roi','result','results','proof','case','case study','case studies','win','wins','outcome','outcomes','performance','metrics'],
+        risk:['complaint','complaints','issue','issues','problem','problems','cancel','cancellation','refund','refunds','support','supporting','dissatisfied','satisfaction','unhappy','risk','guarantee','guarantees','policy','policies'],
+        positioning:['why choose','why you','why revno','unique','difference','different','best','better','mission','vision','philosophy'],
+        fit:['industry','industries','niche','niches','vertical','verticals','business','size','startup','established','team','offers','brand','brands','multi','pipeline'],
+        demo:['demo','sandbox','example','sample','try','tour','walkthrough','crm']
+      };
+      const ABBREVIATIONS = {kpi:'kpi',kpis:'kpi',ghl:'gohighlevel',ig:'instagram',wa:'whatsapp',dm:'dm',roi:'roi',crm:'crm'};
+
+      function stemToken(token){
+        if(token.length <= 3) return token;
+        if(token.endsWith('ies')) return token.slice(0,-3)+'y';
+        if(token.endsWith('ing') && token.length > 5) return token.slice(0,-3);
+        if(token.endsWith('ed') && token.length > 4) return token.slice(0,-2);
+        if(token.endsWith('es') && token.length > 4) return token.slice(0,-2);
+        if(token.endsWith('s') && token.length > 3) return token.slice(0,-1);
+        return token;
+      }
+
+      function expandTokens(tokens){
+        const out = new Set();
+        tokens.forEach(t=>{
+          if(!t) return;
+          out.add(t);
+          const stem = stemToken(t);
+          out.add(stem);
+          if(ABBREVIATIONS[t]) out.add(ABBREVIATIONS[t]);
+          // Add category terms that include this token
+          Object.keys(LEXICON).forEach(cat=>{
+            LEXICON[cat].forEach(term=>{
+              // normalize multi-word term
+              const parts = term.split(/\s+/g);
+              if(parts.includes(t) || parts.includes(stem)){
+                parts.forEach(p=>{ if(p.length>2) out.add(p); });
+              }
+            });
+          });
+        });
+        return Array.from(out);
+      }
+
+      // Character trigram similarity to forgive heavy typos
+      function trigrams(s){
+        const set = new Set();
+        const str = ` ${s} `;
+        for(let i=0;i<str.length-2;i++) set.add(str.slice(i,i+3));
+        return set;
+      }
+      function trigramSim(a,b){
+        const A = trigrams(a), B = trigrams(b);
+        let inter = 0; A.forEach(x=>{ if(B.has(x)) inter++; });
+        const union = A.size + B.size - inter || 1;
+        return inter/union;
       }
 
       function levenshtein(a,b){
@@ -870,6 +1337,9 @@
       function fuzzyMatch(token, candidate){
         if(token === candidate) return true;
         const lenDiff = Math.abs(token.length - candidate.length);
+        if(token.length >= 5 && candidate.length >= 5){
+          if(trigramSim(token, candidate) >= 0.48) return true;
+        }
         if(lenDiff > 2) return false;
         const maxDist = token.length > 6 || candidate.length > 6 ? 2 : 1;
         if(token.length <= 3 || candidate.length <= 3){
@@ -888,6 +1358,128 @@
 
       function tokenize(text){
         return (text.toLowerCase().match(/[a-z0-9]+/g) || []).filter(token=> token.length > 2 && !STOP_WORDS.has(token));
+      }
+
+      // Category detection
+      function detectCategories(questionText, tokens){
+        const scores = {};
+        const lower = questionText.toLowerCase();
+        Object.keys(LEXICON).forEach(cat=>{
+          scores[cat] = 0;
+          LEXICON[cat].forEach(term=>{
+            const t = term.toLowerCase();
+            if(t.includes(' ')){
+              if(lower.includes(t)) scores[cat] += 2; // phrase gets bonus
+            } else {
+              if(tokens.includes(t)) scores[cat] += 1;
+              const stem = stemToken(t);
+              if(tokens.includes(stem)) scores[cat] += 0.5;
+            }
+          });
+        });
+        return scores;
+      }
+
+      // Detect strong booking intent (book/schedule a call/meeting/consult) including Calendly mentions
+      function isBookingIntent(questionText, tokens){
+        const lower = (questionText || '').toLowerCase();
+        const phrases = [
+          'book a call','book call','schedule a call','schedule call',
+          'book a meeting','schedule a meeting','book meeting','schedule meeting',
+          'book consultation','book a consultation','strategy call','book a strategy call',
+          'calendly','calendar link','booking link','book time','schedule time'
+        ];
+        if(phrases.some(p=> lower.includes(p))) return true;
+        const set = new Set(tokens || []);
+        const hits = ['book','schedule','calendly','calendar','booking','appoint','appointment','call','meeting','consultation']
+          .reduce((acc,w)=> acc + (set.has(w) ? 1 : 0), 0);
+        return hits >= 2; // require at least two booking-related tokens
+      }
+
+      // Build context-aware follow-up chips to refine the conversation
+      function buildFollowups(tokens, insight){
+        const set = new Set(tokens||[]);
+        const chips = [];
+        const add = (label, question)=>{ chips.push({label, question}); };
+        const hasAny = (arr)=> arr.some(t=> set.has(t));
+        const calendlyUrl = 'https://calendly.com/fpazienza5/45min-hour-consultation-clone';
+
+        // Heuristics by detected topic
+        if(hasAny(['price','pricing','cost','retainer','budget'])){
+          add('See timeline', 'How fast can we launch?');
+          add('Integrations', 'Which tools do you integrate with?');
+          add('Book a call', 'book a call');
+        } else if(hasAny(['automation','workflow','workflows','sequence','cadence','playbook'])){
+          add('Integrations', 'Which tools do you integrate with?');
+          add('Reporting', 'Do clients get dashboards?');
+          add('Book a call', 'book a call');
+        } else if(hasAny(['service','services','offer','offers','capabilities'])){
+          add('Pricing', 'How do you price this?');
+          add('Timeline', 'How fast can we launch?');
+          add('Book a call', 'book a call');
+        } else {
+          add('Services', 'What are all your services');
+          add('Automations', 'What automations do you handle?');
+          add('Book a call', 'book a call');
+        }
+
+        if(!chips.length) return '';
+        const html = [
+          '<div class="assistant-followups" aria-label="Suggested follow-ups">',
+          ...chips.map(c=> `<button type="button" class="assistant-followup" data-question="${c.question.replace(/"/g,'&quot;')}">${c.label}</button>`),
+          '</div>'
+        ].join('');
+        return html;
+      }
+
+      const categoryAnswers = {
+        pricing:[
+          'You invest once in the implementation so the CRM, automations, and dashboards belong to you. After that we work on a revenue‑share—no monthly retainer.',
+          'We charge a build fee for the systems (you own them) and then operate on a performance‑based revenue share aligned to outcomes—no retainer.'
+        ],
+        automation:[
+          'We deploy the core automations: speed‑to‑lead routing, DM qualification, show‑rate stacks, closer briefs, and reactivation flows—fully synced in your CRM.',
+          'We install lead routing, follow‑up cadences, closer briefings, and recovery workflows so nothing slips through the cracks.'
+        ],
+        technology:[
+          'We plug into GoHighLevel, HubSpot, Salesforce, Calendly, Zoom, WhatsApp/Instagram, Slack/Discord, Stripe, and custom APIs. Different CRM? We’ll map it during onboarding.'
+        ],
+        management:[
+          'Daily rep monitoring, KPI reporting, coaching/roleplays, and script updates—plus RevOps oversight so the pipeline stays honest.'
+        ],
+        timeline:[
+          'Kickoff inside 48 hours. Core systems live across the first 10 business days; weeks 3–4 focus on optimization and coaching.'
+        ],
+        results:[
+          'Expect 40–60% more booked calls and 15–30% higher show rates once the team + automations are live.'
+        ],
+        risk:[
+          'We run weekly QA loops—call reviews, pipeline audits, exec recaps—so issues surface fast and churn stays low.'
+        ],
+        positioning:[
+          'Teams choose Revno because we combine people, playbooks, and automations into one managed system—so more leads become booked revenue consistently.'
+        ],
+        fit:[
+          'We work best with premium, consultative offers—coaching, agencies, SaaS, med spas, real estate—any model that books calls to close.'
+        ],
+        demo:[
+          'Take the quick tour here: <a href="demo-crm.html">Demo CRM</a>.'
+        ]
+      };
+
+      function matchByCategory(questionText, questionTokens){
+        const tokens = Array.from(new Set(questionTokens));
+        const scores = detectCategories(questionText, tokens);
+        let best = null; let bestScore = 0;
+        Object.keys(scores).forEach(cat=>{
+          const sc = scores[cat];
+          if(sc > bestScore){ bestScore = sc; best = cat; }
+        });
+        if(!best || bestScore < 1) return null;
+        const answer = pickFrom(categoryAnswers[best] || []);
+        if(!answer) return null;
+        // Normalize score to candidate range
+        return {answer, score: Math.min(0.72, 0.5 + Math.min(0.2, bestScore * 0.05))};
       }
 
       function buildKnowledge(){
@@ -931,6 +1523,31 @@
       const linkDocs = buildLinkDocs();
 
       const manualQA = [
+        {
+          questions:[
+            'what are all your services',
+            'what services do you offer',
+            'list your services',
+            'full list of services',
+            'service list',
+            'what do you offer',
+            'what are your offerings',
+            'capabilities',
+            'scope of services',
+            'everything you do'
+          ],
+          answer:
+            '<strong>Revno services (end‑to‑end RevOps)</strong><br />\
+            <ul style="margin:8px 0 0 18px; padding:0">\
+              <li><strong>Setup & Architecture:</strong> CRM build (GoHighLevel or your CRM), pipeline + stages, tagging, attribution, forms, calendars.</li>\
+              <li><strong>Automations:</strong> Speed‑to‑lead router, DM ➝ qualified booking flows, reminder stacks + no‑show reducers, dead‑lead revival, failed‑payment recovery, closer briefs.</li>\
+              <li><strong>Team & Management:</strong> Recruit/train setters + closers, scripts/playbooks, roleplays, QA reviews, daily desk monitoring, KPI scorecards.</li>\
+              <li><strong>Reporting & Control:</strong> Real‑time dashboards, executive weekly reports, pipeline hygiene audits, forecast reviews.</li>\
+              <li><strong>Integrations:</strong> GoHighLevel, HubSpot/Salesforce (optional), Calendly/Google Calendar, WhatsApp/Instagram, Slack/Discord, Zoom, Stripe, Zapier/Make, custom APIs.</li>\
+              <li><strong>Ongoing Ops:</strong> Continuous optimization, incident handling, A/B tests on messaging, automation tune‑ups, script updates.</li>\
+            </ul>\
+            <div style="margin-top:8px">Want the scoped version for your funnel? <a href="#contact">Book a strategy call</a> and we’ll map it to your stack.</div>'
+        },
         {
           questions:['what is revno','tell me about revno','describe revno','what does revno do'],
           answer:'Revno is a full-stack sales operations company. We design, automate, and manage the systems that turn leads into booked calls and closed clients, bringing structure, accountability, and automation to your revenue engine.'
@@ -1189,7 +1806,7 @@
         {
           keywords:['automation','automations','workflow','implementation','systems'],
           answers:[
-            'Weeks 1–4 we deploy the core automations: speed-to-lead routing, DM qualification, show-rate reminder stacks, closer briefs, failed-payment recovery, and nurture revivals. Everything stays synced inside your CRM.',
+            'We deploy the core automations: speed-to-lead routing, DM qualification, show-rate reminder stacks, closer briefs, failed-payment recovery, and nurture revivals. Everything stays synced inside your CRM.',
             'Launch month means wiring in the automations—lead routing, follow-up cadences, closer briefings, and recovery workflows so nothing slips through cracks.',
             'We install the Revno automation stack: instant lead routing, DM triage, no-show recovery, and closer playbooks tied straight into your CRM.'
           ]
@@ -1317,7 +1934,9 @@
       const preparedManualQA = manualQA.map(entry=>{
         const tokenSet = new Set();
         entry.questions.forEach(question=>{
-          tokenize(question).forEach(token=> tokenSet.add(token));
+          const base = tokenize(question);
+          const exp = expandTokens(base);
+          exp.forEach(token=> tokenSet.add(token));
         });
         const tokenList = Array.from(tokenSet);
         const normalized = entry.questions.map(normalizeQuestion).filter(Boolean);
@@ -1333,7 +1952,7 @@
           .filter(Boolean);
         const uniqueTokens = new Set();
         tokenSets.forEach(set=> set.forEach(token=> uniqueTokens.add(token)));
-        const uniqueList = Array.from(uniqueTokens);
+        const uniqueList = Array.from(new Set(expandTokens(Array.from(uniqueTokens))));
         return {...entry, tokenSets, uniqueTokens, uniqueList};
       });
 
@@ -1369,8 +1988,13 @@
 
       function findAnswer(question){
         const lowered = question.toLowerCase();
-        const tokens = tokenize(question);
+        const baseTokens = tokenize(question);
+        const tokens = expandTokens(baseTokens);
         const candidates = [];
+
+        // Category-level routing (broad coverage)
+        const cat = matchByCategory(lowered, tokens);
+        if(cat) candidates.push(cat);
 
         const manualMatch = matchManualQA(tokens);
         if(manualMatch) candidates.push(manualMatch);
@@ -1383,6 +2007,9 @@
 
         const docMatch = searchKnowledge(question, tokens);
         if(docMatch) candidates.push(docMatch);
+
+        const synth = synthesizeFromDocs(tokens);
+        if(synth) candidates.push(synth);
 
         const linkMatch = searchLinks(question, tokens);
         if(linkMatch) candidates.push(linkMatch);
@@ -1500,6 +2127,44 @@
         div.textContent = text;
         return div.innerHTML;
       }
+
+      // Global helper to open Calendly popup from assistant messages
+      window._revnoOpenCalendly = function(url){
+        try{
+          if(window.Calendly && typeof window.Calendly.initPopupWidget === 'function'){
+            window.Calendly.initPopupWidget({ url: url });
+            return false; // prevent link navigation
+          }
+        }catch(_e){}
+        // Try to load Calendly script on-the-fly if missing
+        try{
+          const existing = document.querySelector('script[src*="assets.calendly.com/assets/external/widget.js"]');
+          if(!existing){
+            const s = document.createElement('script');
+            s.src = 'https://assets.calendly.com/assets/external/widget.js';
+            s.async = true;
+            s.onload = ()=>{ try{ window.Calendly && window.Calendly.initPopupWidget && window.Calendly.initPopupWidget({ url }); }catch(_e){} };
+            document.head.appendChild(s);
+          } else {
+            // Poll briefly for Calendly to be ready
+            let tries = 0;
+            const t = setInterval(()=>{
+              tries++;
+              if(window.Calendly && typeof window.Calendly.initPopupWidget === 'function'){
+                clearInterval(t);
+                try{ window.Calendly.initPopupWidget({ url }); }catch(_e){}
+              }
+              if(tries > 50) clearInterval(t);
+            }, 100);
+          }
+        }catch(_e){}
+        // Fallback: scroll to embedded scheduler
+        try{
+          const el = document.getElementById('contact') || document.querySelector('#contact');
+          if(el){ el.scrollIntoView({behavior:'smooth'}); }
+        }catch(_e){}
+        return false;
+      };
 
       function analyzeFollowUp(questionTokens, lowered){
         const lastUser = findLastUserMessage();
@@ -1623,6 +2288,43 @@
         return {answer: reply, score: Math.min(0.92, bestScore + (matchedTokens.length * 0.05) + 0.05)};
       }
 
+      function synthesizeFromDocs(presetTokens){
+        const queryTokens = Array.isArray(presetTokens) && presetTokens.length ? presetTokens : [];
+        if(!queryTokens.length || !knowledgeDocs.length) return null;
+        const tokenSet = new Set(queryTokens);
+        const scored = knowledgeDocs.map(doc=>{
+          let m = 0; const tokenArray = doc.tokenArray || Array.from(doc.tokens);
+          queryTokens.forEach(t=>{
+            if(doc.tokens.has(t)) m += 1; else {
+              for(let i=0;i<tokenArray.length;i++){ if(fuzzyMatch(t, tokenArray[i])){ m += 1; break; } }
+            }
+          });
+          if(m === 0) return null;
+          const density = m / Math.sqrt(doc.tokens.size || 1);
+          const ratio = m / Math.max(1, tokenSet.size);
+          const score = (ratio * 0.55) + (density * 0.45);
+          return {doc, score, m};
+        }).filter(Boolean).sort((a,b)=> b.score - a.score).slice(0,3);
+        if(!scored.length) return null;
+        let parts = [];
+        scored.forEach(({doc})=>{
+          const sentences = doc.sentences || [];
+          let best = '';
+          let bestCount = -1;
+          sentences.forEach(s=>{
+            const lower = s.toLowerCase();
+            let c = 0; queryTokens.forEach(t=>{ if(lower.includes(t)) c += 1; });
+            if(c > bestCount){ bestCount = c; best = s; }
+          });
+          if(best) parts.push(best);
+        });
+        const text = parts.slice(0,3).join(' ');
+        if(!text) return null;
+        const closer = pickFrom(docClosers);
+        const answer = `${text}${closer ? ('<br><br>' + closer) : ''}`;
+        return {answer, score: Math.min(0.65, 0.4 + parts.length * 0.08)};
+      }
+
       function buildLinkDocs(){
         const docs = [];
         const seen = new Set();
@@ -1645,7 +2347,7 @@
 
       function searchLinks(question, presetTokens){
         if(!linkDocs.length) return null;
-        const queryTokens = Array.isArray(presetTokens) && presetTokens.length ? presetTokens : tokenize(question);
+        const queryTokens = Array.isArray(presetTokens) && presetTokens.length ? presetTokens : expandTokens(tokenize(question));
         if(!queryTokens.length) return null;
         let best = null;
         let bestScore = 0;
@@ -1683,10 +2385,35 @@
       }
 
       function respond(question){
+        const baseTokens = tokenize(question);
+        const tokens = expandTokens(baseTokens);
         let answer = findAnswer(question);
+        let insight = null;
+        try{
+          insight = (typeof explain === 'function') ? explain(question) : null;
+          const lowConfidence = !insight || !insight.top || (insight.top.source === 'default') || ((insight.top.score||0) < 0.2);
+          if(lowConfidence){
+            const key = 'revnoCopilotUnknown';
+            const prev = JSON.parse(localStorage.getItem(key) || '[]');
+            prev.push({q:question, ts:Date.now(), source: insight && insight.top ? insight.top.source : 'none', score: insight && insight.top ? insight.top.score : 0});
+            if(prev.length > 100) prev.splice(0, prev.length - 100);
+            localStorage.setItem(key, JSON.stringify(prev));
+          }
+        }catch(_e){}
         if(typeof answer !== 'string' || !answer.trim()){
           answer = getDefaultAnswer();
         }
+
+        // Fast-path: booking intent → render CTA button to Calendly
+        try{
+          if(isBookingIntent(question, tokens)){
+            const calendlyUrl = 'https://calendly.com/fpazienza5/45min-hour-consultation-clone';
+            const followupsHtml = buildFollowups(tokens, insight);
+            const html = `${answer}<div class="assistant-cta-wrap"><a class="assistant-cta" href="#book-call" data-calendly-url="${calendlyUrl}">Book on Calendly</a></div>${followupsHtml}`;
+            appendMessage(html, 'ai', true);
+            return;
+          }
+        }catch(_e){}
         let typingBubble = null;
         let typingTimer = null;
         const plainLength = answer.replace(/<[^>]+>/g,'').length;
@@ -1703,6 +2430,7 @@
           const parser = new DOMParser();
           const doc = parser.parseFromString(`<div>${answer}</div>`, 'text/html');
           const nodes = Array.from(doc.body.firstChild.childNodes);
+          const followupsHtml = buildFollowups(tokens, insight);
           const renderNode = (node)=>{
             if(node.nodeType === Node.TEXT_NODE){
               const text = node.textContent || '';
@@ -1734,6 +2462,12 @@
           };
           nodes.forEach(renderNode);
           container.classList.remove('typing');
+          if(followupsHtml){
+            const wrap = document.createElement('div');
+            wrap.innerHTML = followupsHtml;
+            const el = wrap.firstChild;
+            if(el) container.appendChild(el);
+          }
         };
 
         typingTimer = setTimeout(startTyping, delay);
@@ -1764,6 +2498,26 @@
         }
       });
 
+      // Delegate clicks on assistant CTA buttons (e.g., Calendly)
+      assistant.addEventListener('click', (e)=>{
+        const cta = e.target && (e.target.closest ? e.target.closest('.assistant-cta') : null);
+        if(cta){
+          e.preventDefault();
+          const url = cta.getAttribute('data-calendly-url') || 'https://calendly.com/fpazienza5/45min-hour-consultation-clone';
+          if(window._revnoOpenCalendly){ window._revnoOpenCalendly(url); }
+          return;
+        }
+        const follow = e.target && (e.target.closest ? e.target.closest('.assistant-followup') : null);
+        if(follow){
+          e.preventDefault();
+          const q = follow.getAttribute('data-question') || follow.textContent || '';
+          if(q){
+            appendMessage(q,'user',false);
+            respond(q);
+          }
+        }
+      });
+
       form.addEventListener('submit', e=>{
         e.preventDefault();
         const question = input.value.trim();
@@ -1790,6 +2544,92 @@
           toggle.focus();
         }
       });
+
+      // --- Diagnostics: lightweight test harness to validate coverage ---
+      function explain(question){
+        const lowered = question.toLowerCase();
+        const baseTokens = tokenize(question);
+        const tokens = expandTokens(baseTokens);
+        const candidates = [];
+        const res = {};
+
+        const cat = matchByCategory(lowered, tokens);
+        if(cat){ candidates.push({...cat, source:'category'}); res.category = cat; }
+        const manual = matchManualQA(tokens);
+        if(manual){ candidates.push({...manual, source:'manual'}); res.manual = manual; }
+        const mem = matchConversationMemory(tokens, lowered);
+        if(mem){ candidates.push({...mem, source:'memory'}); res.memory = mem; }
+        const kb = matchKnowledgeBase(lowered, tokens);
+        if(kb){ candidates.push({...kb, source:'knowledge'}); res.knowledge = kb; }
+        const doc = searchKnowledge(question, tokens);
+        if(doc){ candidates.push({...doc, source:'doc'}); res.doc = doc; }
+        const synth = synthesizeFromDocs(tokens);
+        if(synth){ candidates.push({...synth, source:'synth'}); res.synth = synth; }
+        const link = searchLinks(question, tokens);
+        if(link){ candidates.push({...link, source:'link'}); res.link = link; }
+
+        candidates.sort((a,b)=> (b.score||0) - (a.score||0));
+        const top = candidates[0] || {answer:getDefaultAnswer(), score:0, source:'default'};
+        return {question, tokens, top, candidates};
+      }
+
+      function runCopilotTests(){
+        const tests = [
+          {name:'greeting', q:'hi how are you', expectAny:['hey','hi','doing great','ready']},
+          {name:'filler thanks', q:'cool thanks', expectAny:['appreciate','glad','love it']},
+          {name:'pricing retainer', q:'do you charge a retainer', expectAny:['no monthly retainer','revenue','share','build','setup']},
+          {name:'pricing monthly', q:'do you charge monthly fee', expectAny:['no monthly retainer','revenue','share','build','setup']},
+          {name:'pricing typo', q:'do you charge a retaner', expectAny:['no monthly retainer','revenue','share','build','setup']},
+          {name:'how much', q:'how much do you cost', expectAny:['invest','revenue','share','retainer','build','setup']},
+          {name:'why choose you', q:'why should i choose you', expectAny:['teams choose revno']},
+          {name:'best', q:'why are you the best', expectAny:['we are the best because']},
+          {name:'complaints', q:'has anyone complained', expectAny:['qa','audit','exec','churn','loops']},
+          {name:'tools', q:'ghl hubspot salesforce calendly zoom', expectAny:['gohighlevel','hubspot','salesforce','calendly','zoom']},
+          {name:'automation', q:'what automations do you build', expectAny:['speed‑to‑lead','routing','reminder','follow','workflows']},
+          {name:'timeline', q:'how fast can we launch', expectAny:['48 hours','10 business days','weeks 3–4']},
+          {name:'demo link', q:'where is the demo crm', expectAny:['demo crm','demo-crm.html','check our demo']},
+          {name:'small typo calendly', q:'caldnely booking link', expectAny:['calendly','book','call']},
+          {name:'memory recap (no data)', q:'summarize what we talked about', expectAny:['recap','book a strategy call','not seeing']} // at least returns a helpful default
+        ];
+
+        const results = tests.map(t=>{
+          const info = explain(t.q);
+          const ans = (info.top.answer||'').toLowerCase();
+          const passed = (t.expectAny||[]).some(s=> ans.includes(s));
+          return {name:t.name, q:t.q, source:info.top.source, score:info.top.score, passed, answer:info.top.answer};
+        });
+        // Memory scenario with transcript context
+        transcripts.splice(0, transcripts.length);
+        transcripts.push({sender:'user', content:'Tell me about your services', timestamp:Date.now()-5000});
+        transcripts.push({sender:'ai', content:'We build CRM, automations, dashboards, and manage sales ops.', timestamp:Date.now()-4800});
+        transcripts.push({sender:'user', content:'Nice thanks', timestamp:Date.now()-4600});
+        transcripts.push({sender:'ai', content:'Glad that helps—want to dive into pricing or timelines?', timestamp:Date.now()-4400});
+        const memInfo = explain('summarize what we talked about');
+        const memAns = (memInfo.top.answer||'').toLowerCase();
+        const memPass = memAns.includes('conversation recap') || memAns.includes('you raised') || memAns.includes('i covered');
+        results.push({name:'memory recap (with context)', q:'summarize what we talked about', source:memInfo.top.source, score:memInfo.top.score, passed:memPass, answer:memInfo.top.answer});
+        const passCount = results.filter(r=>r.passed).length;
+        const summary = {total:results.length, passed:passCount, failed:results.length - passCount, results};
+        try{ console.table(results.map(r=>({name:r.name, source:r.source, score:Math.round((r.score||0)*100)/100, passed:r.passed}))); }catch(_e){}
+        console.log('Copilot test summary:', summary);
+        return summary;
+      }
+
+      window.revnoCopilot = {
+        find:(q)=> explain(q).top.answer,
+        explain,
+        runTests: runCopilotTests,
+        resetTranscripts: ()=>{ transcripts.splice(0, transcripts.length); },
+        pushMessage:(sender, content)=>{ transcripts.push({sender, content, timestamp:Date.now()}); },
+        getUnknown: ()=>{ try{ return JSON.parse(localStorage.getItem('revnoCopilotUnknown')||'[]'); }catch(_e){ return []; } },
+        clearUnknown: ()=>{ try{ localStorage.removeItem('revnoCopilotUnknown'); }catch(_e){} }
+      };
+
+      try{
+        if(window.location && typeof window.location.search === 'string' && window.location.search.includes('diag=1')){
+          setTimeout(()=>{ try{ window.revnoCopilot.runTests(); }catch(_e){} }, 400);
+        }
+      }catch(_e){}
     }
   </script>
 
