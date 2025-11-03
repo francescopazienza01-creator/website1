@@ -414,5 +414,26 @@
       });
     })();
   </script>
+  <script>
+    // Device classification: adds body.device-mobile / device-desktop and html[data-device]
+    (function(){
+      function classify(){
+        try{
+          const ua = navigator.userAgent || '';
+          const isMobileUA = /(Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini)/i.test(ua) || (/iPad/.test(ua) && ('ontouchstart' in window));
+          const isSmall = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+          const isTouch = ('ontouchstart' in window) || ((navigator.maxTouchPoints||0) > 1);
+          const mobile = !!(isMobileUA || (isTouch && isSmall));
+          document.documentElement.setAttribute('data-device', mobile ? 'mobile' : 'desktop');
+          document.body.classList.toggle('device-mobile', mobile);
+          document.body.classList.toggle('device-desktop', !mobile);
+          window.revnoDevice = mobile ? 'mobile' : 'desktop';
+        }catch(_e){}
+      }
+      classify();
+      let t;
+      window.addEventListener('resize', ()=>{ clearTimeout(t); t = setTimeout(classify, 150); }, {passive:true});
+    })();
+  </script>
 </body>
 </html>

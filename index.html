@@ -163,6 +163,7 @@
     .assistant.open .assistant-panel{opacity:1;transform:translateY(0)}
     .assistant-panel[hidden]{display:none}
     .assistant-toggle{position:absolute;right:0;bottom:-58px;background:linear-gradient(135deg,var(--pri),var(--pri-2));border:none;color:#0b0c10;font-weight:700;padding:12px 18px;border-radius:999px;box-shadow:0 12px 30px rgba(110,231,255,.35);cursor:pointer;display:inline-flex;align-items:center;gap:8px;pointer-events:auto}
+    .assistant-toggle .msg-icon{width:16px;height:16px;display:inline-block;flex:0 0 16px;color:#0b0c10}
     .assistant-toggle:focus-visible{outline:2px solid rgba(255,255,255,.6);outline-offset:4px}
     .assistant-header{display:flex;flex-direction:column;gap:6px}
     .assistant-header strong{font-size:15px}
@@ -404,13 +405,29 @@
       .welcome-cover{left:62%; opacity:.9}
     }
     @media (max-width:640px){
-      .cta-group{width:100%;gap:10px}
+      .cta-group{width:100%;gap:8px}
       .cta-group > a{flex:1;justify-content:center}
+      /* On mobile, do NOT keep header sticky/fixed */
+      header{position:static; top:auto; left:auto; right:auto}
+      .wrap{padding:18px}
+      .card{padding:18px; border-radius:14px}
+      .logo{width:48px;height:48px}
+      h1{font-size:26px; line-height:1.15}
+      h2{font-size:20px; margin:10px 0}
+      p.lead{font-size:15px}
+      .hero .cta{width:100%;justify-content:center}
+      .badges{gap:6px}
+      .badge{font-size:12px; padding:6px 10px}
       .month-one-metrics{grid-template-columns:1fr}
+      .system-track,.why-track{animation:none!important;flex-wrap:wrap;width:100%}
+      .system-track .card,.why-track .card{min-width:100%;width:100%}
       .testis .card{flex:0 0 240px}
       .autos .card{flex:0 0 240px}
       .assistant{left:16px;right:16px;width:auto;bottom:90px}
       .assistant-panel{max-height:60vh}
+      .calendly-inline-widget{height:560px !important}
+      /* Hide intrusive popups only */
+      .welcome-overlay,.demo-welcome{display:none}
     }
 
     /* --- Animations & micro-interactions --- */
@@ -436,6 +453,13 @@
     .orb{position:absolute; width:260px; height:260px; border-radius:50%; filter:blur(60px); opacity:.22; pointer-events:none; animation:float 8s ease-in-out infinite}
     .orb-a{background:radial-gradient(closest-side,var(--pri),transparent 70%); top:-70px; left:-70px}
     .orb-b{background:radial-gradient(closest-side,var(--pri-2),transparent 70%); bottom:-90px; right:-50px; animation-duration:10s}
+
+    /* Device-specific styling (JS sets body.device-mobile / device-desktop) */
+    body.device-mobile .chips{display:none}
+    body.device-mobile .orb{display:none}
+    body.device-mobile .cta{padding:14px 22px; font-size:15px}
+    body.device-mobile header{backdrop-filter:none;-webkit-backdrop-filter:none}
+    body.device-desktop .chips{display:flex}
 
     /* Reveal on scroll */
     .reveal{opacity:0; transform:translate3d(0,var(--reveal-offset,14px),0); transition:opacity .7s ease, transform .7s ease}
@@ -1039,6 +1063,9 @@
       </div>
     </div>
     <button class="assistant-toggle" type="button" id="assistantToggle" aria-expanded="false" aria-controls="assistantPanel">
+      <svg class="msg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M4.5 4h15c1.38 0 2.5 1.12 2.5 2.5v8c0 1.38-1.12 2.5-2.5 2.5H12l-4.7 3.33c-.98.69-2.3-.02-2.3-1.2V17H4.5A2.5 2.5 0 0 1 2 14.5v-8C2 5.12 3.12 4 4.5 4Zm0 2a.5.5 0 0 0-.5.5v8c0 .28.22.5.5.5H7a1 1 0 0 1 1 1v2.06L12.2 16H19.5a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-15Z"/>
+      </svg>
       Ask Revno
     </button>
   </div>
@@ -1791,6 +1818,26 @@
         {
           questions:['how are you today','hows your day','what are you up to','tell me something interesting','any news','tell me about yourself','can we just chat','lets chat','what do you do for fun','talk to me','small talk','chat with me','can we talk','tell me a fun fact','anything exciting'],
           answer:'Doing great on this side—keeping Revno’s playbooks sharp and watching the metrics roll in. If you want to chat about automations, client wins, or just swap a fun fact (Did you know: companies with structured follow-up see up to 50% higher close rates?), I’m here for it. What’s on your mind?'
+        },
+        {
+          questions:['are you gdpr compliant','are you ccpa compliant','privacy compliance','data privacy','do you sign a dpa','can you sign a dpa','gdpr question','ccpa question','security compliance'],
+          answer:'We follow privacy‑first practices (least‑privilege access, audit logs, encrypted transit/at‑rest) and can sign a DPA when needed. For data use and deletion options, see <a href="privacy.html#privacy">Privacy</a> and <a href="privacy.html#data-use">Data Use</a>. If you have a vendor security questionnaire, we’ll complete it during onboarding.'
+        },
+        {
+          questions:['how long do you keep data','data retention','data deletion','delete my data','who owns the data','data ownership'],
+          answer:'You own your CRM and data. We keep only what’s required to operate your systems and remove it at the end of the engagement or on request (subject to legal retention). See <a href="privacy.html#data-use">Data Use</a> for details.'
+        },
+        {
+          questions:['what are your support hours','support hours','do you have an sla','response times','incident response','on call','after hours support'],
+          answer:'We provide daily desk monitoring with same‑business‑day responses for most requests. Critical incidents trigger alerts and fast triage; formal SLAs and escalation paths are defined in your SOW. After‑hours/on‑call coverage is available if required.'
+        },
+        {
+          questions:['can you white label','white-label','whitelabel','custom branding','brand the system','custom domain email','send from my domain'],
+          answer:'Yes—systems are branded to you. We set up sending domains, branded assets, and dashboards so communications and links reflect your brand (your domain or subdomain where applicable).'
+        },
+        {
+          questions:['do you support multiple languages','multilingual','multi language','internationalization','time zones','timezone support','send in local time'],
+          answer:'We schedule by each prospect’s local timezone and can run multi‑language messaging with locale‑specific templates and cadences when needed.'
         }
       ];
 
@@ -2668,5 +2715,26 @@
   <!-- Analytics placeholder (e.g., Plausible/GA4) -->
   <!-- <script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script> -->
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script>
+    // Device classification: adds body.device-mobile / device-desktop and html[data-device]
+    (function(){
+      function classify(){
+        try{
+          const ua = navigator.userAgent || '';
+          const isMobileUA = /(Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini)/i.test(ua) || (/iPad/.test(ua) && ('ontouchstart' in window));
+          const isSmall = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+          const isTouch = ('ontouchstart' in window) || ((navigator.maxTouchPoints||0) > 1);
+          const mobile = !!(isMobileUA || (isTouch && isSmall));
+          document.documentElement.setAttribute('data-device', mobile ? 'mobile' : 'desktop');
+          document.body.classList.toggle('device-mobile', mobile);
+          document.body.classList.toggle('device-desktop', !mobile);
+          window.revnoDevice = mobile ? 'mobile' : 'desktop';
+        }catch(_e){}
+      }
+      classify();
+      let t;
+      window.addEventListener('resize', ()=>{ clearTimeout(t); t = setTimeout(classify, 150); }, {passive:true});
+    })();
+  </script>
 </body>
 </html>
