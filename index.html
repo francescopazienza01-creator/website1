@@ -1217,6 +1217,14 @@
       link.addEventListener('click', (e)=>{
         if(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return; // allow new tab/window
         e.preventDefault();
+        // If on mobile or overlay is suppressed by CSS, bypass overlay and go directly
+        const isMobileDevice = (window.revnoDevice === 'mobile') || (window.matchMedia && window.matchMedia('(max-width: 640px)').matches);
+        let overlayHiddenByCSS = false;
+        try{ overlayHiddenByCSS = window.getComputedStyle(overlay).display === 'none'; }catch(_e){}
+        if(isMobileDevice || overlayHiddenByCSS){
+          go();
+          return;
+        }
         showOverlay();
       });
 
