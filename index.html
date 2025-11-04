@@ -419,11 +419,20 @@
     @media (max-width:640px){
       .cta-group{width:100%;gap:8px}
       .cta-group > a{flex:1;justify-content:center}
-      .nav{align-items:center; text-align:initial}
+      .nav{display:flex; flex-direction:row; align-items:center; justify-content:space-between; text-align:initial; width:100%}
       .brand{width:auto; display:flex; justify-content:flex-start}
       .chips{display:none}
       /* On mobile, do NOT keep header sticky/fixed */
       header{position:static; top:auto; left:auto; right:auto}
+      /* Make header content flush to screen edges */
+      header .wrap{padding-left:10px; padding-right:10px}
+      .nav{width:100%; justify-content:space-between}
+      .mobile-menu-toggle{margin-left:auto}
+      /* Smaller menu buttons in hamburger panel */
+      .mobile-nav-panel{padding:2px; width:auto; max-width:40vw; background:var(--card); border:1px solid rgba(255,255,255,.14); border-radius:8px; transform:scale(.78); transform-origin:top right}
+      .mobile-nav-panel .cta{padding:1px 2px; font-size:6.5px; border-radius:2px; margin:0; font-weight:700; line-height:1; background:transparent; border:0; color:var(--txt); box-shadow:none; gap:2px; text-align:left; width:100%; justify-content:flex-start; letter-spacing:0; white-space:nowrap}
+      .mobile-nav-panel .cta:hover{transform:none; box-shadow:none; background:transparent; text-decoration:underline}
+      .mobile-nav-panel .cta::after{display:none}
       .wrap{padding:18px}
       .card{padding:18px; border-radius:14px}
       .logo{width:40px;height:40px}
@@ -437,7 +446,7 @@
       /* Hide desktop CTAs; show hamburger */
       .cta-group{display:none}
       .mobile-menu-toggle{display:inline-flex}
-      .mobile-nav-panel{right:12px; top:calc(100% + 8px)}
+      .mobile-nav-panel{right:0; top:calc(100% + 2px)}
       .month-one h2{font-size:16px; margin:2px 0 6px}
       .month-one p.blurb{font-size:12.5px; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
       .month-one-metrics{grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px}
@@ -1231,7 +1240,17 @@
       const close = ()=>{ panel.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); panel.hidden = true; };
       const isOpen = ()=> panel.classList.contains('open');
       toggle.addEventListener('click', (e)=>{ e.stopPropagation(); isOpen() ? close() : open(); });
-      panel.addEventListener('click', (e)=>{ if(e.target.tagName === 'A'){ close(); } });
+      panel.addEventListener('click', (e)=>{
+        const a = e.target.closest('a');
+        if(!a) return;
+        const href = a.getAttribute('href') || '';
+        close();
+        if(href.startsWith('#')){
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+        }
+      });
       document.addEventListener('click', (e)=>{ if(isOpen() && !panel.contains(e.target) && e.target !== toggle){ close(); } });
       document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && isOpen()){ close(); } });
     })();
