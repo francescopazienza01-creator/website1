@@ -40,7 +40,7 @@
 
     /* Header */
     header{position:sticky;top:0;background:linear-gradient(180deg,rgba(11,12,16,.92),rgba(11,12,16,.7) 60%,rgba(11,12,16,0));backdrop-filter:saturate(160%) blur(6px);-webkit-backdrop-filter:saturate(160%) blur(6px);z-index:50;border-bottom:1px solid rgba(255,255,255,.06);transition:padding .25s ease, box-shadow .25s ease;will-change:transform,backdrop-filter}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px;transition:min-height .25s ease}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px;transition:min-height .25s ease;position:relative}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:60px;height:60px;display:block;border-radius:20px;transition:transform .25s ease,filter .25s ease;filter:drop-shadow(0 8px 24px rgba(110,231,255,.28))}
     .brand:hover .logo{transform:translateY(-1px) scale(1.05);filter:drop-shadow(0 10px 26px rgba(110,231,255,.35))}
@@ -53,6 +53,18 @@
     .legal-link:hover{color:var(--txt);text-decoration:underline}
     .cta.alt{background:transparent;border:1px solid rgba(110,231,255,.35);color:var(--pri);box-shadow:none}
     .cta.alt:hover{box-shadow:0 0 18px rgba(110,231,255,.35);color:var(--txt)}
+
+    /* Mobile menu (hamburger) */
+    .mobile-menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,.14);width:38px;height:38px;border-radius:10px;color:var(--txt);align-items:center;justify-content:center}
+    .mobile-menu-toggle:focus-visible{outline:2px solid rgba(110,231,255,.6);outline-offset:2px}
+    .mobile-menu-toggle .bars{position:relative;width:18px;height:14px;display:block}
+    .mobile-menu-toggle .bars::before,.mobile-menu-toggle .bars::after,.mobile-menu-toggle .bar{content:"";position:absolute;left:0;right:0;height:2px;background:currentColor;border-radius:2px}
+    .mobile-menu-toggle .bars::before{top:0}
+    .mobile-menu-toggle .bar{top:6px}
+    .mobile-menu-toggle .bars::after{bottom:0}
+    .mobile-nav-panel{position:absolute;right:16px;top:60px;z-index:59;background:var(--card);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;width:min(88vw,320px);box-shadow:0 18px 50px rgba(0,0,0,.35);display:none}
+    .mobile-nav-panel.open{display:block}
+    .mobile-nav-panel .cta{width:100%;justify-content:center;margin:6px 0}
 
     /* Progress bar */
     #progressbar{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:left center;transform:scaleX(0);background:linear-gradient(90deg,var(--pri),var(--pri-2));z-index:60;opacity:0;transition:transform .12s ease,opacity .2s ease;will-change:transform}
@@ -407,18 +419,31 @@
     @media (max-width:640px){
       .cta-group{width:100%;gap:8px}
       .cta-group > a{flex:1;justify-content:center}
+      .nav{align-items:center; text-align:initial}
+      .brand{width:auto; display:flex; justify-content:flex-start}
+      .chips{display:none}
       /* On mobile, do NOT keep header sticky/fixed */
       header{position:static; top:auto; left:auto; right:auto}
       .wrap{padding:18px}
       .card{padding:18px; border-radius:14px}
-      .logo{width:48px;height:48px}
+      .logo{width:40px;height:40px}
       h1{font-size:26px; line-height:1.15}
       h2{font-size:20px; margin:10px 0}
       p.lead{font-size:15px}
       .hero .cta{width:100%;justify-content:center}
       .badges{gap:6px}
       .badge{font-size:12px; padding:6px 10px}
-      .month-one-metrics{grid-template-columns:1fr}
+      .month-one{padding:14px; border-radius:12px}
+      /* Hide desktop CTAs; show hamburger */
+      .cta-group{display:none}
+      .mobile-menu-toggle{display:inline-flex}
+      .mobile-nav-panel{right:12px; top:calc(100% + 8px)}
+      .month-one h2{font-size:16px; margin:2px 0 6px}
+      .month-one p.blurb{font-size:12.5px; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+      .month-one-metrics{grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px}
+      .month-one .metric-card{padding:10px 8px; min-height:auto; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center; overflow:hidden}
+      .month-one .metric-num{font-size:17px}
+      .month-one .metric-label{font-size:10.5px; letter-spacing:.06em; white-space:normal; overflow-wrap:anywhere; line-height:1.1}
       .system-track,.why-track{animation:none!important;flex-wrap:wrap;width:100%}
       .system-track .card,.why-track .card{min-width:100%;width:100%}
       .testis .card{flex:0 0 240px}
@@ -713,6 +738,13 @@
       <div class="cta-group">
         <a class="cta" id="demoLink" href="demo-crm.html">Check Our Demo CRM</a>
         <a class="cta" href="#contact">Book Your Call</a>
+      </div>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu" aria-controls="mobileNavPanel" aria-expanded="false">
+        <span class="bars"><span class="bar"></span></span>
+      </button>
+      <div class="mobile-nav-panel" id="mobileNavPanel" hidden>
+        <a class="cta" href="#contact">Book Your Call</a>
+        <a class="cta" href="demo-crm.html">Check Our Demo CRM</a>
       </div>
     </div>
   </header>
@@ -1188,6 +1220,20 @@
         erase();
       }
       setTimeout(cycle, 1200);
+    })();
+
+    // Mobile header menu toggle
+    (function(){
+      const toggle = document.getElementById('mobileMenuToggle');
+      const panel = document.getElementById('mobileNavPanel');
+      if(!toggle || !panel) return;
+      const open = ()=>{ panel.hidden = false; panel.classList.add('open'); toggle.setAttribute('aria-expanded','true'); };
+      const close = ()=>{ panel.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); panel.hidden = true; };
+      const isOpen = ()=> panel.classList.contains('open');
+      toggle.addEventListener('click', (e)=>{ e.stopPropagation(); isOpen() ? close() : open(); });
+      panel.addEventListener('click', (e)=>{ if(e.target.tagName === 'A'){ close(); } });
+      document.addEventListener('click', (e)=>{ if(isOpen() && !panel.contains(e.target) && e.target !== toggle){ close(); } });
+      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && isOpen()){ close(); } });
     })();
 
     // Demo CRM welcome overlay handler
